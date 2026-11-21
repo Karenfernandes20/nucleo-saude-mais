@@ -8,6 +8,7 @@ export const clinic = {
   instagramUrl: 'https://www.instagram.com/nucleodesaudemais/',
   website: 'www.nucleodesaudemais.com.br',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Rua+Janu%C3%A1ria%2C+684%2C+Centro%2C+Montes+Claros+-+MG',
+  mapsEmbedUrl: 'https://www.google.com/maps?q=Rua+Janu%C3%A1ria%2C+684%2C+Centro%2C+Montes+Claros%2C+MG%2C+Brasil&output=embed',
   technicalLead: 'Dra. Sofia Borges',
   crm: 'CRM-MG 69139',
   laboratoryTurnaround: 'até 20 min*',
