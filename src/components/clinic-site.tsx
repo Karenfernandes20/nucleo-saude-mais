@@ -171,8 +171,13 @@ export default function ClinicSite() {
               {[['users-round', 'Atendimento humanizado'], ['stethoscope', 'Diversas especialidades'], ['activity', 'Agendamento rápido']].map(([icon, label]) => <div key={label}><span className="icon-bubble"><Icon name={icon} size={21} /></span><strong>{label}</strong></div>)}
             </div>
           </div>
-          <div className="hero-visual reveal delay-1" aria-label="Ambiente de cuidado e atendimento da clínica">
-            <div className="visual-arch"><div className="visual-shine" /><div className="visual-logo-card"><span className="visual-plus">+</span><span>NÚCLEO DE<br /><b>SAÚDE</b></span><strong>mais</strong></div><div className="visual-person"><div className="person-head" /><div className="person-body"><span className="stetho-line" /></div></div><div className="visual-tag tag-one"><ShieldCheck size={17} /> Cuidado confiável</div><div className="visual-tag tag-two"><Clock3 size={17} /> Mais praticidade</div></div>
+          <div className="hero-visual reveal delay-1" aria-label="Médica da Clínica Núcleo de Saúde Mais">
+            <div className="visual-arch photo-arch">
+              <Image src="/images/clinica/team/doutora.png" alt="Médica sorridente usando jaleco e estetoscópio" fill priority className="hero-doctor-image" />
+              <div className="photo-overlay" />
+              <div className="visual-tag tag-one"><ShieldCheck size={17} /> Cuidado confiável</div>
+              <div className="visual-tag tag-two"><Clock3 size={17} /> Mais praticidade</div>
+            </div>
             <div className="visual-caption"><span><span className="caption-dot" /> Montes Claros - MG</span><span>Consultas + exames</span></div>
           </div>
         </div>
