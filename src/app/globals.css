@@ -104,12 +104,12 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) { .specialists-top, .specialists-body { grid-template-columns: 1fr; }.specialists-title-panel { min-height: 185px; border-radius: 0 0 120px 0; }.specialists-intro { padding: 30px; }.specialists-body { gap: 25px; padding: 0 30px 30px; }.accessible-prices { grid-template-columns: 1fr; }.accessible-prices-photo { min-height: 310px; border-radius: 0 0 30px 30px; } }
 @media (max-width: 560px) { .specialists-title-panel { padding: 38px 26px; }.specialists-intro { padding: 27px 24px; }.specialists-intro p { font-size: .95rem; }.specialists-body { padding: 0 16px 22px; }.specialists-photo { min-height: 300px; border-radius: 0 58px 0 0; }.specialists-list-grid { grid-template-columns: 1fr; }.specialist-link { min-height: 42px; font-size: .9rem; }.accessible-prices-copy { padding: 34px 25px; }.accessible-prices-copy h2 { font-size: 2.1rem; }.accessible-prices-photo { min-height: 280px; }.partner-logo, .partner-name-fallback { flex-basis: 180px; min-width: 180px; width: 180px; height: 92px; }.partner-logo-image { width: 180px; height: 92px; } }
 /* Compact vertical rhythm: keep sections connected without removing card readability. */
-.section:not(.hero) { padding-block: 64px; }
+.section:not(.hero) { padding-block: 32px; }
 .section-heading { margin-bottom: 27px; }
-.positioning-section { padding-top: 46px !important; }
-.steps-section { padding-top: 18px !important; }
-.gallery-section { padding-top: 38px !important; }
-.testimonial-section { padding-block: 48px !important; }
-@media (max-width: 900px) { .section:not(.hero) { padding-block: 54px; }.positioning-section { padding-top: 38px !important; }.steps-section { padding-top: 14px !important; }.gallery-section { padding-top: 32px !important; } }
-@media (max-width: 560px) { .section:not(.hero) { padding-block: 46px; }.positioning-section { padding-top: 32px !important; }.steps-section { padding-top: 10px !important; }.gallery-section { padding-top: 26px !important; }.testimonial-section { padding-block: 38px !important; } }
+.positioning-section { padding-top: 24px !important; }
+.steps-section { padding-top: 12px !important; }
+.gallery-section { padding-top: 18px !important; }
+.testimonial-section { padding-block: 28px !important; }
+@media (max-width: 900px) { .section:not(.hero) { padding-block: 28px; }.positioning-section { padding-top: 22px !important; }.steps-section { padding-top: 10px !important; }.gallery-section { padding-top: 16px !important; } }
+@media (max-width: 560px) { .section:not(.hero) { padding-block: 24px; }.positioning-section { padding-top: 18px !important; }.steps-section { padding-top: 8px !important; }.gallery-section { padding-top: 14px !important; }.testimonial-section { padding-block: 24px !important; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .partner-track { animation: none; } }
