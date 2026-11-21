@@ -57,6 +57,22 @@ export const insurancePlans = [
   'VIVENDO BEM',
 ];
 
+export const insurancePartners = [
+  { name: 'AMIL', image: '/images/insurance/01_amil.png' },
+  { name: 'BRADESCO', image: '/images/insurance/02_bradesco_saude.png' },
+  { name: 'CAMED', image: '/images/insurance/03_camed.png' },
+  { name: 'CARTÃO DE SAÚDE MAIS', image: null },
+  { name: 'CISVARG', image: null },
+  { name: 'PMMG', image: null },
+  { name: 'PRÓ SAÚDE', image: null },
+  { name: 'PROCEDE', image: null },
+  { name: 'SUL AMÉRICA', image: '/images/insurance/09_sulamerica.png' },
+  { name: 'SUL DO PARÁ', image: null },
+  { name: 'TEM SAÚDE', image: null },
+  { name: 'VITTALLIS', image: '/images/insurance/12_vittallis.png' },
+  { name: 'VIVENDO BEM', image: null },
+];
+
 export const faqItems = [
   {
     question: 'Como faço para agendar uma consulta?',
