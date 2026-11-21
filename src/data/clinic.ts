@@ -42,16 +42,19 @@ export const exams = [
 ];
 
 export const insurancePlans = [
-  'AMAGIS',
-  'ASSEFAZ',
-  'CABEFF',
-  'CASEMBRAPA',
-  'COPASS SAÚDE',
-  'GLOBAL',
-  'GOLDEN CROSS',
-  'MAPFRE',
-  'POSTAL SAÚDE',
-  'VIDAPLAN SAÚDE',
+  'AMIL',
+  'BRADESCO',
+  'CAMED',
+  'CARTÃO DE SAÚDE MAIS',
+  'CISVARG',
+  'PMMG',
+  'PRÓ SAÚDE',
+  'PROCEDE',
+  'SUL AMÉRICA',
+  'SUL DO PARÁ',
+  'TEM SAÚDE',
+  'VITTALLIS',
+  'VIVENDO BEM',
 ];
 
 export const faqItems = [
