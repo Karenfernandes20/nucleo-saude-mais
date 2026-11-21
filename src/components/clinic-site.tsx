@@ -19,7 +19,6 @@ import {
   ChevronDown,
   ChevronRight,
   CircleHelp,
-  Clock3,
   Ear,
   Facebook,
   FlaskConical,
@@ -175,8 +174,6 @@ export default function ClinicSite() {
             <div className="visual-arch photo-arch">
               <Image src="/images/clinica/team/doutora.png" alt="Médica sorridente usando jaleco e estetoscópio" fill priority className="hero-doctor-image" />
               <div className="photo-overlay" />
-              <div className="visual-tag tag-one"><ShieldCheck size={17} /> Cuidado confiável</div>
-              <div className="visual-tag tag-two"><Clock3 size={17} /> Mais praticidade</div>
             </div>
             <div className="visual-caption"><span><span className="caption-dot" /> Montes Claros - MG</span><span>Consultas + exames</span></div>
           </div>
