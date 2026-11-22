@@ -183,6 +183,14 @@ export default function ClinicSite() {
         </div>
       </section>
 
+      <section className="slogan-section" aria-label="Bordão da Clínica Núcleo de Saúde Mais">
+        <div className="container">
+          <div className="slogan-banner">
+            <span>MAIS PARA VOCÊ, MAIS POR VOCÊ.</span>
+          </div>
+        </div>
+      </section>
+
       <section className="section positioning-section" aria-label="Posicionamento da clínica">
         <div className="container"><div className="section-heading"><span className="section-kicker">NÚCLEO DE SAÚDE MAIS</span><h2>Saúde com mais cuidado, mais praticidade e mais atenção.</h2><p>Uma clínica preparada para acompanhar você e sua família em diferentes momentos.</p></div><div className="value-grid">{valueCards.map((item) => <article className="soft-card value-card" key={item.title}><div className="card-icon"><Icon name={item.icon} size={26} /></div><h3>{item.title}</h3><p>{item.text}</p><span className="card-line" /></article>)}</div></div>
       </section>
