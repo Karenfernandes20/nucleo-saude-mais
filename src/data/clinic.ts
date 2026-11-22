@@ -16,20 +16,37 @@ export const clinic = {
 
 export const specialties = [
   { name: 'Cardiologia', icon: 'heart-pulse' },
-  { name: 'Ginecologia', icon: 'venus' },
   { name: 'Pediatria', icon: 'baby' },
-  { name: 'Ortopedia', icon: 'bone' },
   { name: 'Psicologia', icon: 'brain' },
-  { name: 'Endocrinologia', icon: 'activity' },
   { name: 'Neurologia', icon: 'brain-circuit' },
-  { name: 'Nutrição', icon: 'apple' },
   { name: 'Otorrinolaringologia', icon: 'ear' },
-  { name: 'Psiquiatria', icon: 'messages-square' },
   { name: 'Anestesiologia', icon: 'syringe' },
-  { name: 'Fisioterapia', icon: 'accessibility' },
   { name: 'Geriatria', icon: 'hand-heart' },
+  { name: 'Ginecologia', icon: 'venus' },
+  { name: 'Ortopedia', icon: 'bone' },
+  { name: 'Endocrinologia', icon: 'activity' },
+  { name: 'Nutrição', icon: 'apple' },
+  { name: 'Psiquiatria', icon: 'messages-square' },
+  { name: 'Fisioterapia', icon: 'accessibility' },
   { name: 'Medicina do Trabalho', icon: 'briefcase-medical' },
 ];
+
+export const specialtyDetails: Record<string, { description: string; benefits: string[]; accent: string }> = {
+  Cardiologia: { description: 'Especialidade dedicada à prevenção, avaliação e acompanhamento da saúde do coração e do sistema cardiovascular.', benefits: ['Avaliação cardiovascular', 'Prevenção e diagnóstico', 'Acompanhamento especializado'], accent: '#e84963' },
+  Pediatria: { description: 'Cuidados médicos voltados à saúde de crianças e adolescentes, com atenção a cada fase do desenvolvimento.', benefits: ['Cuidado infantil', 'Acompanhamento do desenvolvimento', 'Orientação para famílias'], accent: '#ef9c4c' },
+  Psicologia: { description: 'Acompanhamento psicológico e cuidado com a saúde emocional em diferentes momentos da vida.', benefits: ['Escuta qualificada', 'Cuidado emocional', 'Acompanhamento individualizado'], accent: '#a66bd4' },
+  Neurologia: { description: 'Avaliação de condições relacionadas ao sistema nervoso, com acompanhamento especializado e cuidadoso.', benefits: ['Avaliação neurológica', 'Investigação cuidadosa', 'Acompanhamento contínuo'], accent: '#6c82dc' },
+  Otorrinolaringologia: { description: 'Cuidados relacionados ao ouvido, nariz e garganta para diferentes necessidades de saúde.', benefits: ['Ouvido, nariz e garganta', 'Avaliação especializada', 'Orientação individualizada'], accent: '#4ab3b1' },
+  Anestesiologia: { description: 'Avaliação e acompanhamento relacionados à anestesia, com atenção à segurança e ao planejamento.', benefits: ['Avaliação prévia', 'Planejamento individual', 'Orientação especializada'], accent: '#698ca8' },
+  Geriatria: { description: 'Cuidados de saúde direcionados às pessoas idosas, respeitando suas necessidades e sua rotina.', benefits: ['Cuidado integral', 'Acompanhamento próximo', 'Mais qualidade de vida'], accent: '#d18b57' },
+  Ginecologia: { description: 'Acompanhamento da saúde ginecológica com escuta, prevenção e cuidado em todas as fases da vida.', benefits: ['Prevenção e cuidado', 'Acompanhamento ginecológico', 'Atendimento acolhedor'], accent: '#df6c9a' },
+  Ortopedia: { description: 'Avaliação de condições relacionadas aos ossos, músculos e articulações.', benefits: ['Avaliação musculoesquelética', 'Cuidado das articulações', 'Orientação funcional'], accent: '#5b9bc5' },
+  Endocrinologia: { description: 'Acompanhamento de condições hormonais e metabólicas com orientação individualizada.', benefits: ['Saúde hormonal', 'Avaliação metabólica', 'Acompanhamento clínico'], accent: '#72ae69' },
+  Nutrição: { description: 'Orientação alimentar individualizada para apoiar escolhas mais equilibradas e adequadas à sua rotina.', benefits: ['Orientação alimentar', 'Plano individualizado', 'Hábitos mais equilibrados'], accent: '#6eaf76' },
+  Psiquiatria: { description: 'Avaliação e acompanhamento da saúde mental com atenção à história e às necessidades de cada pessoa.', benefits: ['Avaliação individual', 'Cuidado em saúde mental', 'Acompanhamento contínuo'], accent: '#7c76c9' },
+  Fisioterapia: { description: 'Reabilitação, recuperação funcional e promoção do movimento com acompanhamento profissional.', benefits: ['Recuperação funcional', 'Promoção do movimento', 'Plano de cuidado'], accent: '#3aa9a7' },
+  'Medicina do Trabalho': { description: 'Cuidados e avaliações relacionados à saúde ocupacional e ao bem-estar no ambiente de trabalho.', benefits: ['Saúde ocupacional', 'Avaliações profissionais', 'Orientação preventiva'], accent: '#6c8e9c' },
+};
 
 export const exams = [
   { name: 'Exames laboratoriais', icon: 'flask-conical' },
@@ -121,9 +138,9 @@ export const valueCards = [
 
 export const reasons = [
   { title: 'Equipe qualificada', text: 'Profissionais de diferentes especialidades, comprometidos com a qualidade do atendimento.', icon: 'users' },
-  { title: 'Atendimento humanizado', text: 'Cuidado acolhedor, com atenção às necessidades individuais de cada paciente.', icon: 'heart-handshake' },
-  { title: 'Agendamento facilitado', text: 'Entre em contato pelo WhatsApp e solicite sua consulta com praticidade.', icon: 'calendar-check-2' },
-  { title: 'Estrutura moderna', text: 'Ambientes organizados para proporcionar conforto e uma experiência de atendimento agradável.', icon: 'building-2' },
+  { title: 'Agendamento fácil', text: 'Entre em contato pelo WhatsApp e marque sua consulta com praticidade.', icon: 'calendar-check-2' },
+  { title: 'Estrutura moderna', text: 'Ambientes organizados, confortáveis e preparados para receber você.', icon: 'building-2' },
+  { title: 'Cuidado completo', text: 'Consultas, exames e acompanhamento em um só lugar.', icon: 'heart-pulse' },
 ];
 
 export const steps = [
