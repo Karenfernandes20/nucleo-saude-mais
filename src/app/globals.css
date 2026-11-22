@@ -111,6 +111,7 @@ a { color: inherit; text-decoration: none; }
 /* Compact vertical rhythm: keep sections connected without removing card readability. */
 .section:not(.hero) { padding-block: 32px; }
 .section-heading { margin-bottom: 27px; }
+.hero { padding-top: 34px; }
 .slogan-section { padding: 18px 0 10px; background: var(--surface); }
 .slogan-banner { position: relative; display: flex; align-items: center; min-height: 150px; padding: 30px 10%; overflow: hidden; color: #fff; background: linear-gradient(100deg, #215f80 0%, #286785 62%, #18516f 100%); box-shadow: 0 14px 30px rgba(12, 68, 99, .12); }
 .slogan-banner::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 100%; background: rgba(64, 184, 186, .78); clip-path: polygon(0 56%, 100% 56%, 91% 100%, 0 100%); }
@@ -122,6 +123,8 @@ a { color: inherit; text-decoration: none; }
 .testimonial-section { padding-block: 28px !important; }
 @media (max-width: 900px) { .section:not(.hero) { padding-block: 28px; }.positioning-section { padding-top: 22px !important; }.steps-section { padding-top: 10px !important; }.gallery-section { padding-top: 16px !important; } }
 @media (max-width: 560px) { .section:not(.hero) { padding-block: 24px; }.positioning-section { padding-top: 18px !important; }.steps-section { padding-top: 8px !important; }.gallery-section { padding-top: 14px !important; }.testimonial-section { padding-block: 24px !important; } }
+@media (max-width: 900px) { .hero { padding-top: 30px; } }
+@media (max-width: 560px) { .hero { padding-top: 24px; } }
 @media (max-width: 560px) { .slogan-section { padding: 12px 0 6px; }.slogan-banner { min-height: 112px; padding: 24px 20px; }.slogan-banner span { margin-left: 0; font-size: .88rem; letter-spacing: .18em; } }
 @media (max-width: 900px) { .facility-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 150px; } }
 @media (max-width: 560px) { .facility-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 145px; gap: 10px; }.facility-tile-main { grid-column: span 2; grid-row: span 2; } }
