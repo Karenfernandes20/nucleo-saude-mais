@@ -1,130 +1,10 @@
 'use client';
-
-import React, { useState, useMemo } from 'react';
+import React,{useState,useMemo} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Dna,
-  ShieldCheck,
-  CheckCircle2,
-  ArrowRight,
-  MessageCircle,
-  Activity,
-  HeartPulse,
-  Sparkles,
-  HelpCircle,
-  Clock,
-  UserCheck,
-  FileText,
-  Search,
-  Microscope,
-  Cpu,
-  Layers,
-  Baby,
-  Pill,
-  Brain,
-  Heart,
-  Stethoscope,
-  ChevronDown,
-  ChevronUp,
-  Info,
-  Filter,
-  Sparkle,
-} from 'lucide-react';
-import { clinic } from '@/data/clinic';
+import {Dna,ShieldCheck,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,UserCheck,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Info,Filter} from 'lucide-react';
+import {clinic} from '@/data/clinic';
 import DnaCanvas3d from '@/components/dna-canvas-3d';
-
-// ==========================================
-// 1. DATA: HIERARQUIA GENÉTICA EDUCATIVA
-// ==========================================
-interface HierarchyLevel {
-  id: string;
-  step: string;
-  name: string;
-  subtitle: string;
-  summary: string;
-  details: string;
-  analogy: string;
-  clinicalFocus: string;
-  badge: string;
-}
-
-const hierarchyLevels: HierarchyLevel[] = [
-  {
-    id: 'celula',
-    step: '01',
-    name: 'Célula Humana',
-    subtitle: 'A unidade viva fundamental',
-    badge: '30+ Trilhões no Corpo',
-    summary:
-      'A menor unidade viva de todo o organismo. Nosso corpo é composto por mais de 30 trilhões de células especializadas, como neurônios, células cardíacas, epiteliais e musculares.',
-    details:
-      'Praticamente todas as células do seu corpo (com exceção das hemácias maduras) possuem uma cópia idêntica e completa do seu código genético. É por isso que uma simples amostra de saliva (swab bucal) ou sangue fornece células suficientes para decodificar todo o seu DNA com precisão absoluta.',
-    analogy:
-      'Imagine a célula como uma fábrica altamente eficiente: no centro dela fica uma sala de arquivos protegida contendo a planta completa de toda a obra.',
-    clinicalFocus: 'Amostras celulares simples por swab bucal ou sangue sem desconforto.',
-  },
-  {
-    id: 'nucleo',
-    step: '02',
-    name: 'Núcleo Celular',
-    subtitle: 'O cofre protetor do genoma',
-    badge: 'Blindagem Molecular',
-    summary:
-      'O compartimento intracelular delimitado por uma dupla membrana biológica, cuja função primordial é blindar o material genético contra danos químicos e oxidativos.',
-    details:
-      'O núcleo mantém o genoma isolado do resto da célula. No laboratório molecular, o primeiro passo técnico chama-se "lise celular e nuclear": uma reação bioquímica controlada que abre delicadamente a célula e o núcleo para isolar e purificar as fitas de DNA intactas.',
-    analogy:
-      'O núcleo é como o cofre de alta segurança de um banco internacional, onde os livros originais ficam guardados em temperatura e ambiente controlados.',
-    clinicalFocus: 'Extração e purificação de DNA com controle de pureza óptica (razão A260/A280).',
-  },
-  {
-    id: 'cromossomo',
-    step: '03',
-    name: 'Cromossomos',
-    subtitle: 'Os 23 pares organizadores',
-    badge: '46 Estruturas no Total',
-    summary:
-      'Estruturas altamente condensadas formadas por DNA associado a proteínas histonas. Os seres humanos possuem 23 pares de cromossomos (46 no total), sendo 23 herdados da mãe e 23 do pai.',
-    details:
-      'Se esticássemos todo o DNA de uma única célula microscópica, ele mediria quase 2 metros de comprimento. Para caber em um espaço de apenas alguns micrômetros, o DNA se compacta como um novelo nos cromossomos. Alterações no número de cromossomos inteiros causam condições como a Síndrome de Down (Trissomia 21).',
-    analogy:
-      'Os cromossomos são como os 23 volumes de uma enciclopédia: se faltar um volume ou houver um volume duplicado, a leitura biológica se altera.',
-    clinicalFocus: 'Detectados precocemente na gestação através do teste pré-natal NIPT.',
-  },
-  {
-    id: 'dna',
-    step: '04',
-    name: 'Molécula de DNA',
-    subtitle: 'A famosa dupla hélice',
-    badge: '4 Letras Químicas (A, T, C, G)',
-    summary:
-      'O Ácido Desoxirribonucleico é a molécula em formato de escada em caracol (dupla hélice) formada por bilhões de pares de bases químicas: Adenina (A), Timina (T), Citosina (C) e Guanina (G).',
-    details:
-      'A ordem exata dessas quatro letras químicas constitui a linguagem da vida. O Sequenciamento de Nova Geração (NGS) realiza a leitura digital dessas sequências, comparando o genoma do paciente com o genoma humano de referência internacional para identificar variações de base única (SNVs).',
-    analogy:
-      'O DNA é o código binário fundamental da biologia: enquanto o computador lê 0s e 1s, a vida lê as sequências de A, T, C e G.',
-    clinicalFocus: 'Sequenciamento massivo paralelo (NGS) com leitura profunda de milhões de fragmentos.',
-  },
-  {
-    id: 'gene',
-    step: '05',
-    name: 'Genes & Variantes',
-    subtitle: 'As instruções funcionais ativas',
-    badge: '~20.000 Genes Humanos',
-    summary:
-      'Segmentos específicos de DNA que contêm as instruções necessárias para sintetizar proteínas funcionais no organismo. O genoma humano possui cerca de 20.000 genes codificadores.',
-    details:
-      'Mutações pontuais (troca de uma única letra química) ou inserções/deleções no gene podem alterar a proteína produzida. Nos painéis genéticos da clínica, analisamos genes com impacto clínico comprovado: genes de predisposição a câncer (ex: BRCA1, BRCA2), arritmias cardíacas (ex: MYBPC3) ou enzimas hepáticas do metabolismo de remédios (ex: CYP2D6).',
-    analogy:
-      'Os genes são as receitas individuais dentro do grande livro de receitas: se houver um erro de digitação no tempo de forno ou na quantidade de sal, o resultado do prato será afetado.',
-    clinicalFocus: 'Painéis genéticos focados, Exoma completo (WES) e Farmacogenética personalizada.',
-  },
-];
-
-// ==========================================
-// 2. DATA: CORPO HUMANO INTERATIVO (HOTSPOTS)
-// ==========================================
 interface AnatomyHotspot {
   id: string;
   name: string;
@@ -365,45 +245,7 @@ const geneticExamCatalog: GeneticExamCard[] = [
   },
 ];
 
-// ==========================================
-// 4. DATA: LINHA DO TEMPO (5 ETAPAS)
-// ==========================================
-const workflowSteps = [
-  {
-    step: '01',
-    title: 'Orientação Inicial & Acolhimento',
-    desc: 'Nossa equipe esclarece suas dúvidas, explica os detalhes da metodologia e auxilia no alinhamento com a solicitação do seu médico.',
-    icon: Stethoscope,
-  },
-  {
-    step: '02',
-    title: 'Definição do Exame Apropriado',
-    desc: 'Identificação do painel genético exato conforme a especialidade (oncologia, cardiologia, NIPT, exoma ou farmacogenética) e preparo necessário.',
-    icon: Dna,
-  },
-  {
-    step: '03',
-    title: 'Coleta Rápida & Confortável',
-    desc: 'Procedimento simples por saliva (swab bucal indolor) ou pequena amostra de sangue, em ambiente clínico seguro e higienizado.',
-    icon: Clock,
-  },
-  {
-    step: '04',
-    title: 'Processamento & Sequenciamento NGS',
-    desc: 'As amostras são processadas em laboratórios de genética de padrão internacional com sequenciamento de última geração e controle rigoroso.',
-    icon: Microscope,
-  },
-  {
-    step: '05',
-    title: 'Laudo Estruturado & Apoio Clínico',
-    desc: 'Emissão de relatório molecular detalhado e conclusivo para que seu médico de confiança possa orientar condutas preventivas e personalizadas.',
-    icon: FileText,
-  },
-];
 
-// ==========================================
-// 5. DATA: FAQS
-// ==========================================
 const faqsList = [
   {
     q: 'Preciso de pedido médico para fazer um exame genético?',
@@ -422,24 +264,21 @@ const faqsList = [
     a: 'Não necessariamente. Na maioria dos painéis de predisposição hereditária (como câncer ou cardiologia), o resultado positivo indica risco aumentado em comparação com a população geral. Essa informação é uma ferramenta preventiva poderosa: permite ao seu médico instituir vigilância antecipada, exames periódicos e medidas protetivas antes de qualquer sintoma.',
   },
 ];
+const shortAnatomy:Record<string,string>={cerebro:'Investigue possíveis causas genéticas de condições neurológicas.',coracao:'Avalie predisposições hereditárias relacionadas ao coração.',oncologia:'Conheça fatores genéticos associados ao risco de alguns tipos de câncer.',farmaco:'Entenda fatores genéticos que podem influenciar a resposta a medicamentos.',gestacao:'Conheça opções de rastreamento cromossômico durante a gestação.',exoma:'Investigue possíveis causas genéticas de condições complexas e doenças raras.'};
+const shortExams:Record<string,string>={'cancer-hereditario':shortAnatomy.oncologia,'genetica-cardiovascular':shortAnatomy.coracao,'sequenciamento-exoma':shortAnatomy.exoma,neurogenetica:shortAnatomy.cerebro,nipt:shortAnatomy.gestacao,farmacogenetica:shortAnatomy.farmaco};
+const examIcons:Record<string,typeof Brain>={'cancer-hereditario':Activity,'genetica-cardiovascular':HeartPulse,'sequenciamento-exoma':Dna,neurogenetica:Brain,nipt:Baby,farmacogenetica:Pill};
+const situations=[{title:'Histórico de câncer na família?',desc:'Conheça as opções de avaliação de risco hereditário.',icon:Activity},{title:'Doenças cardíacas na família?',desc:'Saiba mais sobre genética cardiovascular.',icon:HeartPulse},{title:'Dificuldade de adaptação a medicamentos?',desc:'Conheça a farmacogenética.',icon:Pill},{title:'Está esperando um bebê?',desc:'Entenda as opções de rastreamento pré-natal.',icon:Baby}];
 
-export default function GeneticaExperience() {
+export default function GeneticaExperience(){
   const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
     'Olá! Gostaria de informações sobre os Exames Genéticos no Núcleo de Saúde Mais.'
   )}`;
 
   // Interactive States
-  const [activeHierarchyId, setActiveHierarchyId] = useState<string>('celula');
   const [activeHotspotId, setActiveHotspotId] = useState<string>('cerebro');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
-  // Active Hierarchy Item
-  const activeHierarchy = useMemo(
-    () => hierarchyLevels.find((l) => l.id === activeHierarchyId) || hierarchyLevels[0],
-    [activeHierarchyId]
-  );
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   // Active Hotspot Item
   const activeHotspot = useMemo(
@@ -469,12 +308,9 @@ export default function GeneticaExperience() {
     });
   }, [selectedCategory, searchQuery]);
 
-  return (
-    <div className="genetica-page-container">
-      {/* =====================================================================
-          1. HERO COM DNA 3D INTERATIVO
-          ===================================================================== */}
-      <section className="genetica-hero-section">
+
+const contact=(message:string)=>`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(message)}`;
+return (<div className="genetica-page-container"><section className="genetica-hero-section">
         <div className="genetica-container">
           <div className="genetica-hero-grid">
             {/* Coluna Esquerda: Textos & Ações */}
@@ -487,32 +323,18 @@ export default function GeneticaExperience() {
 
               <div className="genetica-hero-badge">
                 <Dna size={14} className="text-teal" />
-                <span>MEDICINA DE PRECISÃO & INVESTIGAÇÃO HEREDITÁRIA</span>
+                <span>EXAMES GENÉTICOS EM MONTES CLAROS</span>
               </div>
 
               <h1 className="genetica-hero-title">
-                Exames Genéticos Avançados em Montes Claros
+                O que seu DNA pode revelar sobre sua saúde?
               </h1>
 
               <p className="genetica-hero-subtitle">
-                A tecnologia do DNA a favor da sua saúde: antecipe riscos hereditários, personalize condutas
-                médicas e adote uma postura preventiva de excelência com laudos estruturados e acolhimento clínico.
+                Conheça sua genética e tenha mais informações para cuidar da sua saúde e da sua família.
               </p>
 
-              <div className="genetica-hero-highlights">
-                <span className="genetica-hero-chip">
-                  <Sparkles size={14} className="text-teal" /> Sequenciamento NGS
-                </span>
-                <span className="genetica-hero-chip">
-                  <ShieldCheck size={14} className="text-teal" /> Laudos Acreditados
-                </span>
-                <span className="genetica-hero-chip">
-                  <Clock size={14} className="text-teal" /> Coleta Rápida & Confortável
-                </span>
-                <span className="genetica-hero-chip">
-                  <UserCheck size={14} className="text-teal" /> Apoio ao Seu Médico
-                </span>
-              </div>
+              
 
               <div className="genetica-hero-actions">
                 <a
@@ -522,13 +344,13 @@ export default function GeneticaExperience() {
                   className="btn btn-teal btn-lg"
                 >
                   <MessageCircle size={18} />
-                  <span>Consultar exames genéticos</span>
+                  <span>Quero saber mais pelo WhatsApp</span>
                   <ArrowRight size={16} />
                 </a>
 
-                <a href="#corpo-interativo" className="btn btn-outline-white btn-lg">
+                <a href="#paineis" className="btn btn-outline-white btn-lg">
                   <Activity size={18} />
-                  <span>Explorar mapa anatômico</span>
+                  <span>Conhecer os exames</span>
                 </a>
               </div>
             </div>
@@ -541,246 +363,13 @@ export default function GeneticaExperience() {
                 {/* Micro-badge Flutuante */}
                 <div className="genetica-dna-floating-badge">
                   <Sparkles size={14} className="text-teal" />
-                  <span>Molécula 3D em Tempo Real • Tecnologia NGS</span>
+                  <span>Explore a molécula de DNA</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* =====================================================================
-          2. SEÇÃO EDUCATIVA: HIERARQUIA GENÉTICA (CÉLULA → GENE)
-          ===================================================================== */}
-      <section id="educativo" className="section bg-white genetica-section-padding">
-        <div className="genetica-container">
-          <div className="section-header-compact" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 36px' }}>
-            <div className="section-kicker" style={{ justifyContent: 'center' }}>
-              <span className="kicker-line" />
-              <span>CIÊNCIA DESCOMPLICADA</span>
-              <span className="kicker-line" />
-            </div>
-            <h2 className="section-title">Como a informação genética está organizada no seu corpo?</h2>
-            <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Do microscópico ao molecular: clique nos 5 níveis biológicos para entender como seu DNA
-              guarda as instruções da vida e onde nossos exames atuam.
-            </p>
-          </div>
-
-          <div className="genetica-hierarchy-wrapper">
-            {/* Seletor Horizontal de Passos (Tabs) */}
-            <div className="genetica-hierarchy-nav" role="tablist">
-              {hierarchyLevels.map((lvl) => {
-                const isActive = lvl.id === activeHierarchyId;
-                return (
-                  <button
-                    key={lvl.id}
-                    onClick={() => setActiveHierarchyId(lvl.id)}
-                    className={`genetica-hierarchy-tab ${isActive ? 'active' : ''}`}
-                    role="tab"
-                    aria-selected={isActive}
-                  >
-                    <span className="tab-step">{lvl.step}</span>
-                    <span className="tab-name">{lvl.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Conteúdo Dinâmico Split: Imagem Ilustrada + Card de Detalhes */}
-            <div className="genetica-hierarchy-card">
-              <div className="hierarchy-image-col">
-                <div className="hierarchy-image-wrap">
-                  <Image
-                    src="/images/genetica/estrutura-genetica-celula.webp"
-                    alt="Representação científica interativa: Célula, Núcleo, Cromossomo, DNA e Gene no Núcleo de Saúde Mais"
-                    width={1024}
-                    height={768}
-                    loading="lazy"
-                    className="hierarchy-image"
-                  />
-                  <div className="hierarchy-image-badge">
-                    <Dna size={14} className="text-teal" />
-                    <span>Nível Ativo: {activeHierarchy.name}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hierarchy-text-col">
-                <div className="hierarchy-badge-chip">
-                  <span>Passo {activeHierarchy.step} de 05</span>
-                  <span className="separator">•</span>
-                  <span>{activeHierarchy.badge}</span>
-                </div>
-
-                <h3 className="hierarchy-detail-title">{activeHierarchy.name}</h3>
-                <h4 className="hierarchy-detail-sub">{activeHierarchy.subtitle}</h4>
-
-                <p className="hierarchy-detail-summary">{activeHierarchy.summary}</p>
-                <p className="hierarchy-detail-desc">{activeHierarchy.details}</p>
-
-                <div className="hierarchy-analogy-box">
-                  <div className="analogy-icon">
-                    <Sparkles size={16} className="text-teal" />
-                  </div>
-                  <div>
-                    <strong>Analogia didática:</strong>
-                    <p>{activeHierarchy.analogy}</p>
-                  </div>
-                </div>
-
-                <div className="hierarchy-clinical-focus">
-                  <ShieldCheck size={16} className="text-teal flex-shrink-0" />
-                  <span>
-                    <strong>Importância para o exame:</strong> {activeHierarchy.clinicalFocus}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          3. CORPO HUMANO ANATÔMICO INTERATIVO
-          ===================================================================== */}
-      <section id="corpo-interativo" className="section genetica-anatomy-light">
-        <div className="genetica-container">
-          <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 36px' }}>
-            <div className="section-kicker" style={{ justifyContent: 'center' }}>
-              <span className="kicker-line" />
-              <span>MAPA ANATÔMICO INTERATIVO</span>
-              <span className="kicker-line" />
-            </div>
-            <h2 className="section-title">
-              Aplicações dos Exames Genéticos no Organismo
-            </h2>
-            <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Passe o mouse ou toque nos pontos luminosos do corpo humano para explorar quais órgãos e
-              sistemas contam com testes moleculares dedicados na nossa clínica.
-            </p>
-          </div>
-
-          {/* Seletor Mobile / Tablet de Órgãos */}
-          <div className="genetica-hotspots-mobile-nav">
-            {anatomyHotspots.map((spot) => (
-              <button
-                key={spot.id}
-                aria-pressed={spot.id === activeHotspotId}
-                onClick={() => setActiveHotspotId(spot.id)}
-                className={`genetica-hotspot-pill ${spot.id === activeHotspotId ? 'active' : ''}`}
-              >
-                <span>{spot.name}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="genetica-body-split">
-            {/* Lado Esquerdo: Imagem Anatômica com Hotspots */}
-            <div className="genetica-body-visual">
-              <div className="genetica-body-image-wrap">
-                <Image
-                  src="/images/genetica/corpo-humano-genetica.webp"
-                  alt="Representação estilizada e anatômica do corpo humano com pontos luminosos de exames genéticos"
-                  width={1024}
-                  height={768}
-                  loading="lazy"
-                  className="genetica-body-image"
-                />
-
-                {/* Hotspots Luminosos Sobrepostos */}
-                {anatomyHotspots.map((spot) => {
-                  const isSelected = spot.id === activeHotspotId;
-                  return (
-                    <button
-                      key={spot.id}
-                      onClick={() => setActiveHotspotId(spot.id)}
-                      onMouseEnter={() => setActiveHotspotId(spot.id)}
-                      onFocus={() => setActiveHotspotId(spot.id)}
-                      className={`genetica-hotspot-pin ${isSelected ? 'active' : ''}`}
-                      style={{ top: spot.top, left: spot.left }}
-                      aria-label={`Ver informações de ${spot.name}`}
-                    >
-                      <span className="hotspot-pulse" />
-                      <span className="hotspot-dot" />
-                      <span className="hotspot-tooltip">{spot.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Aviso Ético Importante */}
-              <div className="genetica-disclaimer-box">
-                <Info size={15} className="text-teal flex-shrink-0" />
-                <span>
-                  <strong>Aviso Informativo:</strong> Este recurso é exclusivamente educativo para ilustrar as áreas
-                  médicas de aplicação dos testes moleculares e não constitui ferramenta de autodiagnóstico.
-                </span>
-              </div>
-            </div>
-
-            {/* Lado Direito: Painel de Detalhes do Órgão Selecionado */}
-            <div className="genetica-body-details">
-              <div className="body-details-card" aria-live="polite">
-                <div className="details-header-row">
-                  <div className="details-badge">{activeHotspot.badge}</div>
-                  <span className="details-turnaround">
-                    <Clock size={13} /> {activeHotspot.turnaround}
-                  </span>
-                </div>
-
-                <h3 className="details-title">{activeHotspot.name}</h3>
-                <h4 className="details-exam-name">{activeHotspot.examTitle}</h4>
-
-                <p className="details-desc">{activeHotspot.description}</p>
-
-                <div className="details-benefits-box">
-                  <h5 className="benefits-label">Principais Benefícios Clínicos:</h5>
-                  <ul className="benefits-list">
-                    {activeHotspot.benefits.map((b, idx) => (
-                      <li key={idx} className="benefit-item">
-                        <CheckCircle2 size={16} className="text-teal flex-shrink-0" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="details-meta-grid">
-                  <div className="meta-card">
-                    <span className="meta-label">Tipo de Coleta:</span>
-                    <span className="meta-value">{activeHotspot.sampleType}</span>
-                  </div>
-                  <div className="meta-card">
-                    <span className="meta-label">Genes de Exemplo:</span>
-                    <span className="meta-value">{activeHotspot.genes}</span>
-                  </div>
-                </div>
-
-                <div className="details-action-box">
-                  <a
-                    href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
-                      `Olá! Gostaria de informações sobre o exame de ${activeHotspot.examTitle}.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-teal btn-md"
-                    style={{ width: '100%', justifyContent: 'center' }}
-                  >
-                    <MessageCircle size={16} />
-                    <span>{activeHotspot.ctaText} no WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          4. CATÁLOGO INTERATIVO DE EXAMES COM FILTROS & BUSCA
-          ===================================================================== */}
-      <section id="paineis" className="section bg-white genetica-section-padding">
+      </section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p><a className="btn btn-outline-navy btn-sm" href={contact('Olá! Gostaria de orientação sobre exames genéticos.')} target="_blank" rel="noopener noreferrer">Quero saber mais <ArrowRight size={16}/></a></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
         <div className="genetica-container">
           <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 32px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
@@ -788,10 +377,9 @@ export default function GeneticaExperience() {
               <span>PORTFÓLIO DE EXAMES DA CLÍNICA</span>
               <span className="kicker-line" />
             </div>
-            <h2 className="section-title">Painéis e Testes Moleculares Disponíveis</h2>
+            <h2 className="section-title">Conheça nossos exames genéticos</h2>
             <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Filtre por categoria ou pesquise pelo nome do exame para encontrar a avaliação genética indicada
-              pelo seu médico assistente.
+              Encontre seu exame ou converse com nossa equipe.
             </p>
           </div>
 
@@ -804,7 +392,7 @@ export default function GeneticaExperience() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar por exame, gene ou indicação (ex: BRCA1, NIPT, coração, exoma...)"
+                placeholder="Buscar exame (ex.: NIPT, BRCA1, exoma)"
                 className="catalog-search-input"
                 aria-label="Pesquisar exames genéticos"
               />
@@ -847,7 +435,7 @@ export default function GeneticaExperience() {
                   </div>
 
                   <h3 className="exam-card-title">{exam.title}</h3>
-                  <p className="exam-card-desc">{exam.desc}</p>
+                  <div style={{color:"#169FA5",margin:"12px 0"}}>{React.createElement(examIcons[exam.id] || Dna,{size:36})}</div><p className="exam-card-desc">{shortExams[exam.id]}</p><details style={{marginBottom:16}}><summary style={{cursor:"pointer",color:"#087f85"}}>Saiba mais</summary><p>{exam.desc}</p>
 
                   <div className="exam-card-highlights">
                     <strong>Destaques do painel:</strong>
@@ -866,7 +454,7 @@ export default function GeneticaExperience() {
                     <span className="genes-val">{exam.genesSample}</span>
                   </div>
 
-                  <div className="exam-card-footer">
+                  </details><div className="exam-card-footer">
                     <a
                       href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
                         `Olá! Gostaria de consultar detalhes e valores do exame de ${exam.title}.`
@@ -877,7 +465,7 @@ export default function GeneticaExperience() {
                       style={{ width: '100%', justifyContent: 'center' }}
                     >
                       <MessageCircle size={15} />
-                      <span>Consultar este painel</span>
+                      <span>Consultar pelo WhatsApp</span>
                     </a>
                   </div>
                 </article>
@@ -905,212 +493,137 @@ export default function GeneticaExperience() {
             </div>
           )}
         </div>
-      </section>
-
-      {/* =====================================================================
-          5. TECNOLOGIA DE ANÁLISE GENÉTICA & RIGOR LABORATORIAL
-          ===================================================================== */}
-      <section className="section bg-neutral genetica-section-padding">
+      </section><section id="corpo-interativo" className="section genetica-anatomy-light">
         <div className="genetica-container">
-          <div className="genetica-split-section">
-            {/* Imagem do Laboratório */}
-            <div className="genetica-split-image-col">
-              <div className="genetica-image-card">
-                <Image
-                  src="/images/genetica/laboratorio-genetica.webp"
-                  alt="Cientista biomédica realizando preparo e pipetagem de amostras genéticas em ambiente laboratorial certificado"
-                  width={1024}
-                  height={768}
-                  loading="lazy"
-                  className="genetica-tech-image"
-                />
-                <div className="genetica-floating-card">
-                  <Cpu size={16} className="text-teal" />
-                  <span>Plataformas de Sequenciamento NGS de Última Geração</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Conteúdo Textual Explicativo */}
-            <div className="genetica-split-text-col">
-              <div className="section-kicker">
-                <span className="kicker-line" />
-                <span>TECNOLOGIA MOLECULAR DE PONTA</span>
-              </div>
-              <h2 className="section-title">
-                Sequenciamento NGS e Bioinformática Clínica de Referência
-              </h2>
-              <p className="genetica-split-desc">
-                O Núcleo de Saúde Mais atua em parceria com os mais conceituados laboratórios de genética humana
-                do país, assegurando que cada amostra coletada em Montes Claros passe pelo mais elevado rigor
-                de controle técnico e científico internacional.
-              </p>
-
-              <div className="genetica-features-grid">
-                <div className="genetica-feature-item">
-                  <div className="feature-icon">
-                    <Microscope size={20} />
-                  </div>
-                  <div>
-                    <h4>Leitura Massiva Paralela (NGS)</h4>
-                    <p>
-                      Milhões de fragmentos de DNA sequenciados simultaneamente com alta cobertura de profundidade,
-                      garantindo sensibilidade superior a 99% na detecção de variantes.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="genetica-feature-item">
-                  <div className="feature-icon">
-                    <Cpu size={20} />
-                  </div>
-                  <div>
-                    <h4>Pipeline Computacional de Bioinformática</h4>
-                    <p>
-                      Algoritmos sofisticados filtram ruídos analíticos, comparam dados com bancos populacionais globais
-                      (como GnomAD e ClinVar) e mapeiam variantes com exatidão.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="genetica-feature-item">
-                  <div className="feature-icon">
-                    <ShieldCheck size={20} />
-                  </div>
-                  <div>
-                    <h4>Classificação segundo Diretrizes ACMG</h4>
-                    <p>
-                      Todos os laudos seguem as diretrizes do Colégio Americano de Genética Médica e Genômica (ACMG),
-                      categorizando variantes como patogênicas, provavelmente patogênicas ou VUS.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          6. COMO FUNCIONA O EXAME GENÉTICO (LINHA DO TEMPO)
-          ===================================================================== */}
-      <section className="section bg-white genetica-section-padding">
-        <div className="genetica-container">
-          <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px' }}>
+          <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 36px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
               <span className="kicker-line" />
-              <span>PASSO A PASSO</span>
+              <span>MAPA ANATÔMICO INTERATIVO</span>
               <span className="kicker-line" />
             </div>
-            <h2 className="section-title">Como funciona o seu exame genético?</h2>
+            <h2 className="section-title">
+              Explore o que sua genética pode revelar
+            </h2>
             <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Um fluxo claro, transparente e acolhedor do primeiro contato à entrega do laudo médico.
+              Toque nos pontos do corpo para conhecer os exames.
             </p>
           </div>
 
-          <div className="genetica-timeline-grid">
-            {workflowSteps.map((ws, i) => {
-              const Icon = ws.icon;
-              return (
-                <div key={ws.step} className="genetica-timeline-card">
-                  <div className="timeline-step-badge">{ws.step}</div>
-                  <div className="timeline-icon-box">
-                    <Icon size={20} />
-                  </div>
-                  <h3 className="timeline-card-title">{ws.title}</h3>
-                  <p className="timeline-card-desc">{ws.desc}</p>
-                </div>
-              );
-            })}
+          {/* Seletor Mobile / Tablet de Órgãos */}
+          <div className="genetica-hotspots-mobile-nav">
+            {anatomyHotspots.map((spot) => (
+              <button
+                key={spot.id}
+                aria-pressed={spot.id === activeHotspotId}
+                onClick={() => setActiveHotspotId(spot.id)}
+                className={`genetica-hotspot-pill ${spot.id === activeHotspotId ? 'active' : ''}`}
+              >
+                <span>{spot.name}</span>
+              </button>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* =====================================================================
-          7. CONSULTA MÉDICA & HUMANIZAÇÃO (IMAGEM 5)
-          ===================================================================== */}
-      <section className="section bg-neutral genetica-section-padding">
-        <div className="genetica-container">
-          <div className="genetica-split-section reverse">
-            {/* Imagem Médica + Paciente */}
-            <div className="genetica-split-image-col">
-              <div className="genetica-image-card">
+          <div className="genetica-body-split">
+            {/* Lado Esquerdo: Imagem Anatômica com Hotspots */}
+            <div className="genetica-body-visual">
+              <div className="genetica-body-image-wrap">
                 <Image
-                  src="/images/genetica/consulta-genetica-medica.webp"
-                  alt="Médica explicando os resultados e o laudo do teste genético em tablet para o paciente durante consulta humanizada"
+                  src="/images/genetica/corpo-humano-genetica.webp"
+                  alt="Representação estilizada e anatômica do corpo humano com pontos luminosos de exames genéticos"
                   width={1024}
                   height={768}
                   loading="lazy"
-                  className="genetica-consult-image"
+                  className="genetica-body-image"
                 />
-                <div className="genetica-floating-card">
-                  <UserCheck size={16} className="text-teal" />
-                  <span>Aconselhamento Clínico & Cuidado Humanizado</span>
-                </div>
+
+                {/* Hotspots Luminosos Sobrepostos */}
+                {anatomyHotspots.map((spot) => {
+                  const isSelected = spot.id === activeHotspotId;
+                  return (
+                    <button
+                      key={spot.id}
+                      onClick={() => setActiveHotspotId(spot.id)}
+                      onMouseEnter={() => setActiveHotspotId(spot.id)}
+                      onFocus={() => setActiveHotspotId(spot.id)}
+                      className={`genetica-hotspot-pin ${isSelected ? 'active' : ''}`}
+                      style={{ top: spot.top, left: spot.left }}
+                      aria-pressed={isSelected} aria-label={`Ver informações de ${spot.name}`}
+                    >
+                      <span className="hotspot-pulse" />
+                      <span className="hotspot-dot" />
+                      <span className="hotspot-tooltip">{spot.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Aviso Ético Importante */}
+              <div className="genetica-disclaimer-box">
+                <Info size={15} className="text-teal flex-shrink-0" />
+                <span>
+                  <strong>Aviso Informativo:</strong> Este recurso é exclusivamente educativo para ilustrar as áreas
+                  médicas de aplicação dos testes moleculares e não constitui ferramenta de autodiagnóstico.
+                </span>
               </div>
             </div>
 
-            {/* Texto Aconselhamento */}
-            <div className="genetica-split-text-col">
-              <div className="section-kicker">
-                <span className="kicker-line" />
-                <span>O PAPEL DO MÉDICO</span>
-              </div>
-              <h2 className="section-title">
-                O resultado genético ganha verdadeiro valor na consulta médica
-              </h2>
-              <p className="genetica-split-desc">
-                Um exame genético não é uma sentença definitiva, mas sim uma bússola preditiva. No Núcleo de Saúde
-                Mais, entendemos que o laudo molecular deve ser integrado ao seu histórico clínico, hábitos de vida
-                e história familiar de saúde.
-              </p>
+            {/* Lado Direito: Painel de Detalhes do Órgão Selecionado */}
+            <div className="genetica-body-details">
+              <div className="body-details-card" aria-live="polite">
+                <div className="details-header-row">
+                  <div className="details-badge">{activeHotspot.badge}</div>
+                  <span className="details-turnaround">
+                    <Clock size={13} /> {activeHotspot.turnaround}
+                  </span>
+                </div>
 
-              <div className="genetica-consult-points">
-                <div className="consult-point">
-                  <CheckCircle2 size={18} className="text-teal flex-shrink-0" />
-                  <div>
-                    <strong>Interpretação Segura e Contextualizada:</strong>{' '}
-                    <span>compreensão exata do que significa uma variante de significado incerto (VUS) ou patogênica.</span>
+                <h3 className="details-title">{activeHotspot.name}</h3>
+                <h4 className="details-exam-name">{activeHotspot.examTitle}</h4>
+
+                <p className="details-desc">{shortAnatomy[activeHotspot.id]}</p><details style={{marginBottom:16}}><summary style={{cursor:"pointer",color:"#087f85"}}>Ver detalhes técnicos</summary><p className="details-desc">{activeHotspot.description}</p>
+
+                <div className="details-benefits-box">
+                  <h5 className="benefits-label">Principais Benefícios Clínicos:</h5>
+                  <ul className="benefits-list">
+                    {activeHotspot.benefits.map((b, idx) => (
+                      <li key={idx} className="benefit-item">
+                        <CheckCircle2 size={16} className="text-teal flex-shrink-0" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="details-meta-grid">
+                  <div className="meta-card">
+                    <span className="meta-label">Tipo de Coleta:</span>
+                    <span className="meta-value">{activeHotspot.sampleType}</span>
+                  </div>
+                  <div className="meta-card">
+                    <span className="meta-label">Genes de Exemplo:</span>
+                    <span className="meta-value">{activeHotspot.genes}</span>
                   </div>
                 </div>
 
-                <div className="consult-point">
-                  <CheckCircle2 size={18} className="text-teal flex-shrink-0" />
-                  <div>
-                    <strong>Plano de Ação Preventivo:</strong>{' '}
-                    <span>definição de exames de rastreio em intervalos personalizados para você e seus familiares.</span>
-                  </div>
+                </details><div className="details-action-box">
+                  <a
+                    href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
+                      `Olá! Gostaria de informações sobre o exame de ${activeHotspot.examTitle}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-teal btn-md"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    <MessageCircle size={16} />
+                    <span>Tirar dúvidas sobre este exame</span>
+                  </a>
                 </div>
-
-                <div className="consult-point">
-                  <CheckCircle2 size={18} className="text-teal flex-shrink-0" />
-                  <div>
-                    <strong>Apoio Integral à Família:</strong>{' '}
-                    <span>orientação clara quando houver indicação de investigação em cascata para filhos ou irmãos.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ marginTop: '24px' }}>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-teal btn-lg"
-                >
-                  <MessageCircle size={18} />
-                  <span>Agendar orientação com nossa equipe</span>
-                </a>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* =====================================================================
-          8. DÚVIDAS FREQUENTES EM ACCORDION INTERATIVO
-          ===================================================================== */}
-      <section className="section bg-white genetica-section-padding">
+      </section><section className="section bg-neutral genetica-section-padding"><div className="genetica-container"><div className="genetica-split-section"><div className="genetica-image-card"><Image src="/images/genetica/consulta-genetica-medica.webp" alt="Ilustração de atendimento médico" width={1024} height={768} className="genetica-consult-image"/></div><div><h2 className="section-title">Já tem um pedido médico?</h2><p className="genetica-split-desc">Consulte a disponibilidade, o preparo e os valores do seu exame com nossa equipe.</p><a className="btn btn-teal btn-md" href={contact('Olá! Tenho um pedido médico e gostaria de consultar a disponibilidade do exame.')} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/> Consultar meu pedido</a></div></div></div></section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Seu exame em três passos</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{[{title:'Converse com nossa equipe',desc:'Tire dúvidas e confirme a indicação com seu médico.',icon:MessageCircle},{title:'Realize a coleta',desc:'Sangue ou saliva, conforme o exame.',icon:Dna},{title:'Receba seu resultado',desc:'Leve o laudo para avaliação médica.',icon:FileText}].map(({title,desc,icon:Icon},i)=><article className="genetica-exam-card" key={title}><Icon size={30} className="text-teal"/><h3 className="exam-card-title">{i+1}. {title}</h3><p>{desc}</p></article>)}</div></div></section><section className="section bg-white genetica-section-padding">
         <div className="genetica-container" style={{ maxWidth: '860px' }}>
           <div className="section-header-compact text-center" style={{ textAlign: 'center', margin: '0 auto 36px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
@@ -1118,9 +631,9 @@ export default function GeneticaExperience() {
               <span>TIRE SUAS DÚVIDAS</span>
               <span className="kicker-line" />
             </div>
-            <h2 className="section-title text-center">Perguntas Frequentes sobre Genética</h2>
+            <h2 className="section-title text-center">Dúvidas frequentes</h2>
             <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Tudo o que você precisa saber antes de realizar seu exame molecular no Núcleo de Saúde Mais.
+              Respostas rápidas para começar.
             </p>
           </div>
 
@@ -1165,33 +678,5 @@ export default function GeneticaExperience() {
             </a>
           </div>
         </div>
-      </section>
-
-      {/* =====================================================================
-          9. BANNER CTA FINAL
-          ===================================================================== */}
-      <section className="genetica-cta-bottom-section">
-        <div className="genetica-container">
-          <div className="genetica-cta-bottom-banner">
-            <div>
-              <h3>Pronto para conhecer o que o seu DNA tem a dizer?</h3>
-              <p>
-                Nossa equipe médica e laboratorial analisa pedidos de médicos de qualquer especialidade e
-                verifica a disponibilidade e o preparo adequado para o seu exame.
-              </p>
-            </div>
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-teal btn-lg"
-            >
-              <MessageCircle size={18} />
-              <span>Falar com equipe técnica</span>
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+      </section><section className="genetica-cta-bottom-section"><div className="genetica-container"><div className="genetica-cta-bottom-banner"><div><h3>Não sabe qual exame realizar?</h3><p>Converse com nossa equipe e descubra como começar.</p></div><a className="btn btn-teal btn-lg" href={whatsappHref} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/> Conversar pelo WhatsApp</a></div></div></section></div>);
 }
