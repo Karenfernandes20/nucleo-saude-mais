@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { FacilityPhoto } from '@/data/clinic';
 
@@ -31,11 +32,12 @@ export default function Lightbox({
       }
     };
 
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [currentIndex, photos.length, onClose, onNavigate]);
@@ -54,7 +56,7 @@ export default function Lightbox({
     onNavigate((currentIndex + 1) % photos.length);
   };
 
-  return (
+  return createPortal(
     <div
       className="lightbox-overlay"
       onClick={onClose}
@@ -117,6 +119,7 @@ export default function Lightbox({
         <h4 className="lightbox-caption-title">{currentPhoto.title}</h4>
         <p className="lightbox-caption-desc">{currentPhoto.description}</p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
