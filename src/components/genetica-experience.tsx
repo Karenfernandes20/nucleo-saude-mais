@@ -273,6 +273,7 @@ export default function GeneticaExperience(){
   )}`;
 
   // Interactive States
+  const [mobileOpenId, setMobileOpenId] = useState<string | null>(null);
   const [activeHotspotId, setActiveHotspotId] = useState<string>('cerebro');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -308,6 +309,57 @@ export default function GeneticaExperience(){
 
 
 const contact=(message:string)=>`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(message)}`;
+const renderAnatomyDetails = (activeHotspot: AnatomyHotspot) => (<div className="body-details-card" aria-live="polite" key={activeHotspot.id}>
+                <div className="details-header-row">
+                  <div className="details-badge">{activeHotspot.badge}</div>
+                  <span className="details-turnaround">
+                    <Clock size={13} /> {activeHotspot.turnaround}
+                  </span>
+                </div>
+
+                <h3 className="details-title">{activeHotspot.name}</h3>
+                <h4 className="details-exam-name">{activeHotspot.examTitle}</h4>
+
+                <p className="details-desc">{shortAnatomy[activeHotspot.id]}</p><details style={{marginBottom:16}}><summary style={{cursor:"pointer",color:"#087f85"}}>Ver detalhes técnicos</summary><p className="details-desc">{activeHotspot.description}</p>
+
+                <div className="details-benefits-box">
+                  <h5 className="benefits-label">Principais Benefícios Clínicos:</h5>
+                  <ul className="benefits-list">
+                    {activeHotspot.benefits.map((b, idx) => (
+                      <li key={idx} className="benefit-item">
+                        <CheckCircle2 size={16} className="text-teal flex-shrink-0" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="details-meta-grid">
+                  <div className="meta-card">
+                    <span className="meta-label">Tipo de Coleta:</span>
+                    <span className="meta-value">{activeHotspot.sampleType}</span>
+                  </div>
+                  <div className="meta-card">
+                    <span className="meta-label">Genes de Exemplo:</span>
+                    <span className="meta-value">{activeHotspot.genes}</span>
+                  </div>
+                </div>
+
+                </details><div className="details-action-box">
+                  <a
+                    href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
+                      `Olá! Gostaria de informações sobre o exame de ${activeHotspot.examTitle}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-teal btn-md"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                  >
+                    <MessageCircle size={16} />
+                    <span>Tirar dúvidas sobre este exame</span>
+                  </a>
+                </div>
+              </div>);
 return (<div className="genetica-page-container"><section className="genetica-hero-section genetica-hero-clean">
 <div className="genetica-hero-copy">
 <div className="genetica-hero-badge">EXAMES GENÉTICOS</div>
@@ -445,20 +497,6 @@ return (<div className="genetica-page-container"><section className="genetica-he
             </p>
           </div>
 
-          {/* Seletor Mobile / Tablet de Órgãos */}
-          <div className="genetica-hotspots-mobile-nav">
-            {anatomyHotspots.map((spot) => (
-              <button
-                key={spot.id}
-                aria-pressed={spot.id === activeHotspotId}
-                onClick={() => setActiveHotspotId(spot.id)}
-                className={`genetica-hotspot-pill ${spot.id === activeHotspotId ? 'active' : ''}`}
-              >
-                <span>{spot.name}</span>
-              </button>
-            ))}
-          </div>
-
           <div className="genetica-body-split">
             {/* Lado Esquerdo: Imagem Anatômica com Hotspots */}
             <div className="genetica-body-visual">
@@ -478,7 +516,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
                   return (
                     <button
                       key={spot.id}
-                      onClick={() => setActiveHotspotId(spot.id)}
+                      onClick={() => { setActiveHotspotId(spot.id); setMobileOpenId(spot.id); if (window.matchMedia("(max-width: 900px)").matches) requestAnimationFrame(() => document.getElementById(`anatomy-mobile-${spot.id}`)?.parentElement?.scrollIntoView({block:"start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"})); }}
                       onMouseEnter={() => setActiveHotspotId(spot.id)}
                       onFocus={() => setActiveHotspotId(spot.id)}
                       className={`genetica-hotspot-pin ${isSelected ? 'active' : ''}`}
@@ -505,59 +543,25 @@ return (<div className="genetica-page-container"><section className="genetica-he
 
             {/* Lado Direito: Painel de Detalhes do Órgão Selecionado */}
             <div className="genetica-body-details">
-              <div className="body-details-card" aria-live="polite" key={activeHotspot.id}>
-                <div className="details-header-row">
-                  <div className="details-badge">{activeHotspot.badge}</div>
-                  <span className="details-turnaround">
-                    <Clock size={13} /> {activeHotspot.turnaround}
-                  </span>
-                </div>
-
-                <h3 className="details-title">{activeHotspot.name}</h3>
-                <h4 className="details-exam-name">{activeHotspot.examTitle}</h4>
-
-                <p className="details-desc">{shortAnatomy[activeHotspot.id]}</p><details style={{marginBottom:16}}><summary style={{cursor:"pointer",color:"#087f85"}}>Ver detalhes técnicos</summary><p className="details-desc">{activeHotspot.description}</p>
-
-                <div className="details-benefits-box">
-                  <h5 className="benefits-label">Principais Benefícios Clínicos:</h5>
-                  <ul className="benefits-list">
-                    {activeHotspot.benefits.map((b, idx) => (
-                      <li key={idx} className="benefit-item">
-                        <CheckCircle2 size={16} className="text-teal flex-shrink-0" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="details-meta-grid">
-                  <div className="meta-card">
-                    <span className="meta-label">Tipo de Coleta:</span>
-                    <span className="meta-value">{activeHotspot.sampleType}</span>
-                  </div>
-                  <div className="meta-card">
-                    <span className="meta-label">Genes de Exemplo:</span>
-                    <span className="meta-value">{activeHotspot.genes}</span>
-                  </div>
-                </div>
-
-                </details><div className="details-action-box">
-                  <a
-                    href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
-                      `Olá! Gostaria de informações sobre o exame de ${activeHotspot.examTitle}.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-teal btn-md"
-                    style={{ width: '100%', justifyContent: 'center' }}
-                  >
-                    <MessageCircle size={16} />
-                    <span>Tirar dúvidas sobre este exame</span>
-                  </a>
-                </div>
-              </div>
+              {renderAnatomyDetails(activeHotspot)}
             </div>
           </div>
+          <div className="genetica-hotspots-mobile-nav">
+            {anatomyHotspots.map((spot) => (
+              <div key={spot.id} className="genetica-mobile-accordion-item">
+                <button type="button" aria-expanded={mobileOpenId === spot.id}
+                  aria-controls={`anatomy-mobile-${spot.id}`}
+                  onClick={() => { setActiveHotspotId(spot.id); setMobileOpenId(mobileOpenId === spot.id ? null : spot.id); }}
+                  className={`genetica-hotspot-pill ${mobileOpenId === spot.id ? 'active' : ''}`}>
+                  <span>{spot.name}</span>{mobileOpenId === spot.id ? <ChevronUp size={18}/> : <ChevronDown size={18}/>}
+                </button>
+                <div id={`anatomy-mobile-${spot.id}`} hidden={mobileOpenId !== spot.id}>
+                  {mobileOpenId === spot.id && renderAnatomyDetails(spot)}
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section><section className="section bg-neutral genetica-section-padding"><div className="genetica-container"><div className="genetica-split-section"><div className="genetica-image-card"><Image src="/images/genetica/consulta-genetica-medica.webp" alt="Ilustração de atendimento médico" width={1024} height={768} className="genetica-consult-image"/></div><div><h2 className="section-title">Já tem um pedido médico?</h2><p className="genetica-split-desc">Consulte a disponibilidade, o preparo e os valores do seu exame com nossa equipe.</p><a className="btn btn-teal btn-md" href={contact('Olá! Tenho um pedido médico e gostaria de consultar a disponibilidade do exame.')} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/> Consultar meu pedido</a></div></div></div></section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Seu exame em três passos</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{[{title:'Converse com nossa equipe',desc:'Tire dúvidas e confirme a indicação com seu médico.',icon:MessageCircle},{title:'Realize a coleta',desc:'Sangue ou saliva, conforme o exame.',icon:Dna},{title:'Receba seu resultado',desc:'Leve o laudo para avaliação médica.',icon:FileText}].map(({title,desc,icon:Icon},i)=><article className="genetica-exam-card" key={title}><Icon size={30} className="text-teal"/><h3 className="exam-card-title">{i+1}. {title}</h3><p>{desc}</p></article>)}</div></div></section><section className="section bg-white genetica-section-padding">
         <div className="genetica-container" style={{ maxWidth: '860px' }}>
