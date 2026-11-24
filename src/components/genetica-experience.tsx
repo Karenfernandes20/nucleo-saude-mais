@@ -1,7 +1,7 @@
 'use client';
 import React,{useState,useMemo} from 'react';
 import Image from 'next/image';
-import {ShieldCheck,Users,Target,Dna,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Info,Filter} from 'lucide-react';
+import {ShieldCheck,Users,Target,Dna,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Filter} from 'lucide-react';
 import {clinic} from '@/data/clinic';
 interface AnatomyHotspot {
   id: string;
@@ -531,14 +531,6 @@ return (<div className="genetica-page-container"><section className="genetica-he
                 })}
               </div>
 
-              {/* Aviso Ético Importante */}
-              <div className="genetica-disclaimer-box">
-                <Info size={15} className="text-teal flex-shrink-0" />
-                <span>
-                  <strong>Aviso Informativo:</strong> Este recurso é exclusivamente educativo para ilustrar as áreas
-                  médicas de aplicação dos testes moleculares e não constitui ferramenta de autodiagnóstico.
-                </span>
-              </div>
             </div>
 
             {/* Lado Direito: Painel de Detalhes do Órgão Selecionado */}
