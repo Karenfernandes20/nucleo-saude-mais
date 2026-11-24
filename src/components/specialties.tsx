@@ -18,10 +18,9 @@ import {
   Search,
   ArrowRight,
   Info,
-  CalendarCheck,
   LucideIcon,
 } from 'lucide-react';
-import { specialties, Specialty, clinic } from '@/data/clinic';
+import { specialties, Specialty } from '@/data/clinic';
 import SpecialtyModal from './specialty-modal';
 import BrandCross from './brand-cross';
 
@@ -125,9 +124,6 @@ export default function Specialties() {
         <div className="specialties-grid">
           {displayedSpecialties.map((item) => {
             const IconComponent = iconMap[item.icon] || Stethoscope;
-            const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
-              `Olá! Gostaria de agendar uma consulta de ${item.name} no Núcleo de Saúde Mais.`
-            )}`;
 
             return (
               <div key={item.name} className="specialty-card">
@@ -157,16 +153,7 @@ export default function Specialties() {
                     <span>Saber mais</span>
                   </button>
 
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="specialty-book-btn"
-                    aria-label={`Agendar consulta de ${item.name}`}
-                  >
-                    <span>Agendar</span>
-                    <ArrowRight size={14} />
-                  </a>
+                  
                 </div>
               </div>
             );
