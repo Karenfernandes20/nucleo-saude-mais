@@ -182,7 +182,7 @@ export default function ExamesGeneticosPage() {
         </section>
 
         {/* Seção Informativa: Por que a Genética Importa */}
-        <section className="section bg-white">
+        <section className="section subpage-section bg-white">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -241,7 +241,7 @@ export default function ExamesGeneticosPage() {
         </section>
 
         {/* Painéis em Destaque */}
-        <section id="paineis" className="section bg-neutral">
+        <section id="paineis" className="section subpage-section subpage-section-has-banner bg-neutral">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -303,7 +303,7 @@ export default function ExamesGeneticosPage() {
         </section>
 
         {/* Como Funciona o Processo */}
-        <section className="section bg-white">
+        <section className="section subpage-section subpage-section-after-banner bg-white">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -327,7 +327,7 @@ export default function ExamesGeneticosPage() {
         </section>
 
         {/* FAQ Genética */}
-        <section className="section bg-neutral">
+        <section className="section subpage-section bg-neutral">
           <div className="site-container" style={{ maxWidth: '900px' }}>
             <div className="section-kicker text-center" style={{ justifyContent: 'center' }}>
               <span className="kicker-line" />

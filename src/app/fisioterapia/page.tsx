@@ -181,7 +181,7 @@ export default function FisioterapiaPage() {
         </section>
 
         {/* Áreas de Atuação */}
-        <section id="tratamentos" className="section bg-white">
+        <section id="tratamentos" className="section subpage-section subpage-section-has-banner bg-white">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -243,7 +243,7 @@ export default function FisioterapiaPage() {
         </section>
 
         {/* Como Funciona o Tratamento */}
-        <section className="section bg-neutral">
+        <section className="section subpage-section subpage-section-after-banner bg-neutral">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -267,7 +267,7 @@ export default function FisioterapiaPage() {
         </section>
 
         {/* FAQ Fisioterapia */}
-        <section className="section bg-white">
+        <section className="section subpage-section bg-white">
           <div className="site-container" style={{ maxWidth: '900px' }}>
             <div className="section-kicker text-center" style={{ justifyContent: 'center' }}>
               <span className="kicker-line" />

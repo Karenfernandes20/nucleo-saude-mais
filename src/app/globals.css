@@ -4060,7 +4060,7 @@ ul, ol {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
-  margin-top: 36px;
+  margin-top: 24px;
 }
 
 .subpage-card {
@@ -4111,7 +4111,7 @@ ul, ol {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .subpage-step-card {
@@ -4171,32 +4171,71 @@ ul, ol {
   line-height: 1.55;
 }
 
+/* Subpage sections & spacing optimizations */
+.subpage-section {
+  padding: 40px 0;
+}
+
+.subpage-section.bg-neutral {
+  background-color: var(--color-bg-neutral);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.subpage-section.bg-white {
+  background-color: var(--color-white);
+}
+
+.subpage-section-has-banner {
+  padding-bottom: 16px !important;
+}
+
+.subpage-section-after-banner {
+  padding-top: 24px !important;
+}
+
+/* Fallback via :has for any section containing the banner */
+.section:has(.subpage-cta-banner) {
+  padding-bottom: 16px;
+}
+
+.section:has(.subpage-cta-banner) + .section {
+  padding-top: 24px;
+}
+
 .subpage-cta-banner {
   background: linear-gradient(135deg, #0C4463 0%, #176D7C 100%);
   color: var(--color-white);
   border-radius: var(--radius-xl);
-  padding: 40px;
+  padding: 26px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  margin-top: 48px;
+  gap: 28px;
+  margin-top: 28px;
+  margin-bottom: 0;
   box-shadow: var(--shadow-lg);
 }
 
 .subpage-cta-banner h3 {
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   font-weight: 800;
   color: var(--color-white);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .subpage-cta-banner p {
   color: #D3E4ED;
-  font-size: 0.9375rem;
+  font-size: 0.90625rem;
   line-height: 1.5;
   margin: 0;
   max-width: 600px;
+}
+
+@media (max-width: 1024px) {
+  .subpage-section {
+    padding: 36px 0;
+  }
 }
 
 @media (max-width: 900px) {
@@ -4206,8 +4245,9 @@ ul, ol {
   .subpage-cta-banner {
     flex-direction: column;
     align-items: flex-start;
-    padding: 28px 24px;
-    gap: 20px;
+    padding: 22px 20px;
+    gap: 16px;
+    margin-top: 20px;
   }
   .subpage-cta-banner .btn {
     width: 100%;
@@ -4216,6 +4256,21 @@ ul, ol {
 }
 
 @media (max-width: 600px) {
+  .subpage-section {
+    padding: 28px 0;
+  }
+  .subpage-section-has-banner {
+    padding-bottom: 12px !important;
+  }
+  .subpage-section-after-banner {
+    padding-top: 18px !important;
+  }
+  .section:has(.subpage-cta-banner) {
+    padding-bottom: 12px;
+  }
+  .section:has(.subpage-cta-banner) + .section {
+    padding-top: 18px;
+  }
   .subpage-hero {
     padding: 36px 0 54px;
   }

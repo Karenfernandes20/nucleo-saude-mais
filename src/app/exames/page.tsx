@@ -155,7 +155,7 @@ export default function ExamesPage() {
         </section>
 
         {/* Vantagens */}
-        <section className="section bg-white">
+        <section className="section subpage-section bg-white">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -189,7 +189,7 @@ export default function ExamesPage() {
         </div>
 
         {/* Orientações de Preparo */}
-        <section className="section bg-white">
+        <section className="section subpage-section subpage-section-has-banner bg-white">
           <div className="site-container">
             <div className="section-kicker">
               <span className="kicker-line" />
@@ -230,7 +230,7 @@ export default function ExamesPage() {
         </section>
 
         {/* FAQ Exames */}
-        <section className="section bg-neutral">
+        <section className="section subpage-section subpage-section-after-banner bg-neutral">
           <div className="site-container" style={{ maxWidth: '900px' }}>
             <div className="section-kicker text-center" style={{ justifyContent: 'center' }}>
               <span className="kicker-line" />
