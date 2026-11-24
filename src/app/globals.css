@@ -6037,3 +6037,11 @@ ul, ol {
 .anatomy-click-hint{position:absolute;z-index:2;top:12px;left:12px;max-width:calc(100% - 24px);display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:12px;background:#fff;color:#0d354d;font-size:13px;font-weight:700;box-shadow:0 2px 12px #003a4d33;pointer-events:none}
 @media(max-width:600px){.anatomy-click-hint{top:6px;left:6px;font-size:11px;padding:5px 8px}.genetica-anatomy-light .hotspot-dot{width:25px;height:25px;font-size:20px}}
 @media(prefers-reduced-motion:reduce){.genetica-anatomy-light .hotspot-pulse{animation:none}}
+
+.genetica-split-section.genetica-request-compact{grid-template-columns:minmax(0,340px) minmax(0,680px);justify-content:center;align-items:center;gap:clamp(20px,3vw,44px)}
+.genetica-request-compact .genetica-image-card{width:100%;max-width:340px;aspect-ratio:16/10;min-height:0;height:auto;justify-self:center}
+.genetica-request-compact .genetica-consult-image{width:100%;height:100%;object-fit:cover;object-position:center}
+.genetica-request-compact>div{min-width:0}
+.genetica-request-compact .section-title{font-size:clamp(26px,2.7vw,40px);line-height:1.2;margin-bottom:12px}
+.genetica-request-compact .genetica-split-desc{margin-bottom:18px}
+@media(max-width:767px){.genetica-split-section.genetica-request-compact{grid-template-columns:minmax(0,1fr);gap:16px}.genetica-request-compact .genetica-image-card{max-width:340px}.genetica-request-compact .section-title{font-size:28px}.genetica-request-compact .btn{max-width:100%;white-space:normal}}
