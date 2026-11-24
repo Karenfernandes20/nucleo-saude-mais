@@ -2,10 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Dna, Activity, FlaskConical, ArrowRight, MessageCircle } from 'lucide-react';
+import { Dna, Activity, FlaskConical, ArrowRight, MessageCircle, Stethoscope } from 'lucide-react';
 import { clinic } from '@/data/clinic';
 
 const services = [
+  { id: 'consultas', href: '/#especialidades', title: 'Consultas e Especialidades', icon: Stethoscope, description: 'Atendimento médico, psicologia e nutrição para você e sua família.', action: 'Ver especialidades' },
+  { id: 'exames', href: '/exames', title: 'Exames e Diagnósticos', icon: FlaskConical, description: 'Exames laboratoriais, clínicos e de imagem em um só lugar.', action: 'Ver exames disponíveis' },
   {
     id: 'geneticos',
     href: '/exames-geneticos',
@@ -22,15 +24,7 @@ const services = [
     description: 'Cuidado voltado à recuperação funcional, mobilidade e qualidade de vida.',
     action: 'Conheça os tratamentos',
   },
-  {
-    id: 'exames',
-    href: '/exames',
-    title: 'Exames Diagnósticos',
-    icon: FlaskConical,
-    description: 'Exames laboratoriais, clínicos e de imagem em um só lugar.',
-    action: 'Ver exames disponíveis',
-  },
-];
+ ];
 
 const geneticTopics = [
   ['Câncer hereditário', 'Painéis que investigam variantes associadas à predisposição hereditária a determinados tipos de câncer.'],
@@ -58,7 +52,7 @@ export function PriorityCards({ onNavigate }: { onNavigate?: (id: string) => voi
           <Icon size={36} aria-hidden="true" />
           <h2>{title}</h2>
           <p>{description}</p>
-          <Link href={href} className="priority-link">
+          <Link href={href} className="priority-link" onClick={id === 'consultas' && onNavigate ? (event) => { event.preventDefault(); onNavigate('especialidades'); } : undefined}>
             {action}
             <ArrowRight size={17} />
           </Link>
