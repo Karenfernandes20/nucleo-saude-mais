@@ -40,13 +40,13 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
 
             {/* Main Headline */}
             <h1 className="hero-title">
-              Consultas Médicas, Exames Genéticos e
-              <span className="hero-title-highlight">Medicina Diagnóstica</span>
+              Cuidado completo para
+              <span className="hero-title-highlight">a sua saúde</span>
             </h1>
 
             {/* Complementary Text */}
             <p className="hero-subtitle">
-              Cuidado completo para sua saúde: consultas médicas, exames laboratoriais e genéticos, fisioterapia, psicologia e nutrição em um só lugar.
+              Consultas médicas, exames genéticos e laboratoriais, medicina diagnóstica, fisioterapia, psicologia e nutrição em um só lugar.
             </p>
 
             {/* Primary Action Buttons (Desktop only) */}
