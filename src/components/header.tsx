@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 import { Menu, X, CalendarCheck, MessageCircle, Phone, Clock, MapPin } from 'lucide-react';
 import { clinic } from '@/data/clinic';
 
@@ -36,9 +37,27 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const handleLinkClick = (id: string) => {
-    onNavigate(id);
     setMobileMenuOpen(false);
+    if (mobileMenuOpen) {
+      requestAnimationFrame(() => onNavigate(id));
+    } else {
+      onNavigate(id);
+    }
   };
 
   const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(clinic.whatsappMessage)}`;
@@ -140,10 +159,11 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
         </div>
 
         {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}>
+        {mobileMenuOpen && createPortal(
+          <div className="mobile-menu-overlay" style={{ zIndex: 10000, backdropFilter: "none" }} onClick={() => setMobileMenuOpen(false)}>
             <div
               className="mobile-menu-drawer"
+              style={{ backgroundColor: "#fff", overflowY: "auto", overscrollBehavior: "contain", isolation: "isolate" }}
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
@@ -202,7 +222,8 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </header>
     </>
