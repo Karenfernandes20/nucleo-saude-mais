@@ -261,16 +261,7 @@ export default function FisioterapiaPage() {
                 </div>
 
                 <div>
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-teal btn-md"
-                    style={{ width: 'fit-content' }}
-                  >
-                    <MessageCircle size={16} />
-                    <span>Iniciar meu plano de reabilitação</span>
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -297,18 +288,7 @@ export default function FisioterapiaPage() {
                       <li key={h} style={{ marginBottom: '6px' }}>{h}</li>
                     ))}
                   </ul>
-                  <a
-                    href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
-                      `Olá! Gostaria de agendar atendimento de ${mod.title}.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline-navy btn-sm"
-                    style={{ marginTop: 'auto', width: '100%', justifyContent: 'center' }}
-                  >
-                    <MessageCircle size={15} />
-                    <span>Agendar para esta área</span>
-                  </a>
+                  
                 </article>
               ))}
             </div>
@@ -402,15 +382,7 @@ export default function FisioterapiaPage() {
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '32px' }}>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-teal btn-md"
-              >
-                <MessageCircle size={18} />
-                <span>Falar com o setor de Fisioterapia</span>
-              </a>
+              
             </div>
           </div>
         </section>
