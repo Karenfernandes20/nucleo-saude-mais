@@ -493,7 +493,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
               Explore o que sua genética pode revelar
             </h2>
             <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Toque nos pontos do corpo para conhecer os exames.
+              Clique ou toque nos pontos com + para descobrir os exames de cada região.
             </p>
           </div>
 
@@ -501,6 +501,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
             {/* Lado Esquerdo: Imagem Anatômica com Hotspots */}
             <div className="genetica-body-visual">
               <div className="genetica-body-image-wrap">
+                <div className="anatomy-click-hint" aria-hidden="true"><span>☝</span> Clique nos pontos + para explorar</div>
                 <Image
                   src="/images/genetica/corpo-humano-genetica.webp"
                   alt="Representação estilizada e anatômica do corpo humano com pontos luminosos de exames genéticos"
@@ -517,14 +518,13 @@ return (<div className="genetica-page-container"><section className="genetica-he
                     <button
                       key={spot.id}
                       onClick={() => { setActiveHotspotId(spot.id); setMobileOpenId(spot.id); if (window.matchMedia("(max-width: 900px)").matches) requestAnimationFrame(() => document.getElementById(`anatomy-mobile-${spot.id}`)?.parentElement?.scrollIntoView({block:"start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"})); }}
-                      onMouseEnter={() => setActiveHotspotId(spot.id)}
-                      onFocus={() => setActiveHotspotId(spot.id)}
+
                       className={`genetica-hotspot-pin ${isSelected ? 'active' : ''}`}
                       style={{ top: spot.top, left: spot.left }}
                       aria-pressed={isSelected} aria-label={`Ver informações de ${spot.name}`}
                     >
                       <span className="hotspot-pulse" />
-                      <span className="hotspot-dot" />
+                      <span className="hotspot-dot" aria-hidden="true">+</span>
                       <span className="hotspot-tooltip">{spot.name}</span>
                     </button>
                   );
