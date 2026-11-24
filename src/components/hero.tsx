@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { CalendarCheck, ArrowRight, ShieldCheck, HeartPulse, Clock, Sparkles, MapPin } from 'lucide-react';
+import { CalendarCheck, ArrowRight, ShieldCheck, HeartPulse, Clock, MapPin } from 'lucide-react';
 import { clinic } from '@/data/clinic';
 import BrandCross from './brand-cross';
 
@@ -11,7 +11,9 @@ interface HeroProps {
 }
 
 export default function Hero({ onExploreSpecialties }: HeroProps) {
-  const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de agendar uma consulta no Núcleo de Saúde Mais.')}`;
+  const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
+    'Olá! Gostaria de agendar uma consulta no Núcleo de Saúde Mais.'
+  )}`;
 
   return (
     <section id="inicio" className="hero-section">
@@ -25,121 +27,147 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
       </div>
 
       <div className="site-container hero-container">
-        {/* Left Column: Typography & Conversion CTAs */}
-        <div className="hero-content">
-          {/* Eyebrow / Tag */}
-          <div className="hero-badge">
-            <span className="hero-badge-dot" />
-            <span className="hero-badge-text">Clínica Médica e Exames em Montes Claros – MG</span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="hero-title">
-            Mais saúde para você.
-            <span className="hero-title-highlight"> Mais cuidado por você.</span>
-          </h1>
-
-          {/* Complementary Text */}
-          <p className="hero-subtitle">
-            Consultas, exames e atendimento humanizado em um só lugar.
-          </p>
-
-          {/* Primary Action Buttons */}
-          <div className="hero-actions">
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-teal btn-lg hero-cta-primary"
-              aria-label="Agende sua consulta pelo WhatsApp"
-            >
-              <CalendarCheck size={20} />
-              <span>Agende sua consulta</span>
-              <ArrowRight size={18} className="btn-arrow" />
-            </a>
-
-            <button
-              onClick={onExploreSpecialties}
-              className="btn btn-outline-white btn-lg hero-cta-secondary"
-              aria-label="Conheça nossas especialidades médicas"
-            >
-              <span>Conheça nossas especialidades</span>
-            </button>
-          </div>
-
-          {/* Trust Indicators / Badges */}
-          <div className="hero-trust-bar">
-            <div className="trust-item">
-              <div className="trust-icon-box">
-                <HeartPulse size={18} className="text-teal" />
-              </div>
-              <div className="trust-item-text">
-                <strong>+14 Especialidades</strong>
-                <span>Corpo clínico completo</span>
-              </div>
+        {/* Main Side-by-Side Area: Text on Left, Doctor Photo on Right (Both Desktop & Mobile) */}
+        <div className="hero-split-row">
+          {/* Left Column: Typography & Headings */}
+          <div className="hero-content">
+            {/* Eyebrow / Tag */}
+            <div className="hero-badge">
+              <span className="hero-badge-dot" />
+              <span className="hero-badge-text">Clínica Médica e Exames em Montes Claros – MG</span>
             </div>
 
-            <div className="trust-item">
-              <div className="trust-icon-box">
-                <Clock size={18} className="text-teal" />
-              </div>
-              <div className="trust-item-text">
-                <strong>Resultados Ágeis</strong>
-                <span>Laboratório com agilidade</span>
-              </div>
-            </div>
+            {/* Main Headline */}
+            <h1 className="hero-title">
+              Mais saúde para você.
+              <span className="hero-title-highlight"> Mais cuidado por você.</span>
+            </h1>
 
-            <div className="trust-item">
-              <div className="trust-icon-box">
-                <ShieldCheck size={18} className="text-teal" />
+            {/* Complementary Text */}
+            <p className="hero-subtitle">
+              Consultas, exames e atendimento humanizado em um só lugar.
+            </p>
+
+            {/* Primary Action Buttons (Desktop only) */}
+            <div className="hero-actions hero-actions-desktop">
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-teal btn-lg hero-cta-primary"
+                aria-label="Agende sua consulta pelo WhatsApp"
+              >
+                <CalendarCheck size={20} />
+                <span>Agende sua consulta</span>
+                <ArrowRight size={18} className="btn-arrow" />
+              </a>
+
+              <button
+                onClick={onExploreSpecialties}
+                className="btn btn-outline-white btn-lg hero-cta-secondary"
+                aria-label="Conheça nossas especialidades médicas"
+              >
+                <span>Conheça nossas especialidades</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Hero Image with Editorial Diagonal & Curved Framing */}
+          <div className="hero-visual-col">
+            <div className="hero-image-frame">
+              {/* Background geometric accents */}
+              <div className="hero-frame-backdrop" aria-hidden="true" />
+              <div className="hero-diagonal-accent" aria-hidden="true" />
+
+              {/* Doctor Image */}
+              <div className="hero-image-wrapper">
+                <Image
+                  src="/images/clinica/team/doutora.webp"
+                  alt="Médica do Núcleo de Saúde Mais em ambiente acolhedor"
+                  width={620}
+                  height={680}
+                  priority
+                  className="hero-doctor-img"
+                />
               </div>
-              <div className="trust-item-text">
-                <strong>Atendimento Humanizado</strong>
-                <span>Cuidado e acolhimento</span>
+
+              {/* Floating Floating Card 1: Montes Claros Location */}
+              <div className="hero-floating-card hero-floating-location">
+                <div className="floating-card-icon">
+                  <MapPin size={18} className="text-teal" />
+                </div>
+                <div className="floating-card-body">
+                  <strong>Centro de Montes Claros</strong>
+                  <span>Rua Januária, 684</span>
+                </div>
+              </div>
+
+              {/* Floating Card 2: Humanized Care Rating */}
+              <div className="hero-floating-card hero-floating-stat">
+                <div className="floating-card-symbol">
+                  <BrandCross size={16} color="#43B8BA" variant="duo" />
+                </div>
+                <div className="floating-card-body">
+                  <strong>Excelência Médica</strong>
+                  <span>Estrutura moderna</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Hero Image with Editorial Diagonal & Curved Framing */}
-        <div className="hero-visual-col">
-          <div className="hero-image-frame">
-            {/* Background geometric accents */}
-            <div className="hero-frame-backdrop" aria-hidden="true" />
-            <div className="hero-diagonal-accent" aria-hidden="true" />
+        {/* Primary Action Buttons (Mobile: full width below the side-by-side block) */}
+        <div className="hero-actions hero-actions-mobile">
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-teal btn-lg hero-cta-primary"
+            aria-label="Agende sua consulta pelo WhatsApp"
+          >
+            <CalendarCheck size={18} />
+            <span>Agende sua consulta</span>
+            <ArrowRight size={16} className="btn-arrow" />
+          </a>
 
-            {/* Doctor Image */}
-            <div className="hero-image-wrapper">
-              <Image
-                src="/images/clinica/team/doutora.webp"
-                alt="Médica do Núcleo de Saúde Mais em ambiente acolhedor"
-                width={620}
-                height={680}
-                priority
-                className="hero-doctor-img"
-              />
+          <button
+            onClick={onExploreSpecialties}
+            className="btn btn-outline-white btn-lg hero-cta-secondary"
+            aria-label="Conheça nossas especialidades médicas"
+          >
+            <span>Conheça nossas especialidades</span>
+          </button>
+        </div>
+
+        {/* Trust Indicators / Badges */}
+        <div className="hero-trust-bar">
+          <div className="trust-item">
+            <div className="trust-icon-box">
+              <HeartPulse size={18} className="text-teal" />
             </div>
-
-            {/* Floating Floating Card 1: Montes Claros Location */}
-            <div className="hero-floating-card hero-floating-location">
-              <div className="floating-card-icon">
-                <MapPin size={20} className="text-teal" />
-              </div>
-              <div className="floating-card-body">
-                <strong>Centro de Montes Claros</strong>
-                <span>Rua Januária, 684</span>
-              </div>
+            <div className="trust-item-text">
+              <strong>+14 Especialidades</strong>
+              <span>Corpo clínico completo</span>
             </div>
+          </div>
 
-            {/* Floating Card 2: Humanized Care Rating */}
-            <div className="hero-floating-card hero-floating-stat">
-              <div className="floating-card-symbol">
-                <BrandCross size={16} color="#43B8BA" variant="duo" />
-              </div>
-              <div className="floating-card-body">
-                <strong>Excelência Médica</strong>
-                <span>Estrutura moderna</span>
-              </div>
+          <div className="trust-item">
+            <div className="trust-icon-box">
+              <Clock size={18} className="text-teal" />
+            </div>
+            <div className="trust-item-text">
+              <strong>Resultados Ágeis</strong>
+              <span>Laboratório com agilidade</span>
+            </div>
+          </div>
+
+          <div className="trust-item">
+            <div className="trust-icon-box">
+              <ShieldCheck size={18} className="text-teal" />
+            </div>
+            <div className="trust-item-text">
+              <strong>Atendimento Humanizado</strong>
+              <span>Cuidado e acolhimento</span>
             </div>
           </div>
         </div>

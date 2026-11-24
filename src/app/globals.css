@@ -592,16 +592,27 @@ ul, ol {
 }
 
 .hero-container {
-  display: grid;
-  grid-template-columns: 1.15fr 0.95fr;
-  align-items: center;
-  gap: 48px;
   position: relative;
   z-index: 2;
 }
 
+.hero-split-row {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  align-items: center;
+  gap: 48px;
+}
+
 .hero-content {
   max-width: 620px;
+}
+
+.hero-actions-desktop {
+  display: flex;
+}
+
+.hero-actions-mobile {
+  display: none;
 }
 
 .hero-badge {
@@ -3117,34 +3128,14 @@ ul, ol {
    RESPONSIVE BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1140px) {
-  .hero-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
+  .hero-split-row {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 32px;
+    align-items: center;
   }
 
   .hero-content {
     max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .hero-subtitle {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .hero-trust-bar {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: left;
-  }
-
-  .hero-visual-col {
-    margin-top: 20px;
   }
 
   .differentials-grid {
@@ -3198,6 +3189,30 @@ ul, ol {
     display: block;
   }
 
+  .hero-split-row {
+    grid-template-columns: 1.12fr 0.88fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .hero-content {
+    text-align: left;
+  }
+
+  .hero-actions-desktop {
+    display: none;
+  }
+
+  .hero-actions-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 22px;
+  }
+
   .section {
     padding: 64px 0;
   }
@@ -3244,32 +3259,137 @@ ul, ol {
   }
 
   .hero-section {
-    padding: 40px 0 80px;
+    padding: 24px 0 54px;
+  }
+
+  .hero-split-row {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  .hero-content {
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    padding: 4px 10px;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .hero-badge-text {
+    font-size: 0.65625rem;
+    letter-spacing: 0.02em;
   }
 
   .hero-title {
-    font-size: 2.25rem;
+    font-size: clamp(1.2rem, 4.6vw, 1.55rem);
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    text-align: left;
   }
 
-  .hero-actions {
-    flex-direction: column;
+  .hero-subtitle {
+    font-size: 0.78125rem;
+    line-height: 1.35;
+    margin-bottom: 0;
+    color: #D3E4ED;
+    text-align: left;
+  }
+
+  .hero-visual-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .hero-image-frame {
+    position: relative;
     width: 100%;
+    max-width: 220px;
+  }
+
+  .hero-image-wrapper {
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero-frame-backdrop {
+    inset: -6px;
+    border-radius: 24px;
+  }
+
+  .hero-diagonal-accent {
+    display: none;
+  }
+
+  .hero-floating-location {
+    display: none;
+  }
+
+  .hero-floating-stat {
+    position: absolute;
+    top: 6px;
+    right: -4px;
+    padding: 4px 8px;
+    gap: 6px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.95);
+    margin: 0;
+  }
+
+  .hero-floating-stat .floating-card-symbol {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+
+  .hero-floating-stat .floating-card-body strong {
+    font-size: 0.65625rem;
+    line-height: 1.1;
+  }
+
+  .hero-floating-stat .floating-card-body span {
+    display: none;
+  }
+
+  .hero-actions-desktop {
+    display: none;
+  }
+
+  .hero-actions-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 18px;
   }
 
   .hero-cta-primary,
   .hero-cta-secondary {
     width: 100%;
+    padding: 12px 18px;
+    font-size: 0.875rem;
   }
 
   .hero-trust-bar {
     grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .hero-floating-location,
-  .hero-floating-stat {
-    position: static;
-    margin: 10px auto;
+    gap: 10px;
+    padding-top: 14px;
+    text-align: left;
   }
 
   .differentials-grid {
