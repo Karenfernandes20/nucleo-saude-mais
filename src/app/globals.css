@@ -3754,3 +3754,59 @@ ul, ol {
   .floating-whatsapp-tooltip { display: none; }
   .floating-whatsapp-pulse { inset: -2px; }
 }
+
+/* Exams: prevent intrinsic grid/flex widths from overflowing narrow screens. */
+@media (max-width: 900px) {
+  .exams-section .exams-interactive-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .exams-section .exams-tabs-list,
+  .exams-section .exam-tab-btn,
+  .exams-section .exam-showcase-panel,
+  .exams-section .exams-compact-strip {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .exams-section .exam-tab-btn:hover { transform: none; }
+  .exams-section .exam-tab-text,
+  .exams-section .showcase-header > div:last-child,
+  .exams-section .showcase-action-info,
+  .exams-section .showcase-list-item span,
+  .exams-section .compact-chip span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .exams-section .exam-tab-arrow,
+  .exams-section .compact-chip svg,
+  .exams-section .exams-turnaround-pill svg,
+  .exams-section .showcase-action-card .btn svg { flex-shrink: 0; }
+  .exams-section .showcase-action-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .exams-section .showcase-action-card .btn {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 48px;
+    padding: 12px;
+    white-space: normal;
+    text-align: center;
+  }
+  .exams-section .compact-chip { max-width: 100%; white-space: normal; }
+}
+@media (max-width: 600px) {
+  .exams-section .exam-showcase-panel { padding: 18px; }
+  .exams-section .showcase-header { gap: 12px; }
+  .exams-section .showcase-title { font-size: clamp(1.15rem, 5vw, 1.4rem); }
+  .exams-section .showcase-icon-large { width: 44px; height: 44px; }
+  .exams-section .showcase-highlights-box,
+  .exams-section .showcase-action-card,
+  .exams-section .exams-compact-strip { padding: 14px; }
+  .exams-section .exam-tab-btn { padding: 10px 12px; gap: 10px; }
+  .exams-section .showcase-list-item { align-items: flex-start; }
+  .exams-section .exams-turnaround-pill { max-width: 100%; }
+}
