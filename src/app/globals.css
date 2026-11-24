@@ -4289,3 +4289,228 @@ ul, ol {
     justify-content: center;
   }
 }
+
+/* ==========================================================================
+   Página de Fisioterapia - Seções com Imagens Estratégicas
+   ========================================================================== */
+
+/* 1. Hero com Imagem Principal à Direita */
+.fisioterapia-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.fisioterapia-hero-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.fisioterapia-hero-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  max-height: 480px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.fisioterapia-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.fisioterapia-badge-floating {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(12, 68, 99, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-white);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+}
+
+/* 2. Seção Feature: Reabilitação Física (Imagem à Esquerda) */
+.fisioterapia-split-section {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fisioterapia-feature-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-neutral);
+}
+
+.fisioterapia-feature-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+.fisioterapia-feature-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.fisioterapia-feature-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.fisioterapia-feature-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.fisioterapia-benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.fisioterapia-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.90625rem;
+  line-height: 1.5;
+}
+
+.fisioterapia-benefit-item strong {
+  color: var(--color-navy);
+}
+
+.fisioterapia-benefit-item span {
+  color: var(--color-text-muted);
+}
+
+/* 3. Seção Etapas do Tratamento (Imagem à Direita) */
+.fisioterapia-stages-split {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.fisioterapia-stages-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.fisioterapia-stages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.fisioterapia-stages-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-neutral);
+}
+
+.fisioterapia-stages-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+/* Responsividade Fisioterapia */
+@media (max-width: 1024px) {
+  .fisioterapia-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .fisioterapia-hero-image-wrap {
+    min-height: 340px;
+    max-height: 400px;
+  }
+  .fisioterapia-split-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+  }
+  .fisioterapia-feature-image-wrap {
+    min-height: 320px;
+    max-height: 400px;
+  }
+  .fisioterapia-stages-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .fisioterapia-stages-image-wrap {
+    min-height: 320px;
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fisioterapia-hero-image-wrap,
+  .fisioterapia-feature-image-wrap,
+  .fisioterapia-stages-image-wrap {
+    min-height: 280px;
+    max-height: 330px;
+    border-radius: var(--radius-lg);
+  }
+  .fisioterapia-feature-title {
+    font-size: 1.45rem;
+  }
+  .fisioterapia-badge-floating {
+    bottom: 12px;
+    left: 12px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+  .fisioterapia-stages-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Activity,
   ShieldCheck,
@@ -125,69 +126,160 @@ export default function FisioterapiaPage() {
       <main id="main-content">
         {/* Hero da Página de Fisioterapia */}
         <section className="subpage-hero">
-          <div className="site-container subpage-hero-container">
-            <nav className="subpage-breadcrumb" aria-label="Navegação estrutural">
-              <Link href="/">Início</Link>
-              <span className="subpage-breadcrumb-separator">/</span>
-              <span>Fisioterapia e Reabilitação</span>
-            </nav>
+          <div className="site-container">
+            <div className="fisioterapia-hero-grid">
+              <div className="fisioterapia-hero-content">
+                <nav className="subpage-breadcrumb" aria-label="Navegação estrutural">
+                  <Link href="/">Início</Link>
+                  <span className="subpage-breadcrumb-separator">/</span>
+                  <span>Fisioterapia e Reabilitação</span>
+                </nav>
 
-            <div className="subpage-badge">
-              <Activity size={14} className="text-teal" />
-              <span>REABILITAÇÃO FUNCIONAL & QUALIDADE DE VIDA</span>
-            </div>
+                <div className="subpage-badge">
+                  <Activity size={14} className="text-teal" />
+                  <span>REABILITAÇÃO FUNCIONAL & QUALIDADE DE VIDA</span>
+                </div>
 
-            <h1 className="subpage-title">
-              Fisioterapia Especializada e Reabilitação em Montes Claros
-            </h1>
+                <h1 className="subpage-title">
+                  Fisioterapia Especializada e Reabilitação em Montes Claros
+                </h1>
 
-            <p className="subpage-subtitle">
-              Alívio de dores, recuperação de movimentos e fortalecimento físico. Cuidado humanizado,
-              profissionais qualificados e planos de tratamento 100% individualizados no Centro de Montes Claros.
-            </p>
+                <p className="subpage-subtitle">
+                  Alívio de dores, recuperação de movimentos e fortalecimento físico. Cuidado humanizado,
+                  profissionais qualificados e planos de tratamento 100% individualizados no Centro de Montes Claros.
+                </p>
 
-            <div className="subpage-tags-strip">
-              <span className="subpage-tag-chip">
-                <UserCheck size={14} /> Atendimento Individual
-              </span>
-              <span className="subpage-tag-chip">
-                <ShieldCheck size={14} /> Fisioterapeutas Qualificados
-              </span>
-              <span className="subpage-tag-chip">
-                <Award size={14} /> Estrutura Completa
-              </span>
-              <span className="subpage-tag-chip">
-                <Clock size={14} /> Horários Flexíveis
-              </span>
-            </div>
+                <div className="subpage-tags-strip">
+                  <span className="subpage-tag-chip">
+                    <UserCheck size={14} /> Atendimento Individual
+                  </span>
+                  <span className="subpage-tag-chip">
+                    <ShieldCheck size={14} /> Fisioterapeutas Qualificados
+                  </span>
+                  <span className="subpage-tag-chip">
+                    <Award size={14} /> Estrutura Completa
+                  </span>
+                  <span className="subpage-tag-chip">
+                    <Clock size={14} /> Horários Flexíveis
+                  </span>
+                </div>
 
-            <div className="subpage-actions">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-teal btn-lg"
-              >
-                <MessageCircle size={18} />
-                <span>Agendar avaliação fisioterapêutica</span>
-                <ArrowRight size={16} />
-              </a>
+                <div className="subpage-actions">
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-teal btn-lg"
+                  >
+                    <MessageCircle size={18} />
+                    <span>Agendar avaliação fisioterapêutica</span>
+                    <ArrowRight size={16} />
+                  </a>
 
-              <a href="#tratamentos" className="btn btn-outline-white btn-lg">
-                <span>Conhecer tratamentos</span>
-              </a>
+                  <a href="#tratamentos" className="btn btn-outline-white btn-lg">
+                    <span>Conhecer tratamentos</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* 1. Imagem Principal — Atendimento Fisioterapêutico (Ombro) */}
+              <div className="fisioterapia-hero-image-wrap">
+                <Image
+                  src="/images/fisioterapia/fisioterapia-hero.webp"
+                  alt="Fisioterapeuta realizando atendimento especializado e terapia manual no ombro do paciente no Núcleo de Saúde Mais"
+                  width={1024}
+                  height={682}
+                  priority
+                  className="fisioterapia-hero-image"
+                />
+                <div className="fisioterapia-badge-floating">
+                  <ShieldCheck size={16} className="text-teal" />
+                  <span>Terapia Manual & Cuidado Humanizado</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Áreas de Atuação */}
+        {/* Áreas de Atuação e Reabilitação Física */}
         <section id="tratamentos" className="section subpage-section subpage-section-has-banner bg-white">
           <div className="site-container">
+            {/* 2. Bloco de Destaque: Reabilitação Física e Recuperação de Movimentos (Imagem à Esquerda) */}
+            <div className="fisioterapia-split-section">
+              {/* Imagem à Esquerda */}
+              <div className="fisioterapia-feature-image-wrap">
+                <Image
+                  src="/images/fisioterapia/fisioterapia-reabilitacao.webp"
+                  alt="Paciente realizando exercícios com faixa elástica vermelha acompanhada pela fisioterapeuta no Núcleo de Saúde Mais"
+                  width={1024}
+                  height={682}
+                  loading="lazy"
+                  className="fisioterapia-feature-image"
+                />
+                <div className="fisioterapia-badge-floating">
+                  <Activity size={16} className="text-teal" />
+                  <span>Recuperação Ativa & Fortalecimento</span>
+                </div>
+              </div>
+
+              {/* Informações à Direita */}
+              <div className="fisioterapia-feature-content">
+                <div className="section-kicker">
+                  <span className="kicker-line" />
+                  <span>RECUPERAÇÃO DE MOVIMENTOS & QUALIDADE DE VIDA</span>
+                </div>
+                <h2 className="fisioterapia-feature-title">
+                  Reabilitação física voltada à sua autonomia e bem-estar
+                </h2>
+                <p className="fisioterapia-feature-desc">
+                  Nosso serviço de fisioterapia é estruturado para restabelecer a função mecânica,
+                  aliviar dores na coluna e articulações e devolver sua liberdade de movimento com segurança e suporte contínuo.
+                </p>
+
+                <div className="fisioterapia-benefit-list">
+                  <div className="fisioterapia-benefit-item">
+                    <CheckCircle2 size={18} className="text-teal flex-shrink-0" style={{ marginTop: '2px' }} />
+                    <div>
+                      <strong>Alívio de dores na coluna e articulações:</strong>{' '}
+                      <span>protocolos clínicos para hérnia de disco, lombalgias, tendinites e bursites.</span>
+                    </div>
+                  </div>
+                  <div className="fisioterapia-benefit-item">
+                    <CheckCircle2 size={18} className="text-teal flex-shrink-0" style={{ marginTop: '2px' }} />
+                    <div>
+                      <strong>Reabilitação pós-cirúrgica e esportiva:</strong>{' '}
+                      <span>recuperação de cirurgias ortopédicas, próteses, ligamentos e retorno seguro aos treinos.</span>
+                    </div>
+                  </div>
+                  <div className="fisioterapia-benefit-item">
+                    <CheckCircle2 size={18} className="text-teal flex-shrink-0" style={{ marginTop: '2px' }} />
+                    <div>
+                      <strong>Exercícios terapêuticos direcionados:</strong>{' '}
+                      <span>fortalecimento muscular progressivo e correção biomecânica para evitar novas lesões.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-teal btn-md"
+                    style={{ width: 'fit-content' }}
+                  >
+                    <MessageCircle size={16} />
+                    <span>Iniciar meu plano de reabilitação</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <div className="section-kicker">
               <span className="kicker-line" />
               <span>MODALIDADES TERAPÊUTICAS</span>
             </div>
-            <h2 className="section-title">Nossas Especialidades em Reabilitação</h2>
+            <h3 className="section-title">Nossas Especialidades em Reabilitação</h3>
             <p className="section-subtitle">
               Abordagem clínica integrada para aliviar dores, restaurar funções e devolver sua liberdade de movimento.
             </p>
@@ -242,26 +334,47 @@ export default function FisioterapiaPage() {
           </div>
         </section>
 
-        {/* Como Funciona o Tratamento */}
+        {/* Como Funciona o Tratamento / Acompanhamento Personalizado */}
         <section className="section subpage-section subpage-section-after-banner bg-neutral">
           <div className="site-container">
-            <div className="section-kicker">
-              <span className="kicker-line" />
-              <span>ETAPAS DO TRATAMENTO</span>
-            </div>
-            <h2 className="section-title">Como funciona o seu acompanhamento?</h2>
-            <p className="section-subtitle">
-              Metodologia estruturada que prioriza a causa raiz do problema e garante segurança em cada sessão.
-            </p>
-
-            <div className="subpage-step-grid">
-              {treatmentStages.map((st) => (
-                <div key={st.num} className="subpage-step-card">
-                  <div className="subpage-step-number">{st.num}</div>
-                  <h3 className="subpage-step-title">{st.title}</h3>
-                  <p className="subpage-step-desc">{st.desc}</p>
+            <div className="fisioterapia-stages-split">
+              {/* Conteúdo Textual à Esquerda */}
+              <div className="fisioterapia-stages-content">
+                <div className="section-kicker">
+                  <span className="kicker-line" />
+                  <span>ETAPAS DO TRATAMENTO</span>
                 </div>
-              ))}
+                <h2 className="section-title">Como funciona o seu acompanhamento?</h2>
+                <p className="section-subtitle" style={{ marginBottom: '20px' }}>
+                  Metodologia estruturada que prioriza a causa raiz do problema e garante segurança em cada sessão.
+                </p>
+
+                <div className="fisioterapia-stages-grid">
+                  {treatmentStages.map((st) => (
+                    <div key={st.num} className="subpage-step-card">
+                      <div className="subpage-step-number">{st.num}</div>
+                      <h3 className="subpage-step-title">{st.title}</h3>
+                      <p className="subpage-step-desc">{st.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 3. Terceira Imagem — Tratamento Personalizado (Faixa Azul) */}
+              <div className="fisioterapia-stages-image-wrap">
+                <Image
+                  src="/images/fisioterapia/fisioterapia-personalizada.webp"
+                  alt="Fisioterapeuta acompanhando paciente durante exercício terapêutico individualizado com faixa elástica azul"
+                  width={1024}
+                  height={682}
+                  loading="lazy"
+                  className="fisioterapia-stages-image"
+                />
+                <div className="fisioterapia-badge-floating">
+                  <UserCheck size={16} className="text-teal" />
+                  <span>Atendimento 100% Individualizado</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
