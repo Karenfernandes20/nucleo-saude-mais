@@ -3727,3 +3727,30 @@ ul, ol {
     display: none;
   }
 }
+
+/* Keep floating contact controls inside the mobile viewport. */
+@media (max-width: 768px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  .clinic-app-wrapper {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  .floating-actions-container {
+    position: fixed;
+    left: auto;
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    width: 56px;
+    z-index: 1100;
+  }
+  .floating-btn-whatsapp {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .floating-whatsapp-tooltip { display: none; }
+  .floating-whatsapp-pulse { inset: -2px; }
+}
