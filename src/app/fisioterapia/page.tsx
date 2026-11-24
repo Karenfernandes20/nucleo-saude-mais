@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
 import {
   Activity,
@@ -11,9 +10,7 @@ import {
   Heart,
   Sparkles,
   HelpCircle,
-  Clock,
   UserCheck,
-  Award,
   Bone,
 } from 'lucide-react';
 import Header from '@/components/header';
@@ -129,41 +126,9 @@ export default function FisioterapiaPage() {
           <div className="fisioterapia-hero-container">
             <div className="fisioterapia-hero-grid">
               <div className="fisioterapia-hero-content">
-                <nav className="fisioterapia-hero-breadcrumb" aria-label="Navegação estrutural">
-                  <Link href="/">Início</Link>
-                  <span className="subpage-breadcrumb-separator">/</span>
-                  <span>Fisioterapia e Reabilitação</span>
-                </nav>
-
-                <div className="fisioterapia-hero-badge">
-                  <Activity size={14} className="text-teal" />
-                  <span>REABILITAÇÃO FUNCIONAL & QUALIDADE DE VIDA</span>
-                </div>
-
-                <h1 className="fisioterapia-hero-title">
-                  Fisioterapia Especializada e Reabilitação em Montes Claros
-                </h1>
-
-                <p className="fisioterapia-hero-subtitle">
-                  Alívio de dores, recuperação de movimentos e fortalecimento físico. Cuidado humanizado,
-                  profissionais qualificados e planos de tratamento 100% individualizados no Centro de Montes Claros.
-                </p>
-
-                <div className="fisioterapia-hero-benefits">
-                  <span className="fisioterapia-hero-benefit-item">
-                    <UserCheck size={14} className="text-teal" /> Atendimento Individual
-                  </span>
-                  <span className="fisioterapia-hero-benefit-item">
-                    <ShieldCheck size={14} className="text-teal" /> Fisioterapeutas Qualificados
-                  </span>
-                  <span className="fisioterapia-hero-benefit-item">
-                    <Award size={14} className="text-teal" /> Estrutura Completa
-                  </span>
-                  <span className="fisioterapia-hero-benefit-item">
-                    <Clock size={14} className="text-teal" /> Horários Flexíveis
-                  </span>
-                </div>
-
+                <div className="fisioterapia-hero-badge"><span>FISIOTERAPIA E REABILITAÇÃO</span></div>
+                <h1 className="fisioterapia-hero-title">Recupere seus movimentos. Viva melhor.</h1>
+                <p className="fisioterapia-hero-subtitle">Cuidado individualizado para aliviar dores e recuperar sua mobilidade.</p>
                 <div className="fisioterapia-hero-actions">
                   <a
                     href={whatsappHref}
@@ -172,7 +137,7 @@ export default function FisioterapiaPage() {
                     className="btn btn-teal btn-lg"
                   >
                     <MessageCircle size={18} />
-                    <span>Agendar avaliação fisioterapêutica</span>
+                    <span>Agendar avaliação</span>
                     <ArrowRight size={16} />
                   </a>
 
