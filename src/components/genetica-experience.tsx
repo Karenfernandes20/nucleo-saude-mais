@@ -2,7 +2,7 @@
 import React,{useState,useMemo} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {Dna,ShieldCheck,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,UserCheck,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Info,Filter} from 'lucide-react';
+import {Dna,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Info,Filter} from 'lucide-react';
 import {clinic} from '@/data/clinic';
 import DnaCanvas3d from '@/components/dna-canvas-3d';
 interface AnatomyHotspot {
@@ -369,7 +369,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
             </div>
           </div>
         </div>
-      </section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p><a className="btn btn-outline-navy btn-sm" href={contact('Olá! Gostaria de orientação sobre exames genéticos.')} target="_blank" rel="noopener noreferrer">Quero saber mais <ArrowRight size={16}/></a></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
+      </section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p><a className="btn btn-outline-navy btn-sm" href={contact('Olá! Gostaria de informações sobre exames genéticos relacionados a: '+title)} target="_blank" rel="noopener noreferrer">Quero saber mais <ArrowRight size={16}/></a></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
         <div className="genetica-container">
           <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 32px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
@@ -569,7 +569,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
 
             {/* Lado Direito: Painel de Detalhes do Órgão Selecionado */}
             <div className="genetica-body-details">
-              <div className="body-details-card" aria-live="polite">
+              <div className="body-details-card" aria-live="polite" key={activeHotspot.id}>
                 <div className="details-header-row">
                   <div className="details-badge">{activeHotspot.badge}</div>
                   <span className="details-turnaround">
