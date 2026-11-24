@@ -6003,3 +6003,29 @@ ul, ol {
 .genetica-container:has(> h2.section-title) > .genetica-catalog-grid .exam-card-desc {font-size:15px;line-height:1.5;margin:0}
 @media(max-width:1000px){.genetica-container:has(> h2.section-title) > .genetica-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.genetica-container:has(> h2.section-title) > .genetica-catalog-grid{grid-template-columns:minmax(0,1fr);gap:10px}.genetica-container:has(> h2.section-title) > .genetica-catalog-grid > .genetica-exam-card{padding:14px}}
+
+.physio-clean.fisioterapia-hero-section{position:relative;overflow:hidden;background:linear-gradient(120deg,#f7fbfc 20%,#e4f4f5 80%,#a7e3e5);color:#0d354d;padding:0}
+.physio-clean .fisioterapia-hero-container{width:100%;max-width:none;padding:0;margin:0}
+.physio-clean .fisioterapia-hero-grid{display:grid;grid-template-columns:minmax(0,52fr) minmax(0,48fr);gap:0;align-items:stretch}
+.physio-clean .fisioterapia-hero-content{position:relative;z-index:1;align-self:center;padding:36px 28px 40px max(28px,calc((100vw - 1440px)/2));min-width:0}
+.physio-clean .fisioterapia-hero-badge{display:inline-flex;align-items:center;gap:10px;background:#e0f4f4;border:1px solid #a9dcdf;color:#087c80;max-width:100%;white-space:normal}
+.physio-clean .fisioterapia-hero-title{font-size:clamp(34px,3.5vw,58px);line-height:1.12;color:#0d354d;margin:18px 0;font-family:Arial,sans-serif;letter-spacing:-.035em}
+.physio-clean .fisioterapia-hero-title span{color:#087f82}
+.physio-clean .fisioterapia-hero-subtitle{color:#475569;font-size:clamp(16px,1.35vw,22px);line-height:1.5;margin-bottom:24px;max-width:640px}
+.physio-benefits{display:flex;flex-wrap:wrap;gap:16px;margin:20px 0 28px;color:#0d354d}
+.physio-benefits>div{display:flex;align-items:center;gap:9px;font-weight:700}
+.physio-benefits>div+div{border-left:1px solid #b7dfe0;padding-left:16px}
+.physio-benefits svg{color:#009e9f;width:30px;height:30px;flex-shrink:0}
+.physio-clean .fisioterapia-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:0}
+.physio-clean .fisioterapia-hero-actions .btn{height:auto;min-height:50px;padding:12px 20px;border-radius:18px;white-space:normal;text-align:center;max-width:100%}
+.physio-clean .btn-teal{background:linear-gradient(110deg,#008f94,#006f76);color:white}
+.physio-clean .btn-outline-white{border:1px solid #008b90;color:#0d354d;background:transparent}
+.physio-clean .fisioterapia-hero-image-wrap{position:relative;width:100%;height:100%;min-height:460px;border-radius:24% 0 0 24% / 48% 0 0 52%;overflow:hidden;border:0;box-shadow:-12px 0 #28c5c9,-26px 0 #8cdddf}
+.physio-clean .fisioterapia-hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.physio-image-topics{position:absolute;bottom:30px;left:10%;right:5%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:14px 8px;background:#ffffffe6;border-radius:20px;backdrop-filter:blur(8px);color:#0d354d}
+.physio-image-topics>div{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;font-weight:700;font-size:clamp(11px,1vw,16px);overflow-wrap:anywhere}
+.physio-image-topics>div+div{border-left:1px solid #b7dfe0}
+.physio-image-topics svg{color:#008b90;width:28px;height:28px}
+.physio-image-note{position:absolute;bottom:6px;right:12px;color:white;background:#0d354dcc;padding:2px 6px;border-radius:4px;font-size:10px}
+@media(max-width:900px){.physio-clean .fisioterapia-hero-grid{grid-template-columns:minmax(0,1fr);gap:0}.physio-clean .fisioterapia-hero-image-wrap{order:-1;height:clamp(210px,55vw,340px);min-height:0;border-radius:0 0 50% 50% / 0 0 10% 10%;box-shadow:0 8px #28c5c9,0 16px #a9e5e6}.physio-clean .fisioterapia-hero-content{padding:28px 20px 24px}.physio-clean .fisioterapia-hero-title{font-size:clamp(29px,5vw,42px);margin:12px 0}.physio-clean .fisioterapia-hero-subtitle{font-size:16px;margin-bottom:14px}.physio-benefits{gap:10px;margin:12px 0 18px;font-size:13px}.physio-benefits>div+div{padding-left:0;border:0}.physio-benefits svg{width:22px;height:22px}.physio-image-topics{display:none}.physio-image-note{bottom:16px}.physio-clean .fisioterapia-hero-actions .btn{flex:1 1 100%;width:100%;min-width:0}}
+@media(max-width:400px){.physio-clean .fisioterapia-hero-content{padding-inline:16px}.physio-clean .fisioterapia-hero-badge{font-size:11px;letter-spacing:0}.physio-clean .fisioterapia-hero-title{font-size:29px}}
