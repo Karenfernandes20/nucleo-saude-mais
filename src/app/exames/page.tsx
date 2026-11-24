@@ -252,15 +252,7 @@ export default function ExamesPage() {
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '32px' }}>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-teal btn-md"
-              >
-                <MessageCircle size={18} />
-                <span>Consultar outro exame no WhatsApp</span>
-              </a>
+              
             </div>
           </div>
         </section>
