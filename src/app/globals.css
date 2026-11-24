@@ -3914,3 +3914,17 @@ ul, ol {
 .insurance-carousel-manual .insurance-carousel-card { scroll-snap-align: start; }
 .insurance-carousel-wrapper .carousel-fade-left,
 .insurance-carousel-wrapper .carousel-fade-right { display: none; }
+
+/* Mobile-only exam accordion; desktop retains its side-by-side selector. */
+.exams-mobile-accordion { display: none; }
+@media (max-width: 768px) {
+  .exams-section .exams-interactive-layout { display: none; }
+  .exams-mobile-accordion { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 24px; }
+  .exam-accordion-item { min-width: 0; }
+  .exam-accordion-item .exam-tab-btn { text-align: left; }
+  .exam-accordion-item .exam-tab-arrow { transition: transform .2s ease; }
+  .exam-accordion-item button[aria-expanded="true"] .exam-tab-arrow { transform: rotate(180deg); }
+  .exam-accordion-item .exam-showcase-panel { margin-top: 8px; }
+  .exam-accordion-item .showcase-header { display: none; }
+  .exam-accordion-item [hidden] { display: none; }
+}
