@@ -5979,3 +5979,15 @@ ul, ol {
  .fisioterapia-hero-section .fisioterapia-hero-actions{gap:8px;margin-top:0}
  .fisioterapia-hero-section{padding-block:16px 24px}
 }
+
+.rehab-accordion-item{min-width:0;border:1px solid #dce9ec;border-radius:14px;background:#fff;overflow:hidden}
+.rehab-accordion-item summary{display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:16px 20px;color:#0d354d;font-weight:700;font-size:1.05rem;line-height:1.4;min-height:48px}
+.rehab-accordion-item summary::-webkit-details-marker{display:none}
+.rehab-accordion-item summary:focus-visible{outline:2px solid #169fa5;outline-offset:-3px}
+.rehab-accordion-item[open] summary{background:#edf7f8;color:#0d354d}
+.rehab-chevron{flex-shrink:0;color:#169fa5;transition:transform .2s ease}
+.rehab-accordion-item[open] .rehab-chevron{transform:rotate(180deg)}
+.rehab-accordion-content{padding:16px 20px;color:#475569;line-height:1.6;overflow-wrap:anywhere}
+.rehab-accordion-content ul{padding-left:20px;margin:12px 0 0;list-style:disc}
+@media(max-width:600px){.rehab-accordion-item summary{padding:14px;font-size:1rem}.rehab-accordion-content{padding:14px;font-size:.95rem}}
+@media(prefers-reduced-motion:reduce){.rehab-chevron{transition:none}}
