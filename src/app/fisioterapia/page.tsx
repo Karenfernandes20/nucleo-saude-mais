@@ -12,6 +12,11 @@ import {
   HelpCircle,
   UserCheck,
   Bone,
+  Dumbbell,
+  Footprints,
+  BedDouble,
+  CalendarCheck,
+  List,
 } from 'lucide-react';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
@@ -122,13 +127,14 @@ export default function FisioterapiaPage() {
 
       <main id="main-content">
         {/* Hero da Página de Fisioterapia */}
-        <section className="subpage-hero fisioterapia-hero-section">
+        <section className="subpage-hero fisioterapia-hero-section physio-clean">
           <div className="fisioterapia-hero-container">
             <div className="fisioterapia-hero-grid">
               <div className="fisioterapia-hero-content">
-                <div className="fisioterapia-hero-badge"><span>FISIOTERAPIA E REABILITAÇÃO</span></div>
-                <h1 className="fisioterapia-hero-title">Recupere seus movimentos. Viva melhor.</h1>
-                <p className="fisioterapia-hero-subtitle">Cuidado individualizado para aliviar dores e recuperar sua mobilidade.</p>
+                <div className="fisioterapia-hero-badge"><Activity size={20}/><span>FISIOTERAPIA E REABILITAÇÃO</span></div>
+                <h1 className="fisioterapia-hero-title">Recupere seus movimentos. <span>Viva melhor.</span></h1>
+                <p className="fisioterapia-hero-subtitle">Cuidado individualizado para aliviar dores e recuperar sua mobilidade e melhorar sua qualidade de vida.</p>
+                <div className="physio-benefits"><div><Heart/><span>Alívio de dores</span></div><div><Footprints/><span>Mais mobilidade</span></div><div><Activity/><span>Qualidade de vida</span></div></div>
                 <div className="fisioterapia-hero-actions">
                   <a
                     href={whatsappHref}
@@ -136,13 +142,13 @@ export default function FisioterapiaPage() {
                     rel="noopener noreferrer"
                     className="btn btn-teal btn-lg"
                   >
-                    <MessageCircle size={18} />
+                    <CalendarCheck size={20} />
                     <span>Agendar avaliação</span>
                     <ArrowRight size={16} />
                   </a>
 
                   <a href="#tratamentos" className="btn btn-outline-white btn-lg">
-                    <span>Conhecer tratamentos</span>
+                    <List size={20}/><span>Conhecer tratamentos</span>
                   </a>
                 </div>
               </div>
@@ -151,16 +157,13 @@ export default function FisioterapiaPage() {
               <div className="fisioterapia-hero-image-wrap">
                 <Image
                   src="/images/fisioterapia/fisioterapia-hero.webp"
-                  alt="Fisioterapeuta realizando atendimento especializado e terapia manual no ombro do paciente no Núcleo de Saúde Mais"
+                  alt="Imagem ilustrativa de atendimento fisioterapêutico no ombro"
                   width={1024}
                   height={682}
                   priority
                   className="fisioterapia-hero-image"
                 />
-                <div className="fisioterapia-badge-floating">
-                  <ShieldCheck size={14} className="text-teal" />
-                  <span>Terapia Manual & Cuidado Humanizado</span>
-                </div>
+                <div className="physio-image-topics"><div><Bone/><span>Coluna</span></div><div><Footprints/><span>Lesões</span></div><div><Dumbbell/><span>Reabilitação</span></div><div><BedDouble/><span>Pós-operatório</span></div></div><small className="physio-image-note">Imagem ilustrativa</small>
               </div>
             </div>
           </div>
