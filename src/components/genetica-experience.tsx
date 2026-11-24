@@ -1,10 +1,8 @@
 'use client';
 import React,{useState,useMemo} from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import {Dna,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Info,Filter} from 'lucide-react';
+import {ShieldCheck,Users,Target,Dna,CheckCircle2,ArrowRight,MessageCircle,Activity,HeartPulse,Sparkles,HelpCircle,Clock,FileText,Search,Layers,Baby,Pill,Brain,Heart,ChevronDown,ChevronUp,Info,Filter} from 'lucide-react';
 import {clinic} from '@/data/clinic';
-import DnaCanvas3d from '@/components/dna-canvas-3d';
 interface AnatomyHotspot {
   id: string;
   name: string;
@@ -310,66 +308,15 @@ export default function GeneticaExperience(){
 
 
 const contact=(message:string)=>`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(message)}`;
-return (<div className="genetica-page-container"><section className="genetica-hero-section">
-        <div className="genetica-container">
-          <div className="genetica-hero-grid">
-            {/* Coluna Esquerda: Textos & Ações */}
-            <div className="genetica-hero-left">
-              <nav className="subpage-breadcrumb" aria-label="Navegação estrutural">
-                <Link href="/">Início</Link>
-                <span className="subpage-breadcrumb-separator">/</span>
-                <span>Exames Genéticos</span>
-              </nav>
-
-              <div className="genetica-hero-badge">
-                <Dna size={14} className="text-teal" />
-                <span>EXAMES GENÉTICOS EM MONTES CLAROS</span>
-              </div>
-
-              <h1 className="genetica-hero-title">
-                O que seu DNA pode revelar sobre sua saúde?
-              </h1>
-
-              <p className="genetica-hero-subtitle">
-                Conheça sua genética e tenha mais informações para cuidar da sua saúde e da sua família.
-              </p>
-
-              
-
-              <div className="genetica-hero-actions">
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-teal btn-lg"
-                >
-                  <MessageCircle size={18} />
-                  <span>Quero saber mais pelo WhatsApp</span>
-                  <ArrowRight size={16} />
-                </a>
-
-                <a href="#paineis" className="btn btn-outline-white btn-lg">
-                  <Activity size={18} />
-                  <span>Conhecer os exames</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Coluna Direita: Molécula DNA 3D Interativa */}
-            <div className="genetica-hero-right">
-              <div className="genetica-dna-card">
-                <DnaCanvas3d className="genetica-dna-canvas" />
-
-                {/* Micro-badge Flutuante */}
-                <div className="genetica-dna-floating-badge">
-                  <Sparkles size={14} className="text-teal" />
-                  <span>Explore a molécula de DNA</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p><a className="btn btn-outline-navy btn-sm" href={contact('Olá! Gostaria de informações sobre exames genéticos relacionados a: '+title)} target="_blank" rel="noopener noreferrer">Quero saber mais <ArrowRight size={16}/></a></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
+return (<div className="genetica-page-container"><section className="genetica-hero-section genetica-hero-clean">
+<div className="genetica-hero-copy">
+<div className="genetica-hero-badge">EXAMES GENÉTICOS</div>
+<h1 className="genetica-hero-title">O que seu DNA pode revelar sobre <span>sua saúde?</span></h1>
+<p className="genetica-hero-subtitle">Conheça sua genética e tenha mais informações para cuidar da sua saúde e da sua família.</p>
+<div className="genetica-hero-actions"><a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-teal btn-lg"><MessageCircle size={22}/><span>Quero saber mais pelo WhatsApp</span><ArrowRight size={18}/></a><a href="#paineis" className="btn btn-lg genetics-outline"><Dna size={24}/>Conhecer os exames</a></div>
+<div className="genetics-benefits"><div><ShieldCheck/><span>Prevenção<br/> e cuidado</span></div><div><Users/><span>Informação<br/> para sua família</span></div><div><Target/><span>Mais precisão<br/> nas decisões de saúde</span></div></div>
+</div><div className="genetics-hero-art" aria-hidden="true"><Image src="/images/genetica/dna-hero-art.svg" alt="" fill sizes="(max-width:900px) 100vw, 48vw" priority/></div>
+</section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p><a className="btn btn-outline-navy btn-sm" href={contact('Olá! Gostaria de informações sobre exames genéticos relacionados a: '+title)} target="_blank" rel="noopener noreferrer">Quero saber mais <ArrowRight size={16}/></a></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
         <div className="genetica-container">
           <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 32px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
