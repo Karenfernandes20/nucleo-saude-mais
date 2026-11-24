@@ -5954,3 +5954,15 @@ ul, ol {
 .genetics-hero-art::after{content:"";position:absolute;bottom:-70px;right:-10%;width:85%;height:150px;background:#b6edef88;border-radius:50%;transform:rotate(-15deg)}
 @media(max-width:900px){.genetica-hero-section.genetica-hero-clean{grid-template-columns:minmax(0,1fr)}.genetica-hero-copy{padding:28px 24px}.genetics-hero-art{min-height:0;height:clamp(240px,48vw,360px);border-radius:50% 50% 0 0 / 12% 12% 0 0;box-shadow:0 -10px 0 #ffffff65}.genetica-hero-clean .genetica-hero-actions{align-items:stretch}.genetica-hero-clean .genetica-hero-actions .btn{width:100%}}
 @media(max-width:480px){.genetica-hero-copy{padding:24px 16px}.genetica-hero-clean .genetica-hero-title{font-size:34px}.genetics-benefits{gap:12px}.genetics-benefits>div+div{border:0;padding-left:0}.genetics-benefits svg{width:26px;height:26px}.genetica-hero-clean .genetica-hero-actions .btn{padding:12px 10px;font-size:14px}}
+
+@media(max-width:900px){
+ #corpo-interativo .genetica-body-split>.genetica-body-details{display:none}
+ #corpo-interativo .genetica-hotspots-mobile-nav{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:16px 0 0;padding:0}
+ #corpo-interativo .genetica-mobile-accordion-item{min-width:0;scroll-margin-top:120px}
+ #corpo-interativo .genetica-hotspot-pill{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border-radius:14px;padding:12px;font-size:1rem}
+ #corpo-interativo .genetica-hotspot-pill svg{flex-shrink:0}
+ #corpo-interativo .genetica-mobile-accordion-item .body-details-card{margin:8px 0;padding:16px;min-width:0;overflow-wrap:anywhere}
+ #corpo-interativo .genetica-mobile-accordion-item .details-meta-grid{grid-template-columns:minmax(0,1fr)}
+ #corpo-interativo .genetica-mobile-accordion-item .details-header-row{flex-wrap:wrap;gap:8px}
+}
+@media(min-width:901px){#corpo-interativo .genetica-hotspots-mobile-nav{display:none}}
