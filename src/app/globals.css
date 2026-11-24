@@ -5966,3 +5966,16 @@ ul, ol {
  #corpo-interativo .genetica-mobile-accordion-item .details-header-row{flex-wrap:wrap;gap:8px}
 }
 @media(min-width:901px){#corpo-interativo .genetica-hotspots-mobile-nav{display:none}}
+
+@media(max-width:900px){
+ .fisioterapia-hero-section .fisioterapia-hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+ .fisioterapia-hero-section .fisioterapia-hero-image-wrap{order:-1;width:100%;min-width:0;height:clamp(180px,55vw,300px);min-height:0;overflow:hidden}
+ .fisioterapia-hero-section .fisioterapia-hero-image{width:100%;height:100%;object-fit:cover}
+ .fisioterapia-hero-section .fisioterapia-badge-floating{display:none}
+ .fisioterapia-hero-section .fisioterapia-hero-content{min-width:0}
+ .fisioterapia-hero-section .fisioterapia-hero-badge{margin-bottom:10px}
+ .fisioterapia-hero-section .fisioterapia-hero-title{font-size:clamp(27px,6vw,38px);line-height:1.15;margin-bottom:10px}
+ .fisioterapia-hero-section .fisioterapia-hero-subtitle{font-size:16px;line-height:1.5;margin-bottom:16px}
+ .fisioterapia-hero-section .fisioterapia-hero-actions{gap:8px;margin-top:0}
+ .fisioterapia-hero-section{padding-block:16px 24px}
+}
