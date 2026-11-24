@@ -607,14 +607,6 @@ ul, ol {
   max-width: 620px;
 }
 
-.hero-actions-desktop {
-  display: flex;
-}
-
-.hero-actions-mobile {
-  display: none;
-}
-
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -678,6 +670,14 @@ ul, ol {
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 44px;
+}
+
+.hero-actions-desktop {
+  display: flex;
+}
+
+.hero-actions-mobile {
+  display: none !important;
 }
 
 .hero-cta-primary {
@@ -3226,11 +3226,11 @@ ul, ol {
   }
 
   .hero-actions-desktop {
-    display: none;
+    display: none !important;
   }
 
   .hero-actions-mobile {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 10px;
     width: 100%;
@@ -3515,11 +3515,11 @@ ul, ol {
 
   /* 9. Botões abaixo da imagem, 100% de largura, altura mínima 52px, textos 15-16px */
   .hero-actions-desktop {
-    display: none;
+    display: none !important;
   }
 
   .hero-actions-mobile {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 12px;
     width: 100%;
