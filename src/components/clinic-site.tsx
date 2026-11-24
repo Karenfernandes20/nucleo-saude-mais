@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Accessibility,
   Activity,
@@ -19,7 +19,6 @@ import {
   Check,
   ChevronDown,
   ChevronRight,
-  CircleHelp,
   Ear,
   Facebook,
   FlaskConical,
@@ -116,6 +115,10 @@ export default function ClinicSite() {
   const [selectedSpecialtyName, setSelectedSpecialtyName] = useState(specialties[0].name);
   const [showTop, setShowTop] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const sloganRef = useRef<HTMLDivElement>(null);
+  const [sloganVisible, setSloganVisible] = useState(false);
+  const pricesRef = useRef<HTMLDivElement>(null);
+  const [pricesVisible, setPricesVisible] = useState(false);
 
   useEffect(() => {
     const sections = navItems.map(([, id]) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
@@ -133,6 +136,36 @@ export default function ClinicSite() {
     document.body.style.overflow = mobileOpen || lightboxOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen, lightboxOpen]);
+
+  useEffect(() => {
+    const banner = sloganRef.current;
+    if (!banner) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setSloganVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.35 });
+
+    observer.observe(banner);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const visual = pricesRef.current;
+    if (!visual) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setPricesVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+
+    observer.observe(visual);
+    return () => observer.disconnect();
+  }, []);
 
   const filteredInsurance = useMemo(() => insurancePlans.filter((plan) => plan.toLowerCase().includes(insuranceSearch.toLowerCase())), [insuranceSearch]);
   const filteredSpecialties = useMemo(() => specialties.filter((specialty) => normalizeSearch(specialty.name).includes(normalizeSearch(specialtySearch))), [specialtySearch]);
@@ -196,8 +229,9 @@ export default function ClinicSite() {
 
       <section className="slogan-section" aria-label="Bordão da Clínica Núcleo de Saúde Mais">
         <div className="container">
-          <div className="slogan-banner">
-            <span>MAIS PARA VOCÊ, MAIS POR VOCÊ.</span>
+          <div ref={sloganRef} className={`slogan-banner ${sloganVisible ? 'is-visible' : 'is-pending'}`}>
+            <div className="slogan-copy"><span>MAIS PARA VOCÊ,</span> <strong>MAIS POR VOCÊ.</strong><i /></div>
+            <div className="slogan-medical-art" aria-hidden="true"><div className="slogan-heart"><span>+</span></div><Stethoscope className="slogan-stethoscope" size={112} /></div>
           </div>
         </div>
       </section>
@@ -206,7 +240,7 @@ export default function ClinicSite() {
         <div className="container"><div className="section-heading"><span className="section-kicker">NÚCLEO DE SAÚDE MAIS</span><h2>Saúde com mais cuidado, mais praticidade e mais atenção.</h2><p>Uma clínica preparada para acompanhar você e sua família em diferentes momentos.</p></div><div className="value-grid">{valueCards.map((item) => <article className="soft-card value-card" key={item.title}><div className="card-icon"><Icon name={item.icon} size={26} /></div><h3>{item.title}</h3><p>{item.text}</p><span className="card-line" /></article>)}</div></div>
       </section>
 
-      <section className="section accessible-prices-section" aria-label="Preços acessíveis"><div className="container"><div className="accessible-prices"><div className="accessible-prices-copy"><div className="brand-plus-pattern">+ <span>+</span> <b>+</b></div><div className="section-kicker light">CONSULTAS E EXAMES</div><h2>Preços acessíveis para cuidar de você.</h2><p>Atendimento de qualidade, com valores claros e opções para diferentes necessidades. Fale com nossa equipe e consulte o serviço ideal para você.</p><a className="button button-light" href={whatsappUrl('Olá! Gostaria de consultar os valores de consultas e exames da Clínica Núcleo de Saúde Mais.')} target="_blank" rel="noreferrer"><MessageCircle size={19} /> Consultar valores <ArrowRight size={16} /></a><div className="accessible-points"><span>+ mais humanizada</span><span>+ mais completa</span><span>+ mais moderna</span></div></div><div className="accessible-prices-photo"><Image src="/images/clinica/team/profissional-clinica.png" alt="Profissional de saúde da Clínica Núcleo de Saúde Mais" fill className="accessible-doctor-image" /></div></div></div></section>
+      <section className="section accessible-prices-section" aria-label="Preços acessíveis"><div className="container"><div className="accessible-prices"><div className="accessible-prices-copy"><div className="brand-plus-pattern">+ <span>+</span> <b>+</b></div><div className="section-kicker light">CONSULTAS E EXAMES</div><h2>Preços acessíveis para cuidar de você.</h2><p>Atendimento de qualidade, com valores claros e opções para diferentes necessidades. Fale com nossa equipe e consulte o serviço ideal para você.</p><a className="button button-light" href={whatsappUrl('Olá! Vim pelo site da Clínica Núcleo de Saúde Mais e gostaria de consultar os valores das consultas e exames.')} target="_blank" rel="noreferrer"><MessageCircle size={19} /> Consultar valores <ArrowRight size={16} /></a><div className="accessible-points"><span>+ mais humanizada</span><span>+ mais completa</span><span>+ mais moderna</span></div></div><div ref={pricesRef} className={`accessible-prices-visual ${pricesVisible ? 'is-visible' : 'is-pending'}`} aria-label="Interface ilustrativa para consulta de valores"><div className="prices-glow prices-glow-one" /><div className="prices-glow prices-glow-two" /><div className="prices-interface"><div className="prices-interface-header"><CalendarCheck2 size={25} /><strong>Consulte nossos valores</strong></div><div className="prices-interface-row"><Stethoscope size={20} /><strong>Consulta</strong><span>R$ --</span></div><div className="prices-interface-row"><FlaskConical size={20} /><strong>Exames</strong><span>R$ --</span></div><div className="prices-interface-row"><HeartPulse size={20} /><strong>Procedimentos</strong><span>R$ --</span></div></div><div className="prices-tag"><strong>R$</strong><Check size={22} /></div><div className="prices-shield"><ShieldCheck size={31} /></div><span className="prices-plus prices-plus-one">+</span><span className="prices-plus prices-plus-two">+</span></div></div></div></section>
 
       <section id="sobre" className="section section-anchor about-section"><div className="container about-grid"><div className="about-visual"><div className="about-photo-frame"><Image src="/images/clinica/facade/fachada.png" alt="Fachada da Clínica Núcleo de Saúde Mais à noite" fill sizes="(max-width: 900px) 100vw, 50vw" className="about-facade-image" /></div><div className="about-sticker"><HeartHandshake size={19} /> Atendimento humanizado</div></div><div className="about-copy"><div className="section-kicker">SOBRE A CLÍNICA</div><h2>Uma experiência de atendimento mais humana, moderna e acessível.</h2><p>O Núcleo de Saúde Mais é uma clínica médica e de exames em Montes Claros, criada para oferecer uma experiência de atendimento mais humana, moderna e acessível.</p><p>Nossa proposta é reunir diferentes especialidades, profissionais qualificados e serviços de saúde em um ambiente acolhedor, valorizando o respeito e a atenção a cada paciente.</p><button className="text-link" onClick={() => scrollTo('especialidades')}>Conheça nossas especialidades <ArrowRight size={17} /></button></div></div></section>
 
@@ -284,7 +318,6 @@ export default function ClinicSite() {
 
       <section className="section gallery-section"><div className="container"><div className="section-heading heading-with-action"><div><div className="section-kicker">CONHEÇA NOSSA ESTRUTURA</div><h2>Um ambiente preparado para receber você.</h2><p>Conheça alguns dos consultórios e espaços de atendimento da Clínica Núcleo de Saúde Mais.</p></div><span className="section-pill"><Sparkles size={18} /> Estrutura real da clínica</span></div><div className="facility-gallery" aria-label="Fotos da estrutura da clínica">{['estrutura_01_consultorio_angulo.png','estrutura_02_recepcao_espera.png','estrutura_03_consultorio_branco.png','estrutura_04_consultorio_vertical.png','estrutura_05_consultorio_logo.png','estrutura_06_recepcao_balcao.png','estrutura_07_consultorio_amplo.png'].map((image, index) => <button className={`facility-tile ${index === 0 ? 'facility-tile-main' : ''}`} key={image} onClick={() => setLightboxOpen(true)} aria-label={`Ampliar foto ${index + 1} da estrutura da clínica`}><Image src={`/images/clinica/facility/${image}`} alt={`Estrutura da Clínica Núcleo de Saúde Mais: foto ${index + 1}`} fill className="facility-photo" /></button>)}</div></div></section>
 
-      <section className="section testimonial-section"><div className="container testimonial-shell"><div className="testimonial-copy"><div className="section-kicker">DEPOIMENTOS</div><h2>Quem cuida da saúde com a gente, recomenda.</h2><p>Esta área está pronta para receber avaliações reais e autorizadas dos nossos pacientes.</p></div><div className="testimonial-placeholder"><CircleHelp size={28} /><strong>Depoimentos em breve</strong><span>Não publicamos nomes, fotos ou avaliações sem autorização.</span></div></div></section>
 
       <section id="localizacao" className="section section-anchor location-section" aria-label="Localização da clínica">
         <div className="container location-grid">
