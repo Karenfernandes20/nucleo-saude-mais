@@ -5991,3 +5991,15 @@ ul, ol {
 .rehab-accordion-content ul{padding-left:20px;margin:12px 0 0;list-style:disc}
 @media(max-width:600px){.rehab-accordion-item summary{padding:14px;font-size:1rem}.rehab-accordion-content{padding:14px;font-size:.95rem}}
 @media(prefers-reduced-motion:reduce){.rehab-chevron{transition:none}}
+
+/* Compact situation cards only; leave the exam catalog unchanged. */
+.genetica-container:has(> h2.section-title) > .genetica-catalog-grid {
+ grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;
+}
+.genetica-container:has(> h2.section-title) > .genetica-catalog-grid > .genetica-exam-card {
+ padding:20px;min-height:0;height:auto;gap:8px;min-width:0;
+}
+.genetica-container:has(> h2.section-title) > .genetica-catalog-grid .exam-card-title {font-size:clamp(17px,1.4vw,22px);line-height:1.3;margin:0;overflow-wrap:anywhere}
+.genetica-container:has(> h2.section-title) > .genetica-catalog-grid .exam-card-desc {font-size:15px;line-height:1.5;margin:0}
+@media(max-width:1000px){.genetica-container:has(> h2.section-title) > .genetica-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.genetica-container:has(> h2.section-title) > .genetica-catalog-grid{grid-template-columns:minmax(0,1fr);gap:10px}.genetica-container:has(> h2.section-title) > .genetica-catalog-grid > .genetica-exam-card{padding:14px}}
