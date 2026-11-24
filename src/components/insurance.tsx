@@ -23,7 +23,6 @@ function normalize(text: string) {
 
 export default function Insurance() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [isPaused, setIsPaused] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const filteredPartners = useMemo(() => {
@@ -32,20 +31,26 @@ export default function Insurance() {
     return insurancePartners.filter((p) => normalize(p.name).includes(term));
   }, [searchTerm]);
 
-  // Duplicate list to achieve a seamless, continuous infinite marquee loop
-  const carouselPartners = useMemo(() => {
-    return [...insurancePartners, ...insurancePartners];
-  }, []);
+  const carouselPartners = insurancePartners;
 
   const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
     'Olá! Gostaria de consultar se meu convênio é atendido para a especialidade que preciso no Núcleo de Saúde Mais.'
   )}`;
 
   const handleManualScroll = (direction: 'left' | 'right') => {
-    if (trackRef.current) {
-      const scrollAmount = direction === 'left' ? -320 : 320;
-      trackRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+    const track = trackRef.current;
+    if (!track) return;
+    const cards = Array.from(track.children) as HTMLElement[];
+    if (!cards.length) return;
+    const start = cards[0].offsetLeft;
+    const positions = cards.map(card => card.offsetLeft - start);
+    const max = track.scrollWidth - track.clientWidth;
+    const stops = Array.from(new Set(positions.map(position => Math.min(position, max))));
+    const current = track.scrollLeft;
+    const target = direction === 'right'
+      ? stops.find(position => position > current + 2) ?? 0
+      : [...stops].reverse().find(position => position < current - 2) ?? max;
+    track.scrollTo({ left: target, behavior: 'smooth' });
   };
 
   return (
@@ -120,9 +125,7 @@ export default function Insurance() {
         {!searchTerm ? (
           <div
             className="insurance-carousel-wrapper"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            aria-label="Carrossel contínuo de convênios atendidos"
+            aria-label="Carrossel de convênios atendidos"
           >
             {/* Edge Blur/Fade Shadows */}
             <div className="carousel-fade-left" aria-hidden="true" />
@@ -130,7 +133,7 @@ export default function Insurance() {
 
             <div
               ref={trackRef}
-              className={`insurance-carousel-track ${isPaused ? 'carousel-paused' : ''}`}
+              className="insurance-carousel-track insurance-carousel-manual"
             >
               {carouselPartners.map((partner, index) => {
                 const partnerWhatsAppHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
