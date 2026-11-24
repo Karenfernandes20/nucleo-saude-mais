@@ -5917,3 +5917,18 @@ ul, ol {
 }
 @media(max-width:380px) { #corpo-interativo .details-meta-grid { grid-template-columns:minmax(0,1fr); } }
 @media(prefers-reduced-motion:reduce) { #corpo-interativo .hotspot-pulse { animation:none; } }
+
+/* Compact vertical rhythm across public pages; preserve hero and card internals. */
+.section, .subpage-section, .genetica-section-padding, .genetica-dark-section,
+#corpo-interativo.genetica-anatomy-light { padding-block: 24px; }
+.differentials-section,.about-section,.specialties-section,.exams-section,.insurance-section,.structure-section,.contact-section,.faq-section { padding-block: 20px; }
+.genetica-cta-bottom-section { padding-block: 16px 24px; }
+.priority-services { padding-block: 20px; }
+.fisioterapia-split-section { padding-bottom: 16px; }
+.section + .section { padding-top: 16px; }
+@media (max-width: 768px) {
+ .section,.subpage-section,.genetica-section-padding,.genetica-dark-section,#corpo-interativo.genetica-anatomy-light { padding-block: 16px; }
+ .differentials-section,.about-section,.specialties-section,.exams-section,.insurance-section,.structure-section,.contact-section,.faq-section { padding-block: 16px; }
+ .section + .section { padding-top: 12px; }
+ .priority-services { padding-block: 16px; }
+}
