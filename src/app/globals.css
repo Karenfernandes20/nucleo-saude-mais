@@ -4640,3 +4640,1221 @@ ul, ol {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Página de Exames Genéticos - Experiência Interativa & Científica
+   ========================================================================== */
+
+.genetica-page-container {
+  width: 100%;
+}
+
+.genetica-container {
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.genetica-section-padding {
+  padding: 56px 0;
+}
+
+/* 1. Hero com DNA 3D */
+.genetica-hero-section {
+  position: relative;
+  background: linear-gradient(135deg, #072538 0%, #0c4463 55%, #104e5d 100%);
+  color: var(--color-white);
+  padding: 38px 0 48px;
+  overflow: hidden;
+}
+
+.genetica-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.genetica-hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.genetica-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  margin-bottom: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #DCF4F5;
+  width: fit-content;
+}
+
+.genetica-hero-title {
+  font-size: clamp(1.85rem, 2.7vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--color-white);
+  margin-bottom: 14px;
+}
+
+.genetica-hero-subtitle {
+  font-size: 0.96875rem;
+  color: #D3E4ED;
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 650px;
+}
+
+.genetica-hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.genetica-hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.78125rem;
+  color: #DCF4F5;
+  font-weight: 500;
+}
+
+.genetica-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.genetica-dna-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 440px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(42, 208, 196, 0.15) 0%, rgba(7, 37, 56, 0.85) 65%, rgba(7, 37, 56, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.45);
+}
+
+.genetica-dna-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.genetica-dna-floating-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(12, 68, 99, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-white);
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 2. Seção Educativa: Hierarquia Genética */
+.genetica-hierarchy-wrapper {
+  margin-top: 24px;
+}
+
+.genetica-hierarchy-nav {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  scrollbar-width: thin;
+}
+
+.genetica-hierarchy-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-neutral);
+  border: 1px solid var(--color-border);
+  color: var(--color-navy);
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.genetica-hierarchy-tab:hover {
+  background: #E8F3F7;
+  border-color: #BBE7E8;
+}
+
+.genetica-hierarchy-tab.active {
+  background: #0C4463;
+  color: #FFFFFF;
+  border-color: #0C4463;
+  box-shadow: var(--shadow-sm);
+}
+
+.genetica-hierarchy-tab .tab-step {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(42, 208, 196, 0.25);
+  color: var(--color-teal);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.genetica-hierarchy-tab.active .tab-step {
+  background: #2AD0C4;
+  color: #0C4463;
+}
+
+.genetica-hierarchy-card {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 40px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-md);
+}
+
+.hierarchy-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-neutral);
+}
+
+.hierarchy-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.hierarchy-image-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(12, 68, 99, 0.92);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hierarchy-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.hierarchy-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.hierarchy-badge-chip .separator {
+  color: var(--color-border);
+}
+
+.hierarchy-detail-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.hierarchy-detail-sub {
+  font-size: 0.96875rem;
+  color: var(--color-teal);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.hierarchy-detail-summary {
+  font-size: 0.9375rem;
+  color: var(--color-navy);
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.hierarchy-detail-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.hierarchy-analogy-box {
+  background: #F0F8FA;
+  border-left: 3px solid var(--color-teal);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.hierarchy-analogy-box strong {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--color-navy);
+  margin-bottom: 2px;
+}
+
+.hierarchy-analogy-box p {
+  font-size: 0.8125rem;
+  color: #176D7C;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.hierarchy-clinical-focus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--color-navy);
+  background: var(--color-bg-neutral);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+
+/* 3. Seção Corpo Humano Anatômico (Dark Section) */
+.genetica-dark-section {
+  background: linear-gradient(180deg, #061B28 0%, #082638 50%, #061B28 100%);
+  color: var(--color-white);
+  padding: 60px 0;
+  position: relative;
+}
+
+.genetica-hotspots-mobile-nav {
+  display: none;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+  scrollbar-width: thin;
+}
+
+.genetica-hotspot-pill {
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #DCF4F5;
+  font-size: 0.78125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.genetica-hotspot-pill.active {
+  background: var(--color-teal);
+  color: #0C4463;
+  border-color: var(--color-teal);
+  font-weight: 700;
+}
+
+.genetica-body-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.genetica-body-visual {
+  display: flex;
+  flex-direction: column;
+}
+
+.genetica-body-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(42, 208, 196, 0.25);
+  background: #04121B;
+}
+
+.genetica-body-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+/* Hotspot Pins Pulsantes */
+.genetica-hotspot-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+}
+
+.hotspot-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2AD0C4;
+  box-shadow: 0 0 12px #2AD0C4, 0 0 20px #00E5FF;
+  border: 2px solid #FFFFFF;
+  transition: transform var(--transition-fast);
+}
+
+.hotspot-pulse {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(42, 208, 196, 0.7);
+  animation: hotspotPulse 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@keyframes hotspotPulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.genetica-hotspot-pin:hover .hotspot-dot,
+.genetica-hotspot-pin.active .hotspot-dot {
+  transform: scale(1.35);
+  background: #FFFFFF;
+  box-shadow: 0 0 16px #FFFFFF, 0 0 26px #2AD0C4;
+}
+
+.hotspot-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(7, 37, 56, 0.95);
+  color: #FFFFFF;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  border: 1px solid rgba(42, 208, 196, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.genetica-hotspot-pin:hover .hotspot-tooltip {
+  opacity: 1;
+}
+
+.genetica-disclaimer-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  color: #B5CFDD;
+  line-height: 1.45;
+}
+
+/* Painel Lateral de Detalhes do Corpo */
+.body-details-card {
+  background: rgba(12, 68, 99, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 208, 196, 0.25);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
+}
+
+.details-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.details-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(42, 208, 196, 0.2);
+  color: #2AD0C4;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(42, 208, 196, 0.35);
+}
+
+.details-turnaround {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #D3E4ED;
+}
+
+.details-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.details-exam-name {
+  font-size: 0.9375rem;
+  color: #2AD0C4;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.details-desc {
+  font-size: 0.875rem;
+  color: #D3E4ED;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.details-benefits-box {
+  background: rgba(7, 37, 56, 0.5);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.benefits-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: #E2F0F7;
+  line-height: 1.45;
+}
+
+.details-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.meta-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.meta-label {
+  display: block;
+  font-size: 0.6875rem;
+  color: #B5CFDD;
+  margin-bottom: 2px;
+}
+
+.meta-value {
+  display: block;
+  font-size: 0.78125rem;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* 4. Catálogo de Exames (Filtros & Busca) */
+.genetica-catalog-controls {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.catalog-search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.catalog-search-wrapper .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-teal);
+  pointer-events: none;
+}
+
+.catalog-search-input {
+  width: 100%;
+  padding: 14px 44px 14px 46px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  font-size: 0.9375rem;
+  color: var(--color-navy);
+  outline: none;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.catalog-search-input:focus {
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 3px rgba(42, 208, 196, 0.2);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #E2F0F7;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  color: var(--color-navy);
+  cursor: pointer;
+}
+
+.catalog-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.catalog-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-neutral);
+  border: 1px solid var(--color-border);
+  color: var(--color-navy);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.catalog-cat-btn:hover {
+  background: #E8F3F7;
+  border-color: #BBE7E8;
+}
+
+.catalog-cat-btn.active {
+  background: #0C4463;
+  color: #FFFFFF;
+  border-color: #0C4463;
+  box-shadow: var(--shadow-sm);
+}
+
+.genetica-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.genetica-exam-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.genetica-exam-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: #BBE7E8;
+}
+
+.exam-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.exam-card-sample {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.exam-card-title {
+  font-size: 1.1875rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.exam-card-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.exam-card-highlights {
+  background: var(--color-bg-neutral);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.exam-card-highlights strong {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.exam-card-highlights ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.exam-card-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8125rem;
+  color: #0C4463;
+}
+
+.exam-card-genes {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+  padding: 0 2px;
+}
+
+.exam-card-genes .genes-label {
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-right: 4px;
+}
+
+.exam-card-footer {
+  margin-top: auto;
+}
+
+.catalog-empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--color-bg-neutral);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+.catalog-empty-state h3 {
+  font-size: 1.25rem;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+}
+
+.catalog-empty-state p {
+  color: var(--color-text-muted);
+  font-size: 0.90625rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* 5. Split Section Geral */
+.genetica-split-section {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.genetica-split-section.reverse {
+  grid-template-columns: 1.15fr 1fr;
+}
+
+.genetica-split-section.reverse .genetica-split-image-col {
+  order: 2;
+}
+
+.genetica-split-section.reverse .genetica-split-text-col {
+  order: 1;
+}
+
+.genetica-image-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-neutral);
+}
+
+.genetica-tech-image,
+.genetica-consult-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+.genetica-floating-card {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(12, 68, 99, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78125rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.genetica-split-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.genetica-split-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.genetica-features-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.genetica-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.genetica-feature-item .feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-teal-light);
+  color: var(--color-teal-dark);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.genetica-feature-item h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 4px;
+}
+
+.genetica-feature-item p {
+  font-size: 0.84375rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Consult Points */
+.genetica-consult-points {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.consult-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.90625rem;
+  color: var(--color-navy);
+  line-height: 1.5;
+}
+
+.consult-point span {
+  color: var(--color-text-muted);
+}
+
+/* 6. Linha do Tempo (5 Passos) */
+.genetica-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.genetica-timeline-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.genetica-timeline-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: #BBE7E8;
+}
+
+.timeline-step-badge {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: var(--color-teal);
+  line-height: 1;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.timeline-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--color-teal-light);
+  color: var(--color-teal-dark);
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+.timeline-card-title {
+  font-size: 0.96875rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.timeline-card-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 8. Accordion Interativo de FAQs */
+.genetica-accordion-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.genetica-faq-item {
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.genetica-faq-item.open {
+  border-color: #BBE7E8;
+  box-shadow: var(--shadow-sm);
+}
+
+.genetica-faq-trigger {
+  width: 100%;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.genetica-faq-trigger .faq-question-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.genetica-faq-trigger .faq-icon-arrow {
+  color: var(--color-teal);
+  flex-shrink: 0;
+}
+
+.genetica-faq-content {
+  padding: 0 24px 20px 54px;
+}
+
+.genetica-faq-content p {
+  font-size: 0.90625rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 9. Banner CTA Final */
+.genetica-cta-bottom-section {
+  padding: 10px 0 60px;
+}
+
+.genetica-cta-bottom-banner {
+  background: linear-gradient(135deg, #0C4463 0%, #176D7C 100%);
+  color: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  box-shadow: var(--shadow-lg);
+}
+
+.genetica-cta-bottom-banner h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: 6px;
+}
+
+.genetica-cta-bottom-banner p {
+  color: #D3E4ED;
+  font-size: 0.90625rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 640px;
+}
+
+/* ==========================================
+   RESPONSIVIDADE GENÉTICA
+   ========================================== */
+@media (max-width: 1100px) {
+  .genetica-timeline-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .genetica-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .genetica-dna-card {
+    max-height: 360px;
+  }
+  .genetica-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .genetica-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .genetica-hierarchy-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 24px;
+  }
+  .genetica-body-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .genetica-hotspots-mobile-nav {
+    display: flex;
+  }
+  .genetica-split-section,
+  .genetica-split-section.reverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .genetica-split-section.reverse .genetica-split-image-col {
+    order: 1;
+  }
+  .genetica-split-section.reverse .genetica-split-text-col {
+    order: 2;
+  }
+  .genetica-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .genetica-cta-bottom-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px 22px;
+    gap: 18px;
+  }
+  .genetica-cta-bottom-banner .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .genetica-hero-section {
+    padding: 28px 0 36px;
+  }
+  .genetica-hero-title {
+    font-size: 1.65rem;
+  }
+  .genetica-hero-highlights {
+    gap: 6px;
+  }
+  .genetica-hero-chip {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+  .genetica-dna-card {
+    aspect-ratio: 4 / 3;
+    max-height: 280px;
+    border-radius: 18px;
+  }
+  .genetica-section-padding {
+    padding: 36px 0;
+  }
+  .hierarchy-detail-title {
+    font-size: 1.45rem;
+  }
+  .details-title {
+    font-size: 1.35rem;
+  }
+  .details-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .genetica-timeline-grid {
+    grid-template-columns: 1fr;
+  }
+  .genetica-faq-content {
+    padding: 0 18px 16px 18px;
+  }
+  .genetica-faq-trigger {
+    padding: 16px 18px;
+  }
+  .genetica-faq-trigger .faq-question-text {
+    font-size: 0.90625rem;
+  }
+}
