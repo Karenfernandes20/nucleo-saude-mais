@@ -6065,3 +6065,12 @@ ul, ol {
   #corpo-interativo + .genetica-section-padding { padding-top:12px; margin-top:0; }
   #corpo-interativo::after { bottom:-235px; box-shadow:none; }
 }
+
+/* Compact genetic hero; keep benefit labels fully visible. */
+.genetica-hero-clean .genetica-hero-copy{padding-bottom:24px;align-self:center}
+.genetica-hero-clean .genetics-benefits{margin-top:20px;min-height:0;align-items:center;gap:12px;overflow:visible}
+.genetica-hero-clean .genetics-benefits>div{height:auto;min-height:0;align-items:center;line-height:1.5}
+.genetica-hero-clean .genetics-benefits>div>span{display:block;height:auto;max-height:none;overflow:visible;line-height:1.5;padding-bottom:2px;white-space:normal}
+.genetica-hero-clean::after{bottom:-138px}
+@media(min-width:901px){.genetica-hero-section.genetica-hero-clean,.genetica-hero-clean .genetics-hero-art{min-height:0}.genetica-hero-clean .genetica-hero-copy{padding-top:28px;padding-bottom:24px}}
+@media(max-width:900px){.genetica-hero-clean .genetica-hero-copy{padding-bottom:18px}.genetica-hero-clean .genetics-benefits{margin-top:16px}}
