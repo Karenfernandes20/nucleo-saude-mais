@@ -6074,3 +6074,14 @@ ul, ol {
 .genetica-hero-clean::after{bottom:-138px}
 @media(min-width:901px){.genetica-hero-section.genetica-hero-clean,.genetica-hero-clean .genetics-hero-art{min-height:0}.genetica-hero-clean .genetica-hero-copy{padding-top:28px;padding-bottom:24px}}
 @media(max-width:900px){.genetica-hero-clean .genetica-hero-copy{padding-bottom:18px}.genetica-hero-clean .genetics-benefits{margin-top:16px}}
+
+/* Homepage: balanced service navigation */
+.priority-services { grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.priority-services .priority-card { padding:20px; gap:10px; }
+.priority-services .priority-card:nth-child(2) { background:#fff; color:#10435b; }
+.priority-services .priority-card:nth-child(2) h2 { color:#10435b !important; }
+.priority-services .priority-card:nth-child(2) p { color:inherit; }
+.priority-services .priority-card:nth-child(2) > svg,.priority-services .priority-card:nth-child(2) .priority-link { color:#087d82; }
+.priority-services .priority-card:first-child { background:#edf8f8; border-color:#b9dfe1; }
+@media(max-width:1050px){.priority-services{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:540px){.priority-services{grid-template-columns:minmax(0,1fr);gap:10px}.priority-services .priority-card{padding:16px;gap:8px}}
