@@ -47,10 +47,7 @@ export default function About({ onExploreFacility }: AboutProps) {
             </h2>
 
             <p className="about-lead-text">
-              O Núcleo de Saúde Mais é uma clínica médica e de exames cuja missão é inovar no
-              segmento, trazendo um novo olhar sobre o relacionamento entre médico e paciente.
-              Investimos em tecnologia, competências e excelência para tornar a experiência de nossos
-              pacientes mais humana, moderna e acessível.
+              O Núcleo de Saúde Mais reúne consultas médicas, exames laboratoriais e de imagem, genética, fisioterapia, psicologia e nutrição. Um espaço de cuidado integrado para você e sua família, da prevenção ao acompanhamento.
             </p>
 
             {/* 3 Pillars */}
