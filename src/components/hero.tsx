@@ -35,18 +35,18 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
             <div className="hero-badge">
               <span className="hero-badge-dot" />
               <MapPin size={15} className="hero-badge-pin" />
-              <span className="hero-badge-text">Clínica Médica e Exames em Montes Claros – MG</span>
+              <span className="hero-badge-text">Saúde integrada em Montes Claros – MG</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="hero-title">
-              Exames Genéticos,
-              <span className="hero-title-highlight">Fisioterapia e Exames Diagnósticos</span>
+              Consultas Médicas, Exames Genéticos e
+              <span className="hero-title-highlight">Medicina Diagnóstica</span>
             </h1>
 
             {/* Complementary Text */}
             <p className="hero-subtitle">
-              Tecnologia, reabilitação e diagnóstico em um só lugar, com atendimento humanizado.
+              Cuidado completo para sua saúde: consultas médicas, exames laboratoriais e genéticos, fisioterapia, psicologia e nutrição em um só lugar.
             </p>
 
             {/* Primary Action Buttons (Desktop only) */}
