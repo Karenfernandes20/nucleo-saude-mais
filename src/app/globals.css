@@ -5932,3 +5932,25 @@ ul, ol {
  .section + .section { padding-top: 12px; }
  .priority-services { padding-block: 16px; }
 }
+
+.genetica-hero-section.genetica-hero-clean{position:relative;isolation:isolate;display:grid;grid-template-columns:53% 47%;align-items:stretch;padding:0;min-height:460px;background:linear-gradient(115deg,#f7fbfc 20%,#e6f6f7 75%,#bde9eb);color:#0d354d;overflow:hidden}
+.genetica-hero-clean::after{content:"";position:absolute;pointer-events:none;z-index:2;bottom:-105px;left:-8%;width:75%;height:140px;background:#8cdbdf66;border-radius:50%;transform:rotate(4deg)}
+.genetica-hero-copy{position:relative;z-index:3;min-width:0;align-self:center;padding:36px 24px 42px max(28px,calc((100vw - 1440px)/2))}
+.genetica-hero-clean .genetica-hero-badge{background:none;border:0;padding:0;color:#087e84;letter-spacing:.2em;font-size:.95rem;backdrop-filter:none;margin-bottom:18px}
+.genetica-hero-clean .genetica-hero-title{color:#0d354d;font-size:clamp(36px,3.6vw,60px);line-height:1.08;max-width:850px;margin-bottom:18px}
+.genetica-hero-clean .genetica-hero-title span{color:#009b9e}
+.genetica-hero-clean .genetica-hero-subtitle{color:#24475b;font-size:clamp(17px,1.4vw,22px);max-width:650px;margin-bottom:24px}
+.genetica-hero-clean .genetica-hero-actions{gap:16px;flex-wrap:wrap}
+.genetica-hero-clean .genetica-hero-actions .btn{min-height:54px;height:auto;padding:12px 20px;border-radius:20px;white-space:normal;text-align:center;max-width:100%}
+.genetica-hero-clean .btn-teal{background:#008f94;color:white}
+.genetica-hero-clean .genetics-outline{border:1px solid #009b9e;color:#087e84;background:transparent}
+.genetica-hero-clean .genetics-outline:hover{background:#d9f2f3}
+.genetics-benefits{display:flex;gap:18px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.genetics-benefits>div{display:flex;align-items:center;gap:10px;font-weight:700;font-size:clamp(13px,1.05vw,17px);line-height:1.25}
+.genetics-benefits>div+div{border-left:1px solid #b8d6db;padding-left:18px}
+.genetics-benefits svg{width:34px;height:34px;color:#009b9e;flex-shrink:0}
+.genetics-hero-art{position:relative;min-width:0;min-height:460px;overflow:hidden;border-radius:30% 0 0 32% / 50% 0 0 50%;box-shadow:-22px 0 0 #ffffff65}
+.genetics-hero-art img{object-fit:cover}
+.genetics-hero-art::after{content:"";position:absolute;bottom:-70px;right:-10%;width:85%;height:150px;background:#b6edef88;border-radius:50%;transform:rotate(-15deg)}
+@media(max-width:900px){.genetica-hero-section.genetica-hero-clean{grid-template-columns:minmax(0,1fr)}.genetica-hero-copy{padding:28px 24px}.genetics-hero-art{min-height:0;height:clamp(240px,48vw,360px);border-radius:50% 50% 0 0 / 12% 12% 0 0;box-shadow:0 -10px 0 #ffffff65}.genetica-hero-clean .genetica-hero-actions{align-items:stretch}.genetica-hero-clean .genetica-hero-actions .btn{width:100%}}
+@media(max-width:480px){.genetica-hero-copy{padding:24px 16px}.genetica-hero-clean .genetica-hero-title{font-size:34px}.genetics-benefits{gap:12px}.genetics-benefits>div+div{border:0;padding-left:0}.genetics-benefits svg{width:26px;height:26px}.genetica-hero-clean .genetica-hero-actions .btn{padding:12px 10px;font-size:14px}}
