@@ -14,10 +14,10 @@ interface HeaderProps {
 
 const navLinks = [
   { label: 'Início', href: '/', id: 'inicio' },
+  { label: 'Consultas e Especialidades', href: '/#especialidades', id: 'especialidades' },
+  { label: 'Exames', href: '/exames', id: 'exames' },
   { label: 'Exames Genéticos', href: '/exames-geneticos', id: 'geneticos' },
   { label: 'Fisioterapia e Reabilitação', href: '/fisioterapia', id: 'fisioterapia' },
-  { label: 'Exames', href: '/exames', id: 'exames' },
-  { label: 'Especialidades', href: '/#especialidades', id: 'especialidades' },
   { label: 'Convênios', href: '/#convenios', id: 'convenios' },
   { label: 'Contato', href: '/#contato', id: 'contato' },
 ];
