@@ -3,8 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { HeartHandshake, Award, Sparkles, ArrowRight, Building2, MapPin } from 'lucide-react';
-import { pillars, clinic } from '@/data/clinic';
-import BrandCross from './brand-cross';
+import { pillars } from '@/data/clinic';
 
 interface AboutProps {
   onExploreFacility: () => void;
@@ -32,17 +31,6 @@ export default function About({ onExploreFacility }: AboutProps) {
               <div className="about-badge-location">
                 <MapPin size={15} className="text-teal" />
                 <span>Rua Januária, 684 — Centro</span>
-              </div>
-
-              {/* Floating Badge: Technical Leadership (Bottom-Left) */}
-              <div className="about-badge-tech">
-                <div className="badge-tech-icon">
-                  <BrandCross size={18} color="#FFFFFF" />
-                </div>
-                <div>
-                  <strong>{clinic.technicalLead}</strong>
-                  <span>Resp. Técnica — {clinic.crm}</span>
-                </div>
               </div>
             </div>
           </div>
