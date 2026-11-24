@@ -34,6 +34,7 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
             {/* Eyebrow / Tag */}
             <div className="hero-badge">
               <span className="hero-badge-dot" />
+              <MapPin size={15} className="hero-badge-pin" />
               <span className="hero-badge-text">Clínica Médica e Exames em Montes Claros – MG</span>
             </div>
 

@@ -635,6 +635,10 @@ ul, ol {
   box-shadow: 0 0 10px var(--color-teal);
 }
 
+.hero-badge-pin {
+  display: none;
+}
+
 .hero-badge-text {
   font-family: var(--font-heading);
   font-size: 0.8125rem;
@@ -3283,87 +3287,179 @@ ul, ol {
   }
 }
 
-@media (max-width: 600px) {
+/* ==========================================================================
+   MOBILE HERO & COMPACT BREAKPOINTS (≤ 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
   .site-container {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .header-logo-img {
-    width: 170px;
-  }
-
+  /* Hero Section: Fundo azul, acabamento curvado, espaçamento confortável */
   .hero-section {
-    padding: 24px 0 54px;
+    padding: 32px 0 72px;
+    overflow: hidden;
   }
 
+  /* Elementos decorativos com intensidade reduzida para máxima legibilidade */
+  .hero-cross-bg {
+    opacity: 0.05;
+  }
+
+  .hero-cross-1 {
+    top: 4%;
+    left: -15px;
+    transform: scale(0.65) rotate(-12deg);
+  }
+
+  .hero-cross-2 {
+    display: none;
+  }
+
+  .hero-cross-3 {
+    top: 18%;
+    right: -10px;
+    transform: scale(0.6);
+  }
+
+  .hero-glow-teal {
+    width: 240px;
+    height: 240px;
+    opacity: 0.3;
+    top: -30px;
+    right: -40px;
+  }
+
+  .hero-glow-blue {
+    width: 260px;
+    height: 260px;
+    opacity: 0.3;
+    bottom: -50px;
+    left: -40px;
+  }
+
+  /* 1. Estrutura Vertical (uma única coluna natural) */
   .hero-split-row {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+    margin-bottom: 0;
     text-align: left;
   }
 
   .hero-content {
+    width: 100%;
+    max-width: 100%;
     text-align: left;
+  }
+
+  /* 2. Selo acima do título principal com ícone de localização */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+    margin-bottom: 16px;
+    width: fit-content;
     max-width: 100%;
   }
 
-  .hero-badge {
-    padding: 4px 10px;
-    gap: 6px;
-    margin-bottom: 8px;
+  .hero-badge-dot {
+    display: none;
   }
 
-  .hero-badge-dot {
-    width: 6px;
-    height: 6px;
+  .hero-badge-pin {
+    display: inline-block;
+    color: var(--color-teal);
+    flex-shrink: 0;
   }
 
   .hero-badge-text {
-    font-size: 0.65625rem;
+    font-size: clamp(0.75rem, 3.4vw, 0.8125rem);
+    font-weight: 700;
     letter-spacing: 0.02em;
+    color: #DCF4F5;
+    line-height: 1.25;
   }
 
+  /* 3. Título principal: 30px a 34px, boa quebra de linha */
   .hero-title {
-    font-size: clamp(1.2rem, 4.6vw, 1.55rem);
-    line-height: 1.16;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    font-size: clamp(1.875rem, 7.8vw, 2.125rem); /* ~30px a 34px */
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+    color: var(--color-white);
     text-align: left;
   }
 
+  /* 4. Destaque em verde-água preservado */
+  .hero-title-highlight {
+    display: block;
+    color: var(--color-teal);
+    background: linear-gradient(100deg, #53D1D3 0%, #35B4B6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* 5. Texto descritivo: 15px a 16px com entrelinha confortável */
   .hero-subtitle {
-    font-size: 0.78125rem;
-    line-height: 1.35;
-    margin-bottom: 0;
+    font-size: clamp(0.9375rem, 3.9vw, 1rem); /* 15px a 16px */
     color: #D3E4ED;
+    line-height: 1.55;
+    margin-bottom: 0;
+    max-width: 440px;
     text-align: left;
   }
 
+  /* 6. Fotografia da médica centralizada abaixo do texto, largura quase total */
   .hero-visual-col {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 4px 0 0;
   }
 
   .hero-image-frame {
     position: relative;
     width: 100%;
-    max-width: 220px;
+    max-width: 440px;
+    margin: 0 auto;
   }
 
+  /* 7. Altura da foto: 280px a 320px com object-fit cover e enquadramento perfeito */
   .hero-image-wrapper {
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    position: relative;
+    width: 100%;
+    height: clamp(280px, 72vw, 320px);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    background: linear-gradient(135deg, rgba(34, 87, 123, 0.35) 0%, rgba(12, 68, 99, 0.55) 100%);
+  }
+
+  .hero-doctor-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
   }
 
   .hero-frame-backdrop {
     inset: -6px;
-    border-radius: 24px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(67, 184, 186, 0.25) 0%, rgba(34, 87, 123, 0.1) 100%);
+    transform: none;
+    border: 1px solid rgba(67, 184, 186, 0.2);
   }
 
   .hero-diagonal-accent {
@@ -3374,33 +3470,50 @@ ul, ol {
     display: none;
   }
 
+  /* 8. Selo "Excelência Médica" no topo da fotografia */
   .hero-floating-stat {
     position: absolute;
-    top: 6px;
-    right: -4px;
-    padding: 4px 8px;
-    gap: 6px;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    top: 14px;
+    left: 14px;
+    right: auto;
+    bottom: auto;
+    padding: 7px 13px;
+    gap: 8px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.95);
-    margin: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    animation: none;
+    max-width: none;
+    z-index: 4;
+    display: flex;
+    align-items: center;
   }
 
   .hero-floating-stat .floating-card-symbol {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: rgba(67, 184, 186, 0.15);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
   }
 
   .hero-floating-stat .floating-card-body strong {
-    font-size: 0.65625rem;
-    line-height: 1.1;
+    font-size: 0.8125rem; /* ~13px */
+    font-weight: 700;
+    color: var(--color-navy);
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
   .hero-floating-stat .floating-card-body span {
     display: none;
   }
 
+  /* 9. Botões abaixo da imagem, 100% de largura, altura mínima 52px, textos 15-16px */
   .hero-actions-desktop {
     display: none;
   }
@@ -3408,23 +3521,93 @@ ul, ol {
   .hero-actions-mobile {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
-    margin-bottom: 18px;
+    margin-top: 22px;
+    margin-bottom: 26px;
   }
 
   .hero-cta-primary,
   .hero-cta-secondary {
     width: 100%;
-    padding: 12px 18px;
-    font-size: 0.875rem;
+    min-height: 52px;
+    padding: 14px 20px;
+    font-size: clamp(0.9375rem, 3.9vw, 1rem); /* 15px - 16px */
+    font-weight: 700;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
   }
 
+  .hero-cta-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
+  }
+
+  /* 10. Benefícios organizados verticalmente: títulos ~16px, descrições ~14px, ícones maiores */
   .hero-trust-bar {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding-top: 14px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    width: 100%;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .trust-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(67, 184, 186, 0.15);
+    border: 1px solid rgba(67, 184, 186, 0.3);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .trust-icon-box svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .trust-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .trust-item-text strong {
+    font-size: 1rem; /* 16px */
+    font-weight: 700;
+    color: var(--color-white);
+    line-height: 1.25;
+  }
+
+  .trust-item-text span {
+    font-size: 0.875rem; /* 14px */
+    color: #B5CFDD;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .header-logo-img {
+    width: 170px;
   }
 
   .differentials-grid {
