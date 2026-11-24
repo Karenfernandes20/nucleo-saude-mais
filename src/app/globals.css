@@ -24,8 +24,8 @@
   --color-text-main: #163345;
   --color-text-muted: #556E7F;
   
-  --font-heading: var(--font-heading), 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: var(--font-body), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -3843,4 +3843,57 @@ ul, ol {
   .lightbox-caption { max-height: 30vh; overflow-y: auto; overflow-wrap: anywhere; padding: 0 4px; }
   .lightbox-caption-title { font-size: 1.125rem; }
   .lightbox-caption-desc { font-size: 0.875rem; line-height: 1.45; }
+}
+
+/* Cross-browser responsive safeguards for narrow phones and tablets. */
+@media (max-width: 900px) {
+  .site-container, .site-container > *, .section, .clinic-app-wrapper { min-width: 0; max-width: 100%; }
+  .hero-split-row > *, .about-grid > *, .differentials-grid > *, .specialties-grid > *, .insurance-logos-grid > *, .structure-gallery-bento > *, .gallery-secondary-grid > *, .contact-unified-grid > *, .contact-cards-grid > *, .faq-grid > *, .footer-main-grid > * { min-width: 0; }
+  .section-title, .specialty-name, .footer-contact-row, .contact-card-compact, .faq-question-text, .modal-title { overflow-wrap: anywhere; }
+  .btn { max-width: 100%; white-space: normal; text-align: center; height: auto; min-height: 44px; padding-block: 10px; }
+  .btn svg, .structure-tag-item svg, .footer-contact-row svg, .insurance-disclaimer-info svg { flex-shrink: 0; }
+  .insurance-logo-img { max-width: min(140px, 100%); }
+  .insurance-card-caption { gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .insurance-name-text { white-space: normal; overflow-wrap: anywhere; }
+  .insurance-footer-banner > *, .faq-help-content, .modal-header > *, .specialty-card-footer > * { min-width: 0; max-width: 100%; }
+  .modal-backdrop { z-index: 3000; padding: 12px; overflow-y: auto; backdrop-filter: none; }
+  .modal-container { min-width: 0; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; }
+  .modal-header, .modal-footer { flex-shrink: 0; }
+  .modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  .modal-close-btn { flex-shrink: 0; min-width: 44px; min-height: 44px; }
+  .mobile-menu-drawer { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .mobile-menu-header, .mobile-menu-footer { flex-shrink: 0; }
+  .mobile-menu-links { flex-shrink: 0; }
+  .mobile-menu-logo { max-width: 70%; }
+  .mobile-nav-item { overflow-wrap: anywhere; }
+  .contact-visual-stage, .stage-content-frame, .stage-map-iframe { max-width: 100%; }
+  .stage-map-route-btn { max-width: calc(100% - 28px); }
+  .specialty-search-wrapper input, .insurance-search-box input { min-width: 0; font-size: 16px; }
+}
+@media (max-width: 600px) {
+  .site-container { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+  .section-kicker { max-width: 100%; letter-spacing: .08em; text-align: center; }
+  .kicker-line { flex-shrink: 0; width: 16px; }
+  .hero-cta-primary { min-width: 0; }
+  .specialty-card-footer { flex-wrap: wrap; gap: 10px; }
+  .modal-header, .modal-body, .modal-footer { padding: 16px; }
+  .modal-title { font-size: 1.35rem; }
+  .modal-footer { flex-direction: column; align-items: stretch; gap: 8px; }
+  .modal-footer .btn, .insurance-check-btn, .cta-main-btn { width: 100%; }
+  .specialty-benefits-box { padding: 14px; }
+  .insurance-footer-banner, .faq-help-card { padding: 16px; }
+  .faq-question-btn { padding: 14px; gap: 10px; }
+  .faq-answer-panel { padding: 0 14px 16px; }
+  .cta-title { font-size: clamp(1.75rem, 7vw, 2.25rem); }
+  .cta-main-btn { padding-inline: 14px; }
+  .footer-section { padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
+  .gallery-item-title-sm { white-space: normal; }
+}
+@media (max-height: 500px) and (max-width: 950px) {
+  .modal-container { max-height: calc(100dvh - 24px); }
+  .lightbox-overlay { padding: 8px; gap: 6px; }
+  .lightbox-content-box { min-height: 0; flex: 1; height: auto; }
+  .lightbox-caption { max-height: 25vh; overflow-y: auto; }
+  .lightbox-prev { left: 0; }
+  .lightbox-next { right: 0; }
 }
