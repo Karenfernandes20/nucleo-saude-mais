@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import Header from './header';
 import Hero from './hero';
 import { PriorityCards } from './priority-services';
-import Differentials from './differentials';
 import About from './about';
 import Specialties from './specialties';
 import Insurance from './insurance';
@@ -78,9 +77,6 @@ export default function ClinicSite() {
 
         {/* Serviços de Destaque com links para as páginas dedicadas */}
         <PriorityCards onNavigate={scrollToSection} />
-
-        {/* 3. Diferenciais da Clínica (4 cards) */}
-        <Differentials />
 
         {/* 4. Sobre Nós (Missão e 3 Pilares) */}
         <About onExploreFacility={() => scrollToSection('estrutura')} />
