@@ -3897,3 +3897,20 @@ ul, ol {
   .lightbox-prev { left: 0; }
   .lightbox-next { right: 0; }
 }
+
+/* Native scrolling keeps arrow navigation and touch gestures in sync. */
+.insurance-carousel-track.insurance-carousel-manual {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  animation: none;
+  will-change: auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-block: 6px 12px;
+}
+.insurance-carousel-manual::-webkit-scrollbar { display: none; }
+.insurance-carousel-manual .insurance-carousel-card { scroll-snap-align: start; }
+.insurance-carousel-wrapper .carousel-fade-left,
+.insurance-carousel-wrapper .carousel-fade-right { display: none; }
