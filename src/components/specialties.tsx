@@ -73,7 +73,8 @@ export default function Specialties() {
     if (searchTerm.trim() || showAll) {
       return filtered;
     }
-    return filtered.slice(0, 8);
+    const featured = ['Cardiologia', 'Pediatria', 'Ginecologia', 'Ortopedia', 'Psicologia', 'Nutrição', 'Neurologia', 'Endocrinologia'];
+    return featured.map(name => filtered.find(item => item.name === name)).filter((item): item is Specialty => Boolean(item));
   }, [filtered, searchTerm, showAll]);
 
   return (
@@ -87,11 +88,10 @@ export default function Specialties() {
               <span>CORPO CLÍNICO MULTIDISCIPLINAR</span>
             </div>
             <h2 className="section-title">
-              Especialidades Médicas <span className="text-navy-highlight">para toda a família</span>
+              Consultas e especialidades <span className="text-navy-highlight">para toda a família</span>
             </h2>
             <p className="section-subtitle">
-              Atendimento médico humanizado, com profissionais experientes e dedicados ao seu bem-estar
-              integral.
+              Encontre o atendimento que você precisa, da saúde física à saúde emocional.
             </p>
           </div>
 
