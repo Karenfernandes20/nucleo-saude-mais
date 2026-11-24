@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { HeartHandshake, Award, Sparkles, CheckCircle2, ArrowRight, Building2, MapPin } from 'lucide-react';
+import { HeartHandshake, Award, Sparkles, ArrowRight, Building2, MapPin } from 'lucide-react';
 import { pillars, clinic } from '@/data/clinic';
 import BrandCross from './brand-cross';
 
@@ -18,33 +18,31 @@ export default function About({ onExploreFacility }: AboutProps) {
           {/* Left Column: Visual Composition with Clinic Image & Accreditation Badge */}
           <div className="about-visual-col">
             <div className="about-image-card">
-              <div className="about-image-wrapper">
-                <Image
-                  src="/images/clinica/facade/fachada.webp"
-                  alt="Fachada do Núcleo de Saúde Mais em Montes Claros"
-                  width={580}
-                  height={440}
-                  className="about-primary-img"
-                  priority
-                />
-                <div className="about-image-gradient" />
+              <Image
+                src="/images/clinica/facade/fachada.webp"
+                alt="Fachada do Núcleo de Saúde Mais em Montes Claros"
+                fill
+                sizes="(max-width: 860px) 100vw, 50vw"
+                className="about-primary-img"
+                priority
+              />
+              <div className="about-image-gradient" />
+
+              {/* Floating Badge: Address (Top-Right) */}
+              <div className="about-badge-location">
+                <MapPin size={15} className="text-teal" />
+                <span>Rua Januária, 684 — Centro</span>
               </div>
 
-              {/* Floating Badge 1: Technical Leadership */}
+              {/* Floating Badge: Technical Leadership (Bottom-Left) */}
               <div className="about-badge-tech">
                 <div className="badge-tech-icon">
-                  <BrandCross size={20} color="#FFFFFF" />
+                  <BrandCross size={18} color="#FFFFFF" />
                 </div>
                 <div>
                   <strong>{clinic.technicalLead}</strong>
                   <span>Resp. Técnica — {clinic.crm}</span>
                 </div>
-              </div>
-
-              {/* Floating Badge 2: Address */}
-              <div className="about-badge-location">
-                <MapPin size={16} className="text-teal" />
-                <span>Rua Januária, 684 — Centro</span>
               </div>
             </div>
           </div>
@@ -77,7 +75,7 @@ export default function About({ onExploreFacility }: AboutProps) {
                 return (
                   <div key={pillar.title} className="pillar-item">
                     <div className="pillar-icon-box">
-                      <PillarIcon size={20} className="text-teal" />
+                      <PillarIcon size={18} className="text-teal" />
                     </div>
                     <div className="pillar-text">
                       <h4 className="pillar-title">{pillar.title}</h4>
