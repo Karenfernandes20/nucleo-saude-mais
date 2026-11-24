@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Header from './header';
 import Hero from './hero';
 import { PriorityCards } from './priority-services';
@@ -26,7 +25,6 @@ const sectionIds = [
 
 export default function ClinicSite() {
   const [activeSection, setActiveSection] = useState('inicio');
-  const router = useRouter();
 
   useEffect(() => {
     const handleScrollObserver = () => {
@@ -73,16 +71,14 @@ export default function ClinicSite() {
 
       <main id="main-content">
         {/* 2. Hero Section (Primeira Dobra) */}
-        <Hero onExploreSpecialties={() => router.push('/exames-geneticos')} />
+        <Hero onExploreSpecialties={() => scrollToSection('especialidades')} />
 
         {/* Serviços de Destaque com links para as páginas dedicadas */}
         <PriorityCards onNavigate={scrollToSection} />
 
-        {/* 4. Sobre Nós (Missão e 3 Pilares) */}
-        <About onExploreFacility={() => scrollToSection('estrutura')} />
-
-        {/* 5. Especialidades Médicas (14 Especialidades + Modal + Busca) */}
         <Specialties />
+
+        <About onExploreFacility={() => scrollToSection('estrutura')} />
 
         {/* 6. Convênios Atendidos (13 Logos Oficiais + Busca) */}
         <Insurance />
