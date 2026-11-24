@@ -240,21 +240,18 @@ export default function FisioterapiaPage() {
               Abordagem clínica integrada para aliviar dores, restaurar funções e devolver sua liberdade de movimento.
             </p>
 
-            <div className="subpage-cards-grid">
+            <div className="rehab-accordion" style={{display:'grid',gap:'10px',marginTop:'20px'}}>
               {rehabModalities.map((mod) => (
-                <article key={mod.id} className="subpage-card">
-                  <div className="badge-chip" style={{ width: 'fit-content', marginBottom: '14px' }}>
-                    {mod.badge}
+                <details key={mod.id} name="rehab-modalities" className="rehab-accordion-item">
+                  <summary>
+                    <span>{mod.title}</span>
+                    <svg className="rehab-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </summary>
+                  <div className="rehab-accordion-content">
+                    <p>{mod.desc}</p>
+                    <ul>{mod.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
                   </div>
-                  <h3 className="subpage-card-title">{mod.title}</h3>
-                  <p className="subpage-card-desc">{mod.desc}</p>
-                  <ul style={{ paddingLeft: '18px', marginBottom: '20px', fontSize: '0.84375rem', color: '#0C4463' }}>
-                    {mod.highlights.map((h) => (
-                      <li key={h} style={{ marginBottom: '6px' }}>{h}</li>
-                    ))}
-                  </ul>
-                  
-                </article>
+                </details>
               ))}
             </div>
 
