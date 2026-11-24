@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { CalendarCheck, ArrowRight, ShieldCheck, HeartPulse, Clock, MapPin } from 'lucide-react';
+import { CalendarCheck, ArrowRight, ShieldCheck, Dna, Activity, MapPin } from 'lucide-react';
 import { clinic } from '@/data/clinic';
 import BrandCross from './brand-cross';
 
@@ -40,13 +40,13 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
 
             {/* Main Headline */}
             <h1 className="hero-title">
-              Mais saúde para você.
-              <span className="hero-title-highlight"> Mais cuidado por você.</span>
+              Exames Genéticos,
+              <span className="hero-title-highlight">Fisioterapia e Exames Diagnósticos</span>
             </h1>
 
             {/* Complementary Text */}
             <p className="hero-subtitle">
-              Consultas, exames e atendimento humanizado em um só lugar.
+              Tecnologia, reabilitação e diagnóstico em um só lugar, com atendimento humanizado.
             </p>
 
             {/* Primary Action Buttons (Desktop only) */}
@@ -66,9 +66,9 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
               <button
                 onClick={onExploreSpecialties}
                 className="btn btn-outline-white btn-lg hero-cta-secondary"
-                aria-label="Conheça nossas especialidades médicas"
+                aria-label="Conheça nossos exames genéticos"
               >
-                <span>Conheça nossas especialidades</span>
+                <span>Conheça os exames genéticos</span>
               </button>
             </div>
           </div>
@@ -134,9 +134,9 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
           <button
             onClick={onExploreSpecialties}
             className="btn btn-outline-white btn-lg hero-cta-secondary"
-            aria-label="Conheça nossas especialidades médicas"
+            aria-label="Conheça nossos exames genéticos"
           >
-            <span>Conheça nossas especialidades</span>
+            <span>Conheça os exames genéticos</span>
           </button>
         </div>
 
@@ -144,21 +144,21 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
         <div className="hero-trust-bar">
           <div className="trust-item">
             <div className="trust-icon-box">
-              <HeartPulse size={18} className="text-teal" />
+              <Dna size={18} className="text-teal" />
             </div>
             <div className="trust-item-text">
-              <strong>+14 Especialidades</strong>
-              <span>Corpo clínico completo</span>
+              <strong>Genética e saúde</strong>
+              <span>Investigação hereditária</span>
             </div>
           </div>
 
           <div className="trust-item">
             <div className="trust-icon-box">
-              <Clock size={18} className="text-teal" />
+              <Activity size={18} className="text-teal" />
             </div>
             <div className="trust-item-text">
-              <strong>Resultados Ágeis</strong>
-              <span>Laboratório com agilidade</span>
+              <strong>Reabilitação</strong>
+              <span>Mobilidade e recuperação</span>
             </div>
           </div>
 
