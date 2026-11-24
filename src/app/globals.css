@@ -4463,7 +4463,7 @@ ul, ol {
 }
 
 /* Responsividade Fisioterapia */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .fisioterapia-hero-grid {
     grid-template-columns: 1fr;
     gap: 32px;
