@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { CalendarCheck, ArrowRight, ShieldCheck, Dna, Activity, MapPin } from 'lucide-react';
+import { CalendarCheck, ArrowRight, ShieldCheck, Stethoscope, FlaskConical, MapPin } from 'lucide-react';
 import { clinic } from '@/data/clinic';
 import BrandCross from './brand-cross';
 
@@ -66,9 +66,9 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
               <button
                 onClick={onExploreSpecialties}
                 className="btn btn-outline-white btn-lg hero-cta-secondary"
-                aria-label="Conheça nossos exames genéticos"
+                aria-label="Conheça nossas consultas e especialidades"
               >
-                <span>Conheça os exames genéticos</span>
+                <span>Conheça as especialidades</span>
               </button>
             </div>
           </div>
@@ -134,9 +134,9 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
           <button
             onClick={onExploreSpecialties}
             className="btn btn-outline-white btn-lg hero-cta-secondary"
-            aria-label="Conheça nossos exames genéticos"
+            aria-label="Conheça nossas consultas e especialidades"
           >
-            <span>Conheça os exames genéticos</span>
+            <span>Conheça as especialidades</span>
           </button>
         </div>
 
@@ -144,21 +144,21 @@ export default function Hero({ onExploreSpecialties }: HeroProps) {
         <div className="hero-trust-bar">
           <div className="trust-item">
             <div className="trust-icon-box">
-              <Dna size={18} className="text-teal" />
+              <Stethoscope size={18} className="text-teal" />
             </div>
             <div className="trust-item-text">
-              <strong>Genética e saúde</strong>
-              <span>Investigação hereditária</span>
+              <strong>Consultas médicas</strong>
+              <span>Diversas especialidades</span>
             </div>
           </div>
 
           <div className="trust-item">
             <div className="trust-icon-box">
-              <Activity size={18} className="text-teal" />
+              <FlaskConical size={18} className="text-teal" />
             </div>
             <div className="trust-item-text">
-              <strong>Reabilitação</strong>
-              <span>Mobilidade e recuperação</span>
+              <strong>Exames e diagnósticos</strong>
+              <span>Prevenção e acompanhamento</span>
             </div>
           </div>
 
