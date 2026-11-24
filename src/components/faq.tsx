@@ -43,15 +43,7 @@ export default function FAQ() {
               <div className="faq-help-content">
                 <strong>Ainda tem dúvidas?</strong>
                 <p>Nossa equipe está à disposição no WhatsApp para ajudar você.</p>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline-navy btn-sm faq-contact-btn"
-                >
-                  <MessageCircle size={16} />
-                  <span>Falar com atendente</span>
-                </a>
+                
               </div>
             </div>
           </div>
