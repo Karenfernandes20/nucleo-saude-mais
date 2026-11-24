@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   MapPin,
   Phone,
@@ -17,27 +18,57 @@ import { clinic, specialties } from '@/data/clinic';
 import BrandCross from './brand-cross';
 
 interface FooterProps {
-  onNavigate: (sectionId: string) => void;
+  onNavigate?: (sectionId: string) => void;
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
     'Olá! Vim pelo site da Clínica Núcleo de Saúde Mais e gostaria de tirar uma dúvida.'
   )}`;
 
   const quickLinks = [
-    { label: 'Início', id: 'inicio' },
-    { label: 'Exames Genéticos', id: 'geneticos' },
-    { label: 'Fisioterapia e Reabilitação', id: 'fisioterapia' },
-    { label: 'Sobre nós', id: 'sobre' },
-    { label: 'Especialidades', id: 'especialidades' },
-    { label: 'Exames', id: 'exames' },
-    { label: 'Convênios', id: 'convenios' },
-    { label: 'Nossa Estrutura', id: 'estrutura' },
-    { label: 'Contato', id: 'contato' },
+    { label: 'Início', href: '/', id: 'inicio' },
+    { label: 'Exames Genéticos', href: '/exames-geneticos', id: 'geneticos' },
+    { label: 'Fisioterapia e Reabilitação', href: '/fisioterapia', id: 'fisioterapia' },
+    { label: 'Exames Diagnósticos', href: '/exames', id: 'exames' },
+    { label: 'Sobre nós', href: '/#sobre', id: 'sobre' },
+    { label: 'Especialidades', href: '/#especialidades', id: 'especialidades' },
+    { label: 'Convênios', href: '/#convenios', id: 'convenios' },
+    { label: 'Nossa Estrutura', href: '/#estrutura', id: 'estrutura' },
+    { label: 'Contato', href: '/#contato', id: 'contato' },
   ];
+
+  const handleLinkClick = (href: string, id: string) => {
+    if (href.startsWith('/#')) {
+      const targetId = href.replace('/#', '');
+      if (pathname === '/') {
+        if (onNavigate) {
+          onNavigate(targetId);
+        } else {
+          const el = document.getElementById(targetId);
+          if (el) {
+            const offset = (document.querySelector('header.header')?.getBoundingClientRect().height ?? 80) + 12;
+            const pos = el.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: pos, behavior: 'smooth' });
+          }
+        }
+      } else {
+        router.push(href);
+      }
+    } else if (href === '/') {
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/');
+      }
+    } else {
+      router.push(href);
+    }
+  };
 
   // Pick top 8 specialties for footer list
   const featuredSpecialties = specialties.slice(0, 8);
@@ -56,7 +87,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           {/* Column 1: Brand & Presentation */}
           <div className="footer-col footer-col-brand">
             <button
-              onClick={() => onNavigate('inicio')}
+              onClick={() => handleLinkClick('/', 'inicio')}
               className="footer-logo-btn"
               aria-label="Ir para o início"
             >
@@ -101,11 +132,9 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <MessageCircle size={18} />
               </a>
               <a
-                href={clinic.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="https://www.nucleodesaudemais.com"
                 className="footer-social-btn"
-                aria-label="Website oficial"
+                aria-label="Site Oficial do Núcleo de Saúde Mais"
               >
                 <Globe size={18} />
               </a>
@@ -122,7 +151,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               {quickLinks.map((link) => (
                 <li key={link.id}>
                   <button
-                    onClick={() => onNavigate(link.id)}
+                    onClick={() => handleLinkClick(link.href, link.id)}
                     className="footer-link-btn"
                   >
                     <ChevronRight size={13} className="text-teal" />
@@ -143,7 +172,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               {featuredSpecialties.map((spec) => (
                 <li key={spec.name}>
                   <button
-                    onClick={() => onNavigate('especialidades')}
+                    onClick={() => handleLinkClick('/#especialidades', 'especialidades')}
                     className="footer-link-btn"
                   >
                     <ChevronRight size={13} className="text-teal" />

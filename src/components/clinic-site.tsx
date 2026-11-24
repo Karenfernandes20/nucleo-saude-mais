@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from './header';
 import Hero from './hero';
-import { PriorityCards, PrioritySection } from './priority-services';
+import { PriorityCards } from './priority-services';
 import Differentials from './differentials';
 import About from './about';
 import Specialties from './specialties';
-import Exams from './exams';
 import Insurance from './insurance';
 import Structure from './structure';
 import AppointmentCTA from './appointment-cta';
@@ -18,11 +18,8 @@ import FloatingActions from './floating-actions';
 
 const sectionIds = [
   'inicio',
-  'geneticos',
-  'fisioterapia',
   'sobre',
   'especialidades',
-  'exames',
   'convenios',
   'estrutura',
   'contato',
@@ -30,6 +27,7 @@ const sectionIds = [
 
 export default function ClinicSite() {
   const [activeSection, setActiveSection] = useState('inicio');
+  const router = useRouter();
 
   useEffect(() => {
     const handleScrollObserver = () => {
@@ -76,11 +74,10 @@ export default function ClinicSite() {
 
       <main id="main-content">
         {/* 2. Hero Section (Primeira Dobra) */}
-        <Hero onExploreSpecialties={() => scrollToSection('geneticos')} />
+        <Hero onExploreSpecialties={() => router.push('/exames-geneticos')} />
+
+        {/* Serviços de Destaque com links para as páginas dedicadas */}
         <PriorityCards onNavigate={scrollToSection} />
-        <PrioritySection kind="geneticos" />
-        <PrioritySection kind="fisioterapia" />
-        <Exams />
 
         {/* 3. Diferenciais da Clínica (4 cards) */}
         <Differentials />
@@ -91,28 +88,26 @@ export default function ClinicSite() {
         {/* 5. Especialidades Médicas (14 Especialidades + Modal + Busca) */}
         <Specialties />
 
-
-
-        {/* 7. Convênios Atendidos (13 Logos Oficiais + Busca) */}
+        {/* 6. Convênios Atendidos (13 Logos Oficiais + Busca) */}
         <Insurance />
 
-        {/* 8. Nossa Estrutura (Galeria Real + Lightbox Interativo) */}
+        {/* 7. Nossa Estrutura (Galeria Real + Lightbox Interativo) */}
         <Structure />
 
-        {/* 9. CTA Principal de Agendamento (WhatsApp Oficial) */}
+        {/* 8. CTA Principal de Agendamento (WhatsApp Oficial) */}
         <AppointmentCTA />
 
-        {/* 10. Localização e Contato (Endereço, Mapa e Horários) */}
+        {/* 9. Localização e Contato (Endereço, Mapa e Horários) */}
         <LocationContact />
 
-        {/* 11. FAQ (Dúvidas Frequentes) */}
+        {/* 10. FAQ – Perguntas Frequentes */}
         <FAQ />
       </main>
 
-      {/* 12. Footer Corporativo */}
+      {/* 11. Rodapé Institucional */}
       <Footer onNavigate={scrollToSection} />
 
-      {/* 13. Ações Flutuantes (WhatsApp & Voltar ao Topo) */}
+      {/* 12. Botão Flutuante de WhatsApp e Voltar ao Topo */}
       <FloatingActions />
     </div>
   );

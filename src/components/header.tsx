@@ -2,28 +2,31 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { Menu, X, CalendarCheck, MessageCircle, Phone, Clock, MapPin } from 'lucide-react';
 import { clinic } from '@/data/clinic';
 
 interface HeaderProps {
-  activeSection: string;
-  onNavigate: (sectionId: string) => void;
+  activeSection?: string;
+  onNavigate?: (sectionId: string) => void;
 }
 
 const navLinks = [
-  { label: 'Início', href: 'inicio' },
-  { label: 'Exames Genéticos', href: 'geneticos' },
-  { label: 'Fisioterapia e Reabilitação', href: 'fisioterapia' },
-  { label: 'Exames', href: 'exames' },
-  { label: 'Especialidades', href: 'especialidades' },
-  { label: 'Convênios', href: 'convenios' },
-  { label: 'Contato', href: 'contato' },
+  { label: 'Início', href: '/', id: 'inicio' },
+  { label: 'Exames Genéticos', href: '/exames-geneticos', id: 'geneticos' },
+  { label: 'Fisioterapia e Reabilitação', href: '/fisioterapia', id: 'fisioterapia' },
+  { label: 'Exames', href: '/exames', id: 'exames' },
+  { label: 'Especialidades', href: '/#especialidades', id: 'especialidades' },
+  { label: 'Convênios', href: '/#convenios', id: 'convenios' },
+  { label: 'Contato', href: '/#contato', id: 'contato' },
 ];
 
 export default function Header({ activeSection, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,13 +55,50 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     };
   }, [mobileMenuOpen]);
 
-  const handleLinkClick = (id: string) => {
+  const handleLinkClick = (link: typeof navLinks[0]) => {
     setMobileMenuOpen(false);
-    if (mobileMenuOpen) {
-      requestAnimationFrame(() => onNavigate(id));
+
+    if (link.href.startsWith('/#')) {
+      const targetId = link.href.replace('/#', '');
+      if (pathname === '/') {
+        if (onNavigate) {
+          onNavigate(targetId);
+        } else {
+          const el = document.getElementById(targetId);
+          if (el) {
+            const offset = (document.querySelector('header.header')?.getBoundingClientRect().height ?? 80) + 12;
+            const pos = el.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: pos, behavior: 'smooth' });
+          }
+        }
+      } else {
+        router.push(link.href);
+      }
+    } else if (link.href === '/') {
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/');
+      }
     } else {
-      onNavigate(id);
+      router.push(link.href);
     }
+  };
+
+  const handleLogoClick = () => {
+    setMobileMenuOpen(false);
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      router.push('/');
+    }
+  };
+
+  const isLinkActive = (link: typeof navLinks[0]) => {
+    if (pathname === link.href) return true;
+    if (pathname === '/' && link.href === '/' && (activeSection === 'inicio' || !activeSection)) return true;
+    if (pathname === '/' && activeSection === link.id) return true;
+    return false;
   };
 
   const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(clinic.whatsappMessage)}`;
@@ -107,7 +147,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
         <div className="site-container header-inner">
           {/* Logo Original */}
           <button
-            onClick={() => handleLinkClick('inicio')}
+            onClick={handleLogoClick}
             className="brand-logo-link"
             aria-label="Ir para o início do Núcleo de Saúde Mais"
           >
@@ -126,8 +166,8 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             {navLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleLinkClick(link.href)}
-                className={`nav-link ${activeSection === link.href ? 'nav-link-active' : ''}`}
+                onClick={() => handleLinkClick(link)}
+                className={`nav-link ${isLinkActive(link) ? 'nav-link-active' : ''}`}
               >
                 {link.label}
               </button>
@@ -191,8 +231,8 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                 {navLinks.map((link) => (
                   <button
                     key={link.href}
-                    onClick={() => handleLinkClick(link.href)}
-                    className={`mobile-nav-item ${activeSection === link.href ? 'mobile-nav-item-active' : ''}`}
+                    onClick={() => handleLinkClick(link)}
+                    className={`mobile-nav-item ${isLinkActive(link) ? 'mobile-nav-item-active' : ''}`}
                   >
                     {link.label}
                   </button>
