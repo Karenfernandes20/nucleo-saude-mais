@@ -29,6 +29,8 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   const quickLinks = [
     { label: 'Início', id: 'inicio' },
+    { label: 'Exames Genéticos', id: 'geneticos' },
+    { label: 'Fisioterapia e Reabilitação', id: 'fisioterapia' },
     { label: 'Sobre nós', id: 'sobre' },
     { label: 'Especialidades', id: 'especialidades' },
     { label: 'Exames', id: 'exames' },
