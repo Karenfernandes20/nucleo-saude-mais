@@ -16,14 +16,13 @@ export default function AppointmentCTA() {
       {/* Right Column: Reception Photo */}
       <div className={styles.photoWrapper}>
         <Image
-          src="/images/clinica/recepcao-agendamento.webp"
-          alt="Recepção moderna e acolhedora da clínica Núcleo de Saúde Mais"
+          src="/images/clinica/facility/estrutura_06_recepcao_balcao.webp"
+          alt="Balcão de atendimento e triagem do Núcleo de Saúde Mais"
           fill
           sizes="(max-width: 900px) 100vw, 55vw"
           className={styles.photoImage}
           priority
         />
-        <span className={styles.disclaimer}>* Imagem ilustrativa da recepção</span>
       </div>
 
       {/* Desktop S-Curve SVG Overlay with Glowing Turquoise Contour Line */}
