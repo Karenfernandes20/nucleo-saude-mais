@@ -316,7 +316,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
 <div className="genetica-hero-actions"><a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-teal btn-lg"><MessageCircle size={22}/><span>Quero saber mais pelo WhatsApp</span><ArrowRight size={18}/></a><a href="#paineis" className="btn btn-lg genetics-outline"><Dna size={24}/>Conhecer os exames</a></div>
 <div className="genetics-benefits"><div><ShieldCheck/><span>Prevenção<br/> e cuidado</span></div><div><Users/><span>Informação<br/> para sua família</span></div><div><Target/><span>Mais precisão<br/> nas decisões de saúde</span></div></div>
 </div><div className="genetics-hero-art" aria-hidden="true"><Image src="/images/genetica/dna-hero-art.svg" alt="" fill sizes="(max-width:900px) 100vw, 48vw" priority/></div>
-</section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p><a className="btn btn-outline-navy btn-sm" href={contact('Olá! Gostaria de informações sobre exames genéticos relacionados a: '+title)} target="_blank" rel="noopener noreferrer">Quero saber mais <ArrowRight size={16}/></a></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
+</section><section className="section bg-white genetica-section-padding"><div className="genetica-container"><h2 className="section-title text-center">Você se identifica com alguma dessas situações?</h2><div className="genetica-catalog-grid" style={{marginTop:24}}>{situations.map(({title,desc,icon:Icon})=><article key={title} className="genetica-exam-card"><Icon size={32} className="text-teal"/><h3 className="exam-card-title">{title}</h3><p className="exam-card-desc">{desc}</p></article>)}</div></div></section><section id="paineis" className="section bg-white genetica-section-padding">
         <div className="genetica-container">
           <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 32px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
@@ -402,18 +402,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
                   </div>
 
                   </details><div className="exam-card-footer">
-                    <a
-                      href={`https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
-                        `Olá! Gostaria de consultar detalhes e valores do exame de ${exam.title}.`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline-navy btn-sm"
-                      style={{ width: '100%', justifyContent: 'center' }}
-                    >
-                      <MessageCircle size={15} />
-                      <span>Consultar pelo WhatsApp</span>
-                    </a>
+                    
                   </div>
                 </article>
               ))}
@@ -614,15 +603,7 @@ return (<div className="genetica-page-container"><section className="genetica-he
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '32px' }}>
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-teal btn-md"
-            >
-              <MessageCircle size={18} />
-              <span>Tirar outra dúvida pelo WhatsApp</span>
-            </a>
+            
           </div>
         </div>
       </section><section className="genetica-cta-bottom-section"><div className="genetica-container"><div className="genetica-cta-bottom-banner"><div><h3>Não sabe qual exame realizar?</h3><p>Converse com nossa equipe e descubra como começar.</p></div><a className="btn btn-teal btn-lg" href={whatsappHref} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/> Conversar pelo WhatsApp</a></div></div></section></div>);
