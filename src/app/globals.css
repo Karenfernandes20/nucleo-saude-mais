@@ -4294,12 +4294,25 @@ ul, ol {
    Página de Fisioterapia - Seções com Imagens Estratégicas
    ========================================================================== */
 
-/* 1. Hero com Imagem Principal à Direita */
+/* 1. Hero Compacto & Proporcional com Imagem 4:3 */
+.fisioterapia-hero-section {
+  padding: 36px 0 44px;
+}
+
+.fisioterapia-hero-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
 .fisioterapia-hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 55fr 45fr;
   align-items: center;
-  gap: 40px;
+  gap: 36px;
 }
 
 .fisioterapia-hero-content {
@@ -4307,17 +4320,98 @@ ul, ol {
   flex-direction: column;
 }
 
+.fisioterapia-hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: #B5CFDD;
+  margin-bottom: 10px;
+}
+
+.fisioterapia-hero-breadcrumb a {
+  color: #DCF4F5;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.fisioterapia-hero-breadcrumb a:hover {
+  color: var(--color-teal);
+}
+
+.fisioterapia-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  margin-bottom: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #DCF4F5;
+  width: fit-content;
+}
+
+.fisioterapia-hero-title {
+  font-size: clamp(1.75rem, 2.5vw, 2.35rem);
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.fisioterapia-hero-subtitle {
+  font-size: 0.9375rem;
+  color: #D3E4ED;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  max-width: 640px;
+}
+
+.fisioterapia-hero-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fisioterapia-hero-benefit-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.78125rem;
+  color: #DCF4F5;
+  font-weight: 500;
+}
+
+.fisioterapia-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
 .fisioterapia-hero-image-wrap {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 400px;
-  max-height: 480px;
-  border-radius: var(--radius-xl);
+  max-width: 580px;
+  aspect-ratio: 4 / 3;
+  max-height: 450px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background-color: rgba(255, 255, 255, 0.05);
+  margin-left: auto;
 }
 
 .fisioterapia-hero-image {
@@ -4330,22 +4424,23 @@ ul, ol {
 
 .fisioterapia-badge-floating {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(12, 68, 99, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  bottom: 14px;
+  left: 14px;
+  background: rgba(12, 68, 99, 0.90);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: var(--color-white);
-  padding: 10px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.8125rem;
+  gap: 7px;
+  font-size: 0.75rem;
   font-weight: 600;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   z-index: 2;
+  pointer-events: none;
 }
 
 /* 2. Seção Feature: Reabilitação Física (Imagem à Esquerda) */
@@ -4464,13 +4559,29 @@ ul, ol {
 
 /* Responsividade Fisioterapia */
 @media (max-width: 900px) {
+  .fisioterapia-hero-section {
+    padding: 32px 0 40px;
+  }
   .fisioterapia-hero-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
   }
   .fisioterapia-hero-image-wrap {
-    min-height: 340px;
-    max-height: 400px;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    max-height: none;
+    min-height: 0;
+    border-radius: 20px;
+    margin-left: 0;
+  }
+  .fisioterapia-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .fisioterapia-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
   }
   .fisioterapia-split-section {
     grid-template-columns: 1fr;
@@ -4493,7 +4604,22 @@ ul, ol {
 }
 
 @media (max-width: 600px) {
-  .fisioterapia-hero-image-wrap,
+  .fisioterapia-hero-section {
+    padding: 24px 0 32px;
+  }
+  .fisioterapia-hero-title {
+    font-size: 1.65rem;
+  }
+  .fisioterapia-hero-benefits {
+    gap: 6px;
+  }
+  .fisioterapia-hero-benefit-item {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+  .fisioterapia-hero-image-wrap {
+    border-radius: 18px;
+  }
   .fisioterapia-feature-image-wrap,
   .fisioterapia-stages-image-wrap {
     min-height: 280px;
@@ -4504,11 +4630,11 @@ ul, ol {
     font-size: 1.45rem;
   }
   .fisioterapia-badge-floating {
-    bottom: 12px;
-    left: 12px;
-    padding: 8px 12px;
-    font-size: 0.75rem;
-    gap: 8px;
+    bottom: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    font-size: 0.71875rem;
+    gap: 6px;
   }
   .fisioterapia-stages-grid {
     grid-template-columns: 1fr;
