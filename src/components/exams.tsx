@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import {
   FlaskConical,
   HeartPulse,
@@ -14,12 +13,12 @@ import {
   Clock,
   CheckCircle2,
   ArrowRight,
+  ChevronDown,
   MessageCircle,
   LucideIcon,
   Sparkles,
 } from 'lucide-react';
 import { examCategories, clinic } from '@/data/clinic';
-import BrandCross from './brand-cross';
 
 const examIconMap: Record<string, LucideIcon> = {
   'flask-conical': FlaskConical,
@@ -32,15 +31,63 @@ const examIconMap: Record<string, LucideIcon> = {
   microscope: Microscope,
 };
 
+function ExamDetails({ category }: { category: (typeof examCategories)[number] }) {
+  const selectedCategory = category;
+  const IconSelected = examIconMap[category.icon] || FlaskConical;
+  const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
+    `Olá! Gostaria de consultar a disponibilidade do exame de ${category.name} no Núcleo de Saúde Mais.`
+  )}`;
+  return (
+    <div className="exam-showcase-panel">
+            <div className="showcase-header">
+              <div className="showcase-icon-large">
+                <IconSelected size={32} className="text-teal" />
+              </div>
+              <div>
+                <span className="showcase-tag">Categoria em Destaque</span>
+                <h3 className="showcase-title">{selectedCategory.name}</h3>
+              </div>
+            </div>
+
+            <p className="showcase-description">{selectedCategory.description}</p>
+
+            <div className="showcase-highlights-box">
+              <h4 className="showcase-box-title">Diferenciais do procedimento:</h4>
+              <ul className="showcase-list">
+                {selectedCategory.highlights.map((item, idx) => (
+                  <li key={idx} className="showcase-list-item">
+                    <CheckCircle2 size={18} className="text-teal flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Note & WhatsApp Query CTA */}
+            <div className="showcase-action-card">
+              <div className="showcase-action-info">
+                <strong>Precisa de outro exame específico?</strong>
+                <p>Consulte nossa equipe no WhatsApp para verificar preparo e agendamento.</p>
+              </div>
+
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-teal btn-md"
+              >
+                <MessageCircle size={18} />
+                <span>Consultar este exame</span>
+              </a>
+            </div>
+          </div>
+  );
+}
+
 export default function Exams() {
   const [activeCategory, setActiveCategory] = useState<number>(0);
 
-  const selectedCategory = examCategories[activeCategory];
-  const IconSelected = examIconMap[selectedCategory.icon] || FlaskConical;
-
-  const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
-    `Olá! Gostaria de consultar a disponibilidade do exame de ${selectedCategory.name} no Núcleo de Saúde Mais.`
-  )}`;
+  const [expandedMobile, setExpandedMobile] = useState<number | null>(null);
 
   return (
     <section id="exames" className="section exams-section">
@@ -100,49 +147,33 @@ export default function Exams() {
           </div>
 
           {/* Right: Active Category Showcase Panel */}
-          <div className="exam-showcase-panel">
-            <div className="showcase-header">
-              <div className="showcase-icon-large">
-                <IconSelected size={32} className="text-teal" />
+          <ExamDetails category={examCategories[activeCategory]} />
+        </div>
+
+        <div className="exams-mobile-accordion">
+          {examCategories.map((category, index) => {
+            const IconComp = examIconMap[category.icon] || FlaskConical;
+            const expanded = expandedMobile === index;
+            return (
+              <div className="exam-accordion-item" key={category.name}>
+                <button
+                  type="button"
+                  id={`exam-mobile-button-${index}`}
+                  aria-expanded={expanded}
+                  aria-controls={`exam-mobile-panel-${index}`}
+                  className={`exam-tab-btn ${expanded ? 'exam-tab-btn-active' : ''}`}
+                  onClick={() => setExpandedMobile(previous => previous === index ? null : index)}
+                >
+                  <div className="exam-tab-icon"><IconComp size={20} /></div>
+                  <div className="exam-tab-text"><strong>{category.name}</strong></div>
+                  <ChevronDown size={18} className="exam-tab-arrow" />
+                </button>
+                <div id={`exam-mobile-panel-${index}`} role="region" aria-labelledby={`exam-mobile-button-${index}`} hidden={!expanded}>
+                  {expanded && <ExamDetails category={category} />}
+                </div>
               </div>
-              <div>
-                <span className="showcase-tag">Categoria em Destaque</span>
-                <h3 className="showcase-title">{selectedCategory.name}</h3>
-              </div>
-            </div>
-
-            <p className="showcase-description">{selectedCategory.description}</p>
-
-            <div className="showcase-highlights-box">
-              <h4 className="showcase-box-title">Diferenciais do procedimento:</h4>
-              <ul className="showcase-list">
-                {selectedCategory.highlights.map((item, idx) => (
-                  <li key={idx} className="showcase-list-item">
-                    <CheckCircle2 size={18} className="text-teal flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Note & WhatsApp Query CTA */}
-            <div className="showcase-action-card">
-              <div className="showcase-action-info">
-                <strong>Precisa de outro exame específico?</strong>
-                <p>Consulte nossa equipe no WhatsApp para verificar preparo e agendamento.</p>
-              </div>
-
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-teal btn-md"
-              >
-                <MessageCircle size={18} />
-                <span>Consultar este exame</span>
-              </a>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
         {/* Fast Grid Overview for Mobile & Scanning */}
