@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import {
   Search,
@@ -21,36 +21,255 @@ function normalize(text: string) {
     .toLowerCase();
 }
 
+// 4 repeated sets to guarantee endless seamless loop in both directions
+const CAROUSEL_COPIES = 4;
+
 export default function Insurance() {
   const [searchTerm, setSearchTerm] = useState('');
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Auto-scroll & interaction refs
+  const isManualPausedRef = useRef(false);
+  const isHoveredRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const dragDistanceRef = useRef(0);
+  const pointerStartXRef = useRef<number | null>(null);
+  const pointerStartScrollRef = useRef(0);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const scrollPosRef = useRef(0);
+  const lastTimeRef = useRef(0);
+
+  // Search results use single unique list (never duplicated)
   const filteredPartners = useMemo(() => {
     if (!searchTerm.trim()) return insurancePartners;
     const term = normalize(searchTerm);
     return insurancePartners.filter((p) => normalize(p.name).includes(term));
   }, [searchTerm]);
 
-  const carouselPartners = insurancePartners;
+  // Repeated partners for the seamless infinite carousel
+  const carouselPartners = useMemo(() => {
+    return Array.from({ length: CAROUSEL_COPIES }, () => insurancePartners).flat();
+  }, []);
 
   const whatsappHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
     'Olá! Gostaria de consultar se meu convênio é atendido para a especialidade que preciso no Núcleo de Saúde Mais.'
   )}`;
 
+  // Measure card step (width + gap) and single set width dynamically
+  const getMetrics = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return { step: 235, singleSetWidth: 235 * insurancePartners.length };
+    const cards = track.querySelectorAll<HTMLElement>('.insurance-carousel-card');
+    if (cards.length < 2) return { step: 235, singleSetWidth: 235 * insurancePartners.length };
+
+    const firstCard = cards[0];
+    const secondCard = cards[1];
+    const step = Math.max(1, secondCard.offsetLeft - firstCard.offsetLeft);
+
+    const nextSetIndex = insurancePartners.length;
+    const nextSetCard = cards[nextSetIndex];
+    const singleSetWidth = nextSetCard
+      ? Math.max(step * nextSetIndex, nextSetCard.offsetLeft - firstCard.offsetLeft)
+      : step * nextSetIndex;
+
+    return { step, singleSetWidth };
+  }, []);
+
+  // Initialize track scroll position on mount
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const { singleSetWidth } = getMetrics();
+    // Start at second set so user can scroll left or right immediately
+    if (track.scrollLeft === 0) {
+      track.scrollLeft = singleSetWidth;
+      scrollPosRef.current = singleSetWidth;
+    }
+  }, [getMetrics]);
+
+  // Continuous auto-movement loop via requestAnimationFrame
+  useEffect(() => {
+    // When searching, pause carousel
+    if (searchTerm.trim()) {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      return;
+    }
+
+    // Check prefers-reduced-motion
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mediaQuery.matches) {
+        isManualPausedRef.current = true;
+        return;
+      }
+    }
+
+    const track = trackRef.current;
+    if (!track) return;
+
+    lastTimeRef.current = performance.now();
+
+    const animate = (currentTime: number) => {
+      // If manual interaction happened (arrow clicked or touch drag), stop permanently
+      if (isManualPausedRef.current) {
+        return;
+      }
+
+      const dt = Math.min((currentTime - lastTimeRef.current) / 1000, 0.1);
+      lastTimeRef.current = currentTime;
+
+      const currentTrack = trackRef.current;
+      if (currentTrack && !isHoveredRef.current && !isDraggingRef.current) {
+        const { singleSetWidth } = getMetrics();
+
+        // Smooth, calm drift: ~36px per second
+        const SPEED_PX_PER_SEC = 36;
+        scrollPosRef.current += SPEED_PX_PER_SEC * dt;
+
+        // Wrap around seamlessly without gap or jump
+        if (scrollPosRef.current >= singleSetWidth * 2) {
+          scrollPosRef.current -= singleSetWidth;
+          currentTrack.scrollLeft -= singleSetWidth;
+        }
+
+        currentTrack.scrollLeft = scrollPosRef.current;
+      } else if (currentTrack) {
+        // Keep position synchronized during hover
+        scrollPosRef.current = currentTrack.scrollLeft;
+      }
+
+      rafIdRef.current = requestAnimationFrame(animate);
+    };
+
+    rafIdRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, [searchTerm, getMetrics]);
+
+  // Manual navigation via left and right arrows
   const handleManualScroll = (direction: 'left' | 'right') => {
     const track = trackRef.current;
     if (!track) return;
-    const cards = Array.from(track.children) as HTMLElement[];
-    if (!cards.length) return;
-    const start = cards[0].offsetLeft;
-    const positions = cards.map(card => card.offsetLeft - start);
-    const max = track.scrollWidth - track.clientWidth;
-    const stops = Array.from(new Set(positions.map(position => Math.min(position, max))));
-    const current = track.scrollLeft;
-    const target = direction === 'right'
-      ? stops.find(position => position > current + 2) ?? 0
-      : [...stops].reverse().find(position => position < current - 2) ?? max;
-    track.scrollTo({ left: target, behavior: 'smooth' });
+
+    // Permanently stop automatic motion
+    isManualPausedRef.current = true;
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
+
+    const { step, singleSetWidth } = getMetrics();
+    const cards = Array.from(track.querySelectorAll<HTMLElement>('.insurance-carousel-card'));
+    let currentScroll = track.scrollLeft;
+
+    // Boundary wrap-around for infinite manual arrow clicks
+    if (currentScroll >= singleSetWidth * 2.5) {
+      currentScroll -= singleSetWidth;
+      track.scrollLeft = currentScroll;
+    } else if (currentScroll <= singleSetWidth * 0.5) {
+      currentScroll += singleSetWidth;
+      track.scrollLeft = currentScroll;
+    }
+
+    let target = currentScroll;
+    if (direction === 'right') {
+      // Advance exactly one card, cleanly aligned
+      const nextCard = cards.find((c) => c.offsetLeft > currentScroll + 4);
+      target = nextCard ? nextCard.offsetLeft : currentScroll + step;
+    } else {
+      // Return exactly one card, cleanly aligned
+      const prevCard = [...cards].reverse().find((c) => c.offsetLeft < currentScroll - 4);
+      target = prevCard ? prevCard.offsetLeft : currentScroll - step;
+    }
+
+    scrollPosRef.current = target;
+    track.scrollTo({
+      left: target,
+      behavior: 'smooth',
+    });
+  };
+
+  // Touch gesture handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+    dragDistanceRef.current = 0;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartXRef.current);
+    const deltaY = Math.abs(e.touches[0].clientY - (touchStartYRef.current ?? 0));
+    dragDistanceRef.current = Math.max(dragDistanceRef.current, deltaX);
+
+    // If user dragged horizontally, stop auto-movement permanently
+    if (deltaX > 8 && deltaX > deltaY) {
+      isManualPausedRef.current = true;
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+    // Keep small delay so link doesn't trigger if drag just finished
+    setTimeout(() => {
+      dragDistanceRef.current = 0;
+    }, 120);
+  };
+
+  // Desktop pointer drag handlers
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0) return; // Only primary click
+    pointerStartXRef.current = e.clientX;
+    const track = trackRef.current;
+    pointerStartScrollRef.current = track ? track.scrollLeft : 0;
+    dragDistanceRef.current = 0;
+    isDraggingRef.current = false;
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (pointerStartXRef.current === null) return;
+    const deltaX = e.clientX - pointerStartXRef.current;
+    dragDistanceRef.current = Math.abs(deltaX);
+
+    if (Math.abs(deltaX) > 6) {
+      isDraggingRef.current = true;
+      // Permanently stop auto-movement on manual drag
+      isManualPausedRef.current = true;
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+
+      const track = trackRef.current;
+      if (track) {
+        track.scrollLeft = pointerStartScrollRef.current - deltaX;
+        scrollPosRef.current = track.scrollLeft;
+      }
+    }
+  };
+
+  const handlePointerUp = () => {
+    pointerStartXRef.current = null;
+    setTimeout(() => {
+      isDraggingRef.current = false;
+      dragDistanceRef.current = 0;
+    }, 120);
   };
 
   return (
@@ -103,7 +322,7 @@ export default function Insurance() {
                 <button
                   onClick={() => handleManualScroll('left')}
                   className="carousel-arrow-btn"
-                  aria-label="Ver convênios anteriores"
+                  aria-label="Ver convênio anterior"
                   title="Anterior"
                 >
                   <ChevronLeft size={20} />
@@ -111,7 +330,7 @@ export default function Insurance() {
                 <button
                   onClick={() => handleManualScroll('right')}
                   className="carousel-arrow-btn"
-                  aria-label="Ver próximos convênios"
+                  aria-label="Ver próximo convênio"
                   title="Próximo"
                 >
                   <ChevronRight size={20} />
@@ -126,6 +345,13 @@ export default function Insurance() {
           <div
             className="insurance-carousel-wrapper"
             aria-label="Carrossel de convênios atendidos"
+            onMouseEnter={() => {
+              isHoveredRef.current = true;
+            }}
+            onMouseLeave={() => {
+              isHoveredRef.current = false;
+              lastTimeRef.current = performance.now();
+            }}
           >
             {/* Edge Blur/Fade Shadows */}
             <div className="carousel-fade-left" aria-hidden="true" />
@@ -133,7 +359,14 @@ export default function Insurance() {
 
             <div
               ref={trackRef}
-              className="insurance-carousel-track insurance-carousel-manual"
+              className="insurance-carousel-track"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
             >
               {carouselPartners.map((partner, index) => {
                 const partnerWhatsAppHref = `https://wa.me/${clinic.whatsappNumber}?text=${encodeURIComponent(
@@ -148,6 +381,12 @@ export default function Insurance() {
                     rel="noopener noreferrer"
                     className="insurance-card insurance-carousel-card"
                     title={`Consultar cobertura do convênio ${partner.name}`}
+                    onClick={(e) => {
+                      if (dragDistanceRef.current > 8) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                      }
+                    }}
                   >
                     <div className="insurance-image-container">
                       <Image

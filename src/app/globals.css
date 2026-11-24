@@ -1820,7 +1820,7 @@ ul, ol {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100px;
+  width: 80px;
   z-index: 6;
   pointer-events: none;
 }
@@ -1835,31 +1835,41 @@ ul, ol {
   background: linear-gradient(-90deg, #FFFFFF 25%, transparent 100%);
 }
 
+@media (max-width: 768px) {
+  .carousel-fade-left,
+  .carousel-fade-right {
+    width: 28px;
+  }
+}
+
 .insurance-carousel-track {
   display: flex;
   gap: 20px;
-  width: max-content;
-  animation: insuranceMarquee 38s linear infinite;
-  will-change: transform;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+  padding-block: 4px 12px;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y pinch-zoom;
 }
 
-.insurance-carousel-track:hover,
-.insurance-carousel-track.carousel-paused {
-  animation-play-state: paused;
+.insurance-carousel-track:active {
+  cursor: grabbing;
+}
+
+.insurance-carousel-track::-webkit-scrollbar {
+  display: none;
 }
 
 .insurance-carousel-card {
   flex: 0 0 215px;
   width: 215px;
-}
-
-@keyframes insuranceMarquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 .insurance-logos-grid {
@@ -3898,22 +3908,6 @@ ul, ol {
   .lightbox-next { right: 0; }
 }
 
-/* Native scrolling keeps arrow navigation and touch gestures in sync. */
-.insurance-carousel-track.insurance-carousel-manual {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  animation: none;
-  will-change: auto;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-block: 6px 12px;
-}
-.insurance-carousel-manual::-webkit-scrollbar { display: none; }
-.insurance-carousel-manual .insurance-carousel-card { scroll-snap-align: start; }
-.insurance-carousel-wrapper .carousel-fade-left,
-.insurance-carousel-wrapper .carousel-fade-right { display: none; }
 
 /* Mobile-only exam accordion; desktop retains its side-by-side selector. */
 .exams-mobile-accordion { display: none; }
