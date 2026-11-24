@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './header';
 import Hero from './hero';
+import { PriorityCards, PrioritySection } from './priority-services';
 import Differentials from './differentials';
 import About from './about';
 import Specialties from './specialties';
@@ -17,6 +18,8 @@ import FloatingActions from './floating-actions';
 
 const sectionIds = [
   'inicio',
+  'geneticos',
+  'fisioterapia',
   'sobre',
   'especialidades',
   'exames',
@@ -52,7 +55,7 @@ export default function ClinicSite() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80;
+      const offset = (document.querySelector('header.header')?.getBoundingClientRect().height ?? 80) + 12;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -73,7 +76,11 @@ export default function ClinicSite() {
 
       <main id="main-content">
         {/* 2. Hero Section (Primeira Dobra) */}
-        <Hero onExploreSpecialties={() => scrollToSection('especialidades')} />
+        <Hero onExploreSpecialties={() => scrollToSection('geneticos')} />
+        <PriorityCards onNavigate={scrollToSection} />
+        <PrioritySection kind="geneticos" />
+        <PrioritySection kind="fisioterapia" />
+        <Exams />
 
         {/* 3. Diferenciais da Clínica (4 cards) */}
         <Differentials />
@@ -84,8 +91,7 @@ export default function ClinicSite() {
         {/* 5. Especialidades Médicas (14 Especialidades + Modal + Busca) */}
         <Specialties />
 
-        {/* 6. Exames e Diagnósticos (7 Categorias + Resultados Ágeis) */}
-        <Exams />
+
 
         {/* 7. Convênios Atendidos (13 Logos Oficiais + Busca) */}
         <Insurance />
