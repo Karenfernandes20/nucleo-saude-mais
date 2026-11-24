@@ -6045,3 +6045,11 @@ ul, ol {
 .genetica-request-compact .section-title{font-size:clamp(26px,2.7vw,40px);line-height:1.2;margin-bottom:12px}
 .genetica-request-compact .genetica-split-desc{margin-bottom:18px}
 @media(max-width:767px){.genetica-split-section.genetica-request-compact{grid-template-columns:minmax(0,1fr);gap:16px}.genetica-request-compact .genetica-image-card{max-width:340px}.genetica-request-compact .section-title{font-size:28px}.genetica-request-compact .btn{max-width:100%;white-space:normal}}
+
+.genetica-hero-section.genetica-hero-clean{height:auto;max-height:none;grid-auto-rows:auto}
+.genetica-hero-clean .genetica-hero-copy{height:auto;max-height:none;overflow:visible;padding-bottom:64px}
+.genetica-hero-clean .genetics-benefits{position:relative;z-index:4;height:auto;min-height:44px;max-height:none;overflow:visible;align-items:center;row-gap:14px;margin-bottom:0}
+.genetica-hero-clean .genetics-benefits>div{min-width:0;max-width:100%;white-space:normal;line-height:1.4}
+.genetica-hero-clean::after{z-index:0;bottom:-125px}
+@media(max-width:900px){.genetica-hero-clean .genetica-hero-copy{padding-bottom:32px}.genetica-hero-clean .genetics-benefits{margin-top:20px}}
+@media(max-width:480px){.genetica-hero-clean .genetics-benefits{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}.genetica-hero-clean .genetics-benefits>div+div{border:0;padding-left:0}}
