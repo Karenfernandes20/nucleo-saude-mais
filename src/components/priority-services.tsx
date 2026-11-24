@@ -101,14 +101,7 @@ export function PrioritySection({ kind }: { kind: 'geneticos' | 'fisioterapia' }
               <Icon size={26} aria-hidden="true" />
               <h3>{name}</h3>
               <p>{description}</p>
-              <a
-                href={whatsapp('Olá! Gostaria de informações sobre ' + name + ' no Núcleo de Saúde Mais.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="priority-link"
-              >
-                Consultar equipe <ArrowRight size={16} />
-              </a>
+              
             </article>
           ))}
         </div>
