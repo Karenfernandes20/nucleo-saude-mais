@@ -13,9 +13,10 @@ interface HeaderProps {
 
 const navLinks = [
   { label: 'Início', href: 'inicio' },
-  { label: 'Sobre nós', href: 'sobre' },
-  { label: 'Especialidades', href: 'especialidades' },
+  { label: 'Exames Genéticos', href: 'geneticos' },
+  { label: 'Fisioterapia e Reabilitação', href: 'fisioterapia' },
   { label: 'Exames', href: 'exames' },
+  { label: 'Especialidades', href: 'especialidades' },
   { label: 'Convênios', href: 'convenios' },
   { label: 'Contato', href: 'contato' },
 ];
