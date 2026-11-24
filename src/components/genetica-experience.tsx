@@ -644,7 +644,7 @@ export default function GeneticaExperience() {
       {/* =====================================================================
           3. CORPO HUMANO ANATÔMICO INTERATIVO
           ===================================================================== */}
-      <section id="corpo-interativo" className="section genetica-dark-section">
+      <section id="corpo-interativo" className="section genetica-anatomy-light">
         <div className="genetica-container">
           <div className="section-header-compact text-center" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 36px' }}>
             <div className="section-kicker" style={{ justifyContent: 'center' }}>
@@ -652,10 +652,10 @@ export default function GeneticaExperience() {
               <span>MAPA ANATÔMICO INTERATIVO</span>
               <span className="kicker-line" />
             </div>
-            <h2 className="section-title text-white" style={{ color: '#FFFFFF' }}>
+            <h2 className="section-title">
               Aplicações dos Exames Genéticos no Organismo
             </h2>
-            <p className="section-subtitle text-white-muted" style={{ color: '#D3E4ED', margin: '0 auto' }}>
+            <p className="section-subtitle" style={{ margin: '0 auto' }}>
               Passe o mouse ou toque nos pontos luminosos do corpo humano para explorar quais órgãos e
               sistemas contam com testes moleculares dedicados na nossa clínica.
             </p>
@@ -666,6 +666,7 @@ export default function GeneticaExperience() {
             {anatomyHotspots.map((spot) => (
               <button
                 key={spot.id}
+                aria-pressed={spot.id === activeHotspotId}
                 onClick={() => setActiveHotspotId(spot.id)}
                 className={`genetica-hotspot-pill ${spot.id === activeHotspotId ? 'active' : ''}`}
               >
@@ -695,6 +696,7 @@ export default function GeneticaExperience() {
                       key={spot.id}
                       onClick={() => setActiveHotspotId(spot.id)}
                       onMouseEnter={() => setActiveHotspotId(spot.id)}
+                      onFocus={() => setActiveHotspotId(spot.id)}
                       className={`genetica-hotspot-pin ${isSelected ? 'active' : ''}`}
                       style={{ top: spot.top, left: spot.left }}
                       aria-label={`Ver informações de ${spot.name}`}
@@ -719,7 +721,7 @@ export default function GeneticaExperience() {
 
             {/* Lado Direito: Painel de Detalhes do Órgão Selecionado */}
             <div className="genetica-body-details">
-              <div className="body-details-card">
+              <div className="body-details-card" aria-live="polite">
                 <div className="details-header-row">
                   <div className="details-badge">{activeHotspot.badge}</div>
                   <span className="details-turnaround">
