@@ -9,3 +9,5 @@ out/
 *.tsbuildinfo
 Thumbs.db
 Desktop.ini
+*.zip
+*.rar
