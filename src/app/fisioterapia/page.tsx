@@ -163,7 +163,7 @@ export default function FisioterapiaPage() {
                   priority
                   className="fisioterapia-hero-image"
                 />
-                <div className="physio-image-topics"><div><Bone/><span>Coluna</span></div><div><Footprints/><span>Lesões</span></div><div><Dumbbell/><span>Reabilitação</span></div><div><BedDouble/><span>Pós-operatório</span></div></div><small className="physio-image-note">Imagem ilustrativa</small>
+                <div className="physio-image-topics"><div><Bone/><span>Coluna</span></div><div><Footprints/><span>Lesões</span></div><div><Dumbbell/><span>Reabilitação</span></div><div><BedDouble/><span>Pós-operatório</span></div></div>
               </div>
             </div>
           </div>
