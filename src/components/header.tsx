@@ -122,16 +122,6 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             </span>
           </div>
           <div className="top-bar-right">
-            <button
-              type="button"
-              onClick={() => setExamModalOpen(true)}
-              className="top-bar-result-btn"
-              aria-label="Consultar resultado de exames"
-            >
-              <FileText size={13} className="text-teal" />
-              <span>Resultado de Exames</span>
-            </button>
-            <span className="top-bar-separator">|</span>
             <a
               href={`tel:${clinic.whatsappNumber}`}
               className="top-bar-link"
