@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
-import { Menu, X, CalendarCheck, MessageCircle, Phone, Clock, MapPin } from 'lucide-react';
+import { Menu, X, CalendarCheck, MessageCircle, Phone, Clock, MapPin, FileText } from 'lucide-react';
 import { clinic } from '@/data/clinic';
+import ExamResultsModal from '@/components/exam-results-modal';
 
 interface HeaderProps {
   activeSection?: string;
@@ -25,6 +26,7 @@ const navLinks = [
 export default function Header({ activeSection, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [examModalOpen, setExamModalOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -120,6 +122,16 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             </span>
           </div>
           <div className="top-bar-right">
+            <button
+              type="button"
+              onClick={() => setExamModalOpen(true)}
+              className="top-bar-result-btn"
+              aria-label="Consultar resultado de exames"
+            >
+              <FileText size={13} className="text-teal" />
+              <span>Resultado de Exames</span>
+            </button>
+            <span className="top-bar-separator">|</span>
             <a
               href={`tel:${clinic.whatsappNumber}`}
               className="top-bar-link"
@@ -176,6 +188,16 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
 
           {/* Desktop CTA Button */}
           <div className="header-actions">
+            <button
+              type="button"
+              onClick={() => setExamModalOpen(true)}
+              className="btn btn-outline-navy btn-sm header-results-btn"
+              aria-label="Consultar resultado de exames"
+            >
+              <FileText size={15} />
+              <span>Resultado de Exames</span>
+            </button>
+
             <a
               href={whatsappHref}
               target="_blank"
@@ -237,6 +259,18 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                     {link.label}
                   </button>
                 ))}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setExamModalOpen(true);
+                  }}
+                  className="mobile-nav-item mobile-nav-result-item"
+                >
+                  <FileText size={16} className="text-teal inline-icon" />
+                  <span>Resultado de Exames</span>
+                </button>
               </div>
 
               <div className="mobile-menu-footer">
@@ -267,6 +301,12 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           document.body
         )}
       </header>
+
+      {/* Modal de Consulta de Resultado de Exames WorkLab */}
+      <ExamResultsModal
+        isOpen={examModalOpen}
+        onClose={() => setExamModalOpen(false)}
+      />
     </>
   );
 }

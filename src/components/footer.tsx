@@ -32,6 +32,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   const quickLinks = [
     { label: 'Início', href: '/', id: 'inicio' },
+    { label: 'Resultado de Exames', href: '/resultado-exames', id: 'resultado-exames' },
     { label: 'Exames Genéticos', href: '/exames-geneticos', id: 'geneticos' },
     { label: 'Fisioterapia e Reabilitação', href: '/fisioterapia', id: 'fisioterapia' },
     { label: 'Exames Diagnósticos', href: '/exames', id: 'exames' },
